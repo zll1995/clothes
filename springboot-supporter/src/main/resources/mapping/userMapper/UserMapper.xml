@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.user.mapper.UserMapper" >
+
+    <sql id="Base_Column_List" >
+     id, name, age, sex, img, birthday,powerid
+   </sql>
+
+    <select id="queryUser" resultType="Map">
+        select u.*,r.roname roname from
+            user u
+        LEFT JOIN userandrole ur ON u.id=ur.userid
+
+        LEFT JOIN  role r ON ur.roleid=r.roid
+    </select>
+
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+       delete from user
+       where id in
+       <foreach collection="ids" open="(" separator="," close= ")" index="index" item="ids">
+            #{ids}
+       </foreach>
+
+    </delete>
+
+
+    <select id="updateById" resultType="com.jk.user.model.User">
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where id = #{id}
+
+    </select>
+
+    <update id="updateUser" parameterType="com.jk.user.model.User">
+        update user  set
+            name=#{name},
+            age=#{age},
+            birthday=#{birthday},
+            img=#{img}
+        where id = #{id}
+
+    </update>
+
+    <insert id="addUser"  parameterType="com.jk.user.model.User">
+
+        insert into user (name, age, sex, img, birthday,powerid)
+        values (#{name},#{age},#{sex},#{img},#{birthday},#{powerid})
+
+    </insert>
+
+</mapper>

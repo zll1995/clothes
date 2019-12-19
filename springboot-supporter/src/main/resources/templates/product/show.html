@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery.min.js"></script>
+</head>
+<body>
+    <button class="layui-btn layui-btn-warm" onclick="notOnShelves()">未上架商品</button>
+    <input class="layui-btn layui-btn-warm" type="button" onclick="notAll()" value="批量下架商品"/>
+    <hr>
+    <form class="layui-form" action="" lay-filter="example1">
+        <div class="layui-form-item" style="width: 400px;">
+            <label class="layui-form-label">商品名称</label>
+            <div class="layui-input-block">
+                <input type="text" id="productName" name="productName" lay-verify="title" autocomplete="off" placeholder="商品名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width: 400px;">
+            <label class="layui-form-label">开始日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="startTime" id="startTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width: 400px;">
+            <label class="layui-form-label">结束日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="endTime" id="endTime" lay-verify="date1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit="" onclick="searchBtn()">搜索</button>
+            </div>
+        </div>
+    </form>
+    <table class="layui-hide" id="productTable" lay-filter="productTable1"></table>
+    <table class="layui-hide" id="productTable2"></table>
+<script>
+    layui.use(['table','jquery','layer'], function() {
+        var table = layui.table;
+        var $ = layui.jquery;
+        var laydate = layui.laydate
+        laydate.render({
+            elem:'#startTime'
+        })
+        laydate.render({
+            elem:'#endTime'
+        })
+        table.render({
+            elem: '#productTable'
+            , url: '../product/queryProduct'
+            , where:{
+                productName:$("#productName").val(),
+                startTime:$("#startTime").val(),
+                endTime:$("#endTime").val()
+            }
+            , cols: [
+                [
+                    {type: 'checkbox'},
+                    {field: 'productName', title: '商品名称', width: '10%',align:"center"}
+                    , {field: 'productArt', width: '10%', title: '货号',align:"center"}
+                    , {field: 'fashionElement', width: '17.3%', title: '流行元素',align:"center"}
+                    , {field: 'market', width: '10%', title: '上市时间',align:"center",
+                            templet: function (a) {
+                                 return a.market.toLocaleString().substr(0,10);
+                            }
+                    }
+                    , {field: 'areaName', width: '10%', title: '商品产地',align:"center"}
+                    , {field: 'typeName', width: '10%', title: '商品类型',align:"center"}
+                    , {
+                    field: 'productStatus', width: '10%', title: '状态',align:"center", templet: function (a) {
+                        if (a.productStatus === 1) {
+                            return "上架";
+                        }
+                        if (a.productStatus === 2) {
+                            return "下架"
+                        }
+                    }
+                }
+                    , {field: 'sdTime', width: '10%', title: '上架时间',align:"center",
+                        templet: function (a) {
+                            return  new Date(a.market).toLocaleString().substr(0,10);
+                        }
+                    }
+                    , {
+                    field: 'xxx', width: '10%',align:"center", title: '操作', templet: function (a) {
+                        return "<button type='button' class='layui-btn layui-btn-sm' onclick='detailed(" + a.productId + ")'>详情</button><button type='button' class='layui-btn layui-btn-sm' onclick='lowerShelf(" + a.productId + ")'>下架</button>"
+                    }
+                }
+                ]
+            ]
+            , page: true
+        });
+        detailed = function (id) {
+            location.href="../product/toDetailed?id="+id;
+        }
+        lowerShelf = function (id) {
+            $.ajax({
+                url:"../product/lowerShelf?id="+id,
+                success:function () {
+                    location.reload();
+                }
+            })
+        }
+        notOnShelves=function () {
+            layer.open({
+                type: 2,
+                title: "未上架商品",
+                area: ['80%', '60%'],
+                content: "../product/toNotOnShelves",
+                end:function () {
+                    location.reload();
+                }
+            })
+        }
+                    notAll = function () {
+                        var ids =  table.checkStatus("productTable");
+                        var arr = ids.data;
+                        var id = "";
+                        for (var i=0;i<arr.length;i++){
+                            id +=","+arr[i].productId
+                        }
+                        var idss = id.substr(1);
+                        if(idss.length>0){
+                            $.ajax({
+                                url:"../product/notAll?ids="+idss,
+                                success:function () {
+                                    location.reload();
+                                }
+                            })
+                        }else{
+                            layer.alert('请选择下架商品', {icon: 6});
+                        }
+
+                      }
+            searchBtn=function () {
+                var productName = $('#productName').val();
+                var startTime=$("#startTime").val();
+                 var    endTime=$("#endTime").val();
+                table.reload('productTable', {
+                    url: '../product/queryProduct',
+                    where: {
+                        productName: productName,
+                        startTime : startTime,
+                        endTime : endTime
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+                return false;
+            }
+
+    })
+
+</script>
+</body>
+</html>

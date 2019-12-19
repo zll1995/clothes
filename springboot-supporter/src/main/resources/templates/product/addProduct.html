@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery.min.js"></script>
+</head>
+<body>
+<form class="layui-form" action="" lay-filter="example">
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="productName" placeholder="商品名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品毛重</label>
+        <div class="layui-input-block">
+            <input type="text" name="productCode" placeholder="商品毛重" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">货号</label>
+        <div class="layui-input-block">
+            <input type="text" name="productArt" placeholder="货号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">版型</label>
+        <div class="layui-input-block">
+            <input type="text" name="productModel" placeholder="版型" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">厚度</label>
+        <div class="layui-input-block">
+            <input type="text" name="productPly" placeholder="厚度" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">领型</label>
+        <div class="layui-input-block">
+            <input type="text" name="productCollarType" placeholder="领型" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">流行元素</label>
+        <div class="layui-input-block">
+            <input type="text" name="fashionElement" placeholder="流行元素" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">含绒量</label>
+        <div class="layui-input-block">
+            <input type="text" name="downContent" placeholder="含绒量" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">填充物</label>
+        <div class="layui-input-block">
+            <input type="text" name="productFiller" placeholder="填充物" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上市时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="market" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品产地</label>
+        <div class="layui-input-block">
+            <select name="productArea" id="area">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">风格</label>
+        <div class="layui-input-block">
+            <input type="text" name="productStyle" placeholder="风格" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">适用人群</label>
+        <div class="layui-input-block">
+            <input type="text" name="suitable" placeholder="适用人群" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品品牌</label>
+        <div class="layui-input-block">
+            <select name="brand" id="brand"  lay-filter="brand">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品类型</label>
+        <div class="layui-input-block">
+            <select name="typeid" id="type">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">袖长</label>
+        <div class="layui-input-block">
+            <input type="text" name="outsideSleeve" placeholder="袖长" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">裤型</label>
+        <div class="layui-input-block">
+            <input type="text" name="pantsType" placeholder="裤型" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">裤长</label>
+        <div class="layui-input-block">
+            <input type="text" name="outsideLength" placeholder="裤长" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">腰型</label>
+        <div class="layui-input-block">
+            <input type="text" name="waistFull" placeholder="腰型" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <input type="text" name="describes" placeholder="描述" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">增加商品</button>
+        </div>
+    </div>
+</form>
+<script>
+    layui.use(['form','layer','laydate','jquery'],function(){
+        var $ = layui.jquery;
+        var laydata = layui.laydate;
+        var form = layui.form;
+        form.render()
+        laydata.render({
+            elem:'#date1'
+        });
+        form.on('submit(formDemo)',function (data) {
+            console.log(data)
+            console.log(data.field)
+            var node = data.field
+            $.ajax({
+                url:"../product/addProduct",
+                data:node,
+                type:"post",
+                success:function () {
+                    form.render();
+                }
+            })
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+        })
+        $.ajax({
+            url:"../product/queryArea",
+            success:function (data) {
+                var area = "";
+                for(var i=0;i<data.length;i++){
+                    area +="<option value='"+data[i].id+"'>"+data[i].areaName+"</option>";
+                }
+                $("#area").append(area);
+                form.render('select');
+            }
+        });
+        $.ajax({
+            url:"../product/queryBrand",
+            success:function (data) {
+                var brand = "";
+                for(var i=0;i<data.length;i++){
+                    brand +="<option value='"+data[i].brandId+"'>"+data[i].brandName+"</option>";
+                }
+                $("#brand").append(brand);
+                form.render('select');
+            }
+        });
+        form.on('select(brand)', function(data){
+            $("#type").append("<option value='1'>55555</option>");
+        });
+    })
+
+</script>
+</body>
+</html>

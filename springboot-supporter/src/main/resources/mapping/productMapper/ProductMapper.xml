@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="com.jk.product.mapper.ProductMapper" >
+
+    <select id="queryArea" resultType="com.jk.product.model.Area">
+        select * from t_area
+    </select>
+  <select id="queryBrand" resultType="com.jk.product.model.Brand">
+    select * from t_brand
+  </select>
+  <insert id="addProduct">
+    insert into t_product (productName,productCode,productArt,productModel,productPly,productCollarType,fashionElement,downContent,productFiller,market,productArea,productStyle,suitable,outsideSleeve,typeid,productStatus,sdTime,describes,pantsType,outsideLength,waistFull)
+    values (#{productName},#{productCode},#{productArt},#{productModel},#{productPly},#{productCollarType},#{fashionElement},#{downContent},#{productFiller},#{market},#{productArea},#{productStyle},#{suitable},#{outsideSleeve},#{typeid},1,sysdate(),#{describes},#{pantsType},#{outsideLength},#{waistFull})
+  </insert>
+  <select id="queryCount" resultType="int">
+    select count(*) from t_product where productStatus = 1
+    <if test="productName!=null and productName!=''">
+      and productName like '%${productName}%'
+    </if>
+    <if test="startTime!=null and startTime!=''">
+      and market &gt; #{startTime}
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      and market &lt; #{endTime}
+    </if>
+  </select>
+  <select id="queryCount2" resultType="int">
+    select count(*) from t_product where productStatus = 2
+  </select>
+  <select id="queryProduct" resultType="com.jk.product.model.Product">
+    select tp.productId,tp.productStatus,tp.productName,tp.productCode,tp.productArt,tp.productModel,tp.fashionElement,date_sub(tp.market,interval -1 day) market,tt.typeName typeName,ta.areaName areaName
+    from t_product tp
+    left join t_type tt on tp.typeid = tt.typeId
+    left join t_area ta on tp.productArea = ta.id
+    where tp.productStatus = 1
+    <if test="p.productName!=null and p.productName!=''">
+        and productName like '%${p.productName}%'
+    </if>
+    <if test="p.startTime!=null and p.startTime!=''">
+      and market &gt; #{p.startTime}
+    </if>
+    <if test="p.endTime!=null and p.endTime!=''">
+      and market &lt; #{p.endTime}
+    </if>
+    limit #{s},#{l}
+  </select>
+  <select id="queryProduct2" resultType="com.jk.product.model.Product">
+    select tp.productId,tp.productStatus,tp.productName,tp.productCode,tp.productArt,tp.productModel,tp.fashionElement,date_sub(tp.market,interval -1 day) market,tt.typeName typeName,ta.areaName areaName
+    from t_product tp
+    left join t_type tt on tp.typeid = tt.typeId
+    left join t_area ta on tp.productArea = ta.id
+    where tp.productStatus = 2
+    limit #{s},#{l}
+  </select>
+  <select id="queryDetailed" resultType="com.jk.product.model.Color">
+    select * from t_color where productId = #{id}
+  </select>
+  <insert id="addColor" parameterType="com.jk.product.model.Color">
+    insert into t_color (colorName,productId) values (#{colorName},#{productId})
+  </insert>
+
+  <delete id="deleteColor">
+    delete from t_color where colorid = #{colorid}
+  </delete>
+
+  <select id="queryByIds" resultType="int">
+    select tcs.sizeId from t_color_size tcs where tcs.colorId = #{colorid}
+  </select>
+  <delete id="deleteSize" >
+    delete from t_size where sizeId in
+    <foreach collection="list" separator="," open="(" close=")" item="l">
+      #{l}
+    </foreach>
+  </delete>
+  <delete id="deleteColorSize">
+    delete from t_color_size where colorId = #{colorid}
+  </delete>
+
+  <select id="querySize" resultType="com.jk.product.model.Size">
+    select ts.*,tc.colorName from t_color tc
+    LEFT JOIN t_color_size tcz on tc.colorid = tcz.colorId
+    LEFT JOIN t_size ts on tcz.sizeId = ts.sizeId
+    where tc.colorid = #{id}
+  </select>
+  <insert id="addSize" useGeneratedKeys="true" keyProperty="sizeId">
+    insert into t_size (sizeName,sizeCount,sizePrice,sizePack,sizeImg) values(#{sizeName},#{sizeCount},#{sizePrice},#{sizePack},#{sizeImg})
+  </insert>
+  <insert id="addColorAndSize">
+    insert into t_color_size (colorId,sizeId) values(#{colorId},#{sizeId})
+  </insert>
+  <delete id="delSize">
+    delete from t_size where sizeId = #{sizeId}
+  </delete>
+  <delete id="delColorSize">
+    delete from t_color_size where sizeId = #{sizeId}
+  </delete>
+
+  <update id="lowerShelf" >
+    update t_product set productStatus = 2,sdTime=sysdate() where productId = #{id}
+  </update>
+  <update id="upperShelf" >
+    update t_product set productStatus = 1,sdTime=sysdate() where productId = #{id}
+  </update>
+
+  <select id="queryColorIdByProductId" resultType="int">
+    select colorid from t_color where productId = #{id}
+  </select>
+
+  <select id="querySizeIdByColorId"  resultType="int">
+    select sizeId from t_color_size where colorId in (#{substring})
+  </select>
+  <delete id="delColor">
+    delete from t_color where colorid in (#{coloridss})
+  </delete>
+  <delete id="delAllColorSize">
+    delete from t_color_size where colorId in (#{coloridss})
+  </delete>
+  <delete id="delProduct">
+    delete from t_product where productId = #{id}
+  </delete>
+  <update id="notAll">
+    update t_product set productStatus = 2,sdTime=sysdate() where productId in (${ids})
+  </update>
+  <update id="putAll">
+    update t_product set productStatus = 1,sdTime=sysdate() where productId in (${ids})
+  </update>
+  </mapper>

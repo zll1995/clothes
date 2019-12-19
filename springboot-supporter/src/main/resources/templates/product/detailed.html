@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery.min.js"></script>
+</head>
+<body>
+     <p th:text="${id}" id="id" style="display: none"></p>
+     <button class="layui-btn" onclick="toProduct()">返回商品主页</button>
+     <button class="layui-btn" onclick="toAddDetailed()"><i class="layui-icon">&#xe654;</i></button>
+    <table class="layui-hide" id="detailedTable"></table>
+     <div id="add" style = "display : none">
+         <form class="layui-form" action="" type="post" lay-filter="example1">
+             <input type="hidden" id="productId"  name="productId"/>
+             <div class="layui-form-item">
+                 <label class="layui-form-label">颜色</label>
+                 <div class="layui-input-block">
+                     <input type="text" name="colorName" lay-verify="title" autocomplete="off" placeholder="请输入颜色" class="layui-input">
+                 </div>
+             </div>
+             <div class="layui-form-item">
+                 <div class="layui-input-block">
+                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="add">立即提交</button>
+                 </div>
+             </div>
+         </form>
+     </div>
+
+     <script>
+        layui.use(['table','jquery','layer'], function() {
+            var table = layui.table;
+            var $ = layui.jquery;
+            var id = $("#id").html();
+            table.render({
+                elem: '#detailedTable'
+                , url: '../product/queryDetailed?id='+id
+                , cols: [
+                    [
+                          {field: 'colorName', width: '50%', title: '颜色',align:"center"}
+                        , {
+                        field: 'xxx', width: '50%', title: '操作',align:"center", templet: function (a) {
+                            return "<button type='button' class='layui-btn layui-btn-danger layui-btn-sm' onclick='deleteColor(" + a.colorid + ")'><i class='layui-icon'>&#x1006;</i></button><button type='button' class='layui-btn layui-btn-warm layui-btn-sm' onclick='specifications(" + a.colorid + ")'><i class='layui-icon'>&#xe654;</i></button>"
+                        }
+                    }
+                    ]
+                ]
+            });
+            deleteColor=function (colorid) {
+                $.ajax({
+                    url:"../product/deleteColor?colorid="+colorid,
+                    success:function () {
+                        location.href="../product/toDetailed?id="+id;
+                    }
+                })
+            }
+            specifications=function (colorid) {
+                layer.open({
+                    type: 2,
+                    title: "弹框",
+                    area: ['50%', '70%'],
+                    content:"../product/toSpecifications?colorid="+colorid
+                })
+            }
+        })
+        function toProduct() {
+            location.href="../product/toQueryproduct";
+        }
+        layui.use(['table','jquery','layer','form','laydate'], function() {
+            $("#productId").val($("#id").html());
+            var layer = layui.layer;
+            var form = layui.form;
+            var laydate = layui.laydate
+            var table = layui.table
+            var id = $("#id").html();
+            toAddDetailed = function () {
+                layer.open({
+                    type: 1,
+                    title: "新增弹框",
+                    content: $("#add").html(),
+                    success: function () {
+                        laydate.render({
+                            elem: '#date1'
+                        })
+                        form.render()
+                        form.on('submit(add)', function (data) {
+                            console.log(data)
+                            console.log(data.field)
+                            var node = data.field
+                            $.ajax({
+                                url:"../product/addColor",
+                                type:"post",
+                                data:node,
+                                success:function () {
+                                    form.render();
+                                    layer.closeAll()
+                                }
+                            })
+                            location.reload();
+                            return false;
+                        })
+                    },
+                    end: function () {
+                        table.reload();
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>

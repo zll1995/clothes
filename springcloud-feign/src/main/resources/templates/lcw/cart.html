@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> 购物车 </title>
+
+    <!-- MAIN CSS FILES===================================
+	======================================================= -->
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <!-- Mean Menu CSS -->
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="assets/css/slick-1.9.0.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&display=swap" rel="stylesheet">
+    <!-- Helper Css -->
+    <link rel="stylesheet" href="assets/css/helper.css" >
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/css/zimate-1.0.css" >
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="assets/css/responsive-1.0.css">
+    <!-- modernizr js -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Header Start  -->                 
+    <header>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Site Menu -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <nav class="main-menu fs-12 lh-70">
+                         <ul>
+                            <li>
+                                <a  href="../query">主页</a>
+                                <ul class="sub-menu">
+                                    <li><a href="index.html">个人资料</a></li>
+                                    <li><a href="home-02.html">我的收藏</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="category.html">类别</a>
+                            </li>
+
+                            
+                            
+                            <li>
+                                <a href="blog.html">博客</a>
+                            </li>
+                            <li class="active">
+                                <a href="cart.html">购物车</a>
+                            </li>
+                            <li>
+                                <a href="checkout.html">结帐</a>
+                            </li>
+                            <li>
+                                <a href="contact.html">接触</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- end col -->
+                <!-- Site Logo -->
+                <div class="col-lg-2 col-6">
+                    <div class="logo text-center">
+                        <a href="index.html"><img src="assets/img/logo.png" alt="zimate"></a>
+                    </div>
+                </div>
+
+                <!-- Site Hader cart -->
+                <div class="col-lg-5 col-6">
+                    <div class="header-right text-right">
+                        <ul>
+                            <li><a href=""><i class="ti ti-user"></i></a></li>
+                            <li class="search"><a href="#"><i class="ti ti-search"></i></a></li>
+                            <li class="cart"><a href="#"><i class="ti ti-bag"></i> <span>2</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 d-none menu-show">
+                    <div class="mobilemenu"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Cart Aera End -->
+    <!-- Mian Wrapper Start -->
+    <main>
+        <!-- breadcrumb-area start -->
+        <section class="breadcrumb-area bg-light p-t-80 p-b-120 fs-14 link-color-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="m-b-30 fs-40 fw-600">购物车</h2>
+                        <ul class="list-inline">
+                            <li><a href="index.html">Home</a></li>
+                            <li>-</li>
+                            <li><a href="single-post.html">Shopping Cart</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- breadcrumb-area start -->
+        <!-- Cart content Wrapper -->
+        <section class="cart-content-wrapper p-t-120 p-b-120">
+            <div class="container">
+                <!-- Cart Table start -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="cart-table">
+                            <table class="table-shopping-cart" id="tableid">
+                                
+
+                            </table>
+                        </div>
+
+                        <div class="table-bootm clearfix m-t-30">
+                            <div class="table-bootm-left float-l">
+                                <a href="#" class="continune-shop btn boxed-btn m-r-22">继续购物</a>
+                                <a href="#" class="update-cart btn border-btn">更新购物车</a>
+                            </div>
+                            <div class="table-bootm-right float-r">
+                                <a href="#" class="clear-cart btn border-btn">清空购物车</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cart Table end -->
+
+              <!--  <div class="row m-t-80">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="shop-shipping">
+                            <h4 class="fs-22 m-b-40">装运详细信息</h4>
+                            <div class="shop-shipping-form">
+                                <form action="#">
+                                    <p class="m-b-30">
+                                        <label for="country">国家</label>
+                                        <select name="country" id="country">
+                                            <option value="england">中国</option>
+                                            <option value="bangladesh">美国</option>
+                                            <option value="india">印度</option>
+                                        </select>
+                                    </p>
+                                    <p class="m-b-30">
+                                        <label for="state">国家</label>
+                                        <select name="state" id="state">
+                                            <option value="1">西安</option>
+                                            <option value="2">洛杉矶</option>
+                                            <option value="3">达卡</option>
+                                        </select>
+                                    </p>
+                                    <p class="m-b-30">
+                                        <label for="state">国家</label>
+                                        <input type="text" placeholder="邮政编码">
+                                    </p>
+                                    <p>
+                                        <button class="btn boxed-btn">计算运费</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="cart-note">
+                            <h4 class="fs-22 m-b-40">购物车备注</h4>
+                            <div class="cart-note-form">
+                                <form>
+                                    <p>
+                                        <label for="note">注意</label>
+                                        <textarea name="note" id="note"></textarea>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="cart-total">
+                            <h4 class="fs-22 m-b-40">购物车合计</h4>
+                            <div class="cart-total-form p-all-40">
+                                <ul class="clearfix">
+                                    <li class="clearfix">
+                                        <p class="float-l">小计 </p>
+                                        <p class="float-r">$250.60</p>
+                                    </li>
+                                    <li class="clearfix">
+                                        <p class="float-l">总计</p>
+                                        <p class="float-r">$250.60</p>
+                                    </li>
+                                </ul>
+                                <a href="" class="btn boxed-btn">计算运费</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </section>
+        <!-- Cart content Wrapper End-->
+    </main>
+    <!-- Mian Wrapper End -->
+    <!-- Footer Start  -->
+    <footer class="footer-black">
+        <!-- Footer Top Area -->
+        <div class="footer-widget-area p-t-100 p-b-100 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">关于我们</h4>
+                            <ul>
+                                 <li><a href="">我们是谁</a></li>
+                                <li><a href="">使用 </a></li>
+                                <li><a href="">成为供应商</a></li>
+                                <li><a href="">投资者关系</a></li>
+                                <li><a href="">我们的设备</a></li>
+                                <li><a href="">附属计划</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">有用的链接</h4>
+                            <ul>
+                                <li><a href="">联系我们</a></li>
+                                <li><a href="">常见问题解答</a></li>
+                                <li><a href="">条款和条件</a></li>
+                                <li><a href="">退货政策</a></li>
+                                <li><a href="">取消预约</a></li>
+                                <li><a href="">轨道 </a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                           <h4 class="widgets-title">跟我们来</h4>
+                            <ul>
+                                <li><a href=""><i class="ti ti-facebook"></i>脸谱网</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>推特</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>一款图片分享应用</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>Youtube网站</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">网上购物</h4>
+                            <ul>
+                                <li><a href="">时尚男士购物</a></li>
+                                <li><a href="">女性购物 2019</a></li>
+                                <li><a href="">礼品卡和优惠券</a></li>
+                                <li><a href="">家庭生活费</a></li>
+                                <li><a href="">电子小工具</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom-area -->
+        <div class="footer-bottom-area p-t-30 p-b-30 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="copyright-text">
+                            <p>版权 © 2019 <a href="http://www.bootstrapmb.com/" target="_blank">1905班三组</a>. 保留所有权利</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="payment-method text-right">
+                            <ul>
+                                <li><a href="#"><img src="assets/img/payment/01-white.png" alt="Paypal"></a></li>
+                                <li><a href="#"><img src="assets/img/payment/02-white.png" alt="Visa"></a></li>
+                                <li><a href="#"><img src="assets/img/payment/03-white.png" alt="Master Crad"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+
+    <!-- MAIN JS FILES===================================
+	======================================================= -->
+    <!-- jQuery -->
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <!-- Bootstrap js-->
+    <script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Poper js -->
+    <script src="assets/js/popper-1.14.7.js"></script>
+    <!-- Mean Menu js -->
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <!-- Slick JS -->
+    <script src="assets/js/slick.min-1.9.0.js"></script>
+    <!-- sweetalert -->
+    <script src="assets/js/sweetalert.min-1.0.js"></script>
+    <!-- Theme js -->
+    <script src="assets/js/zimate-1.0.js"></script>
+</body>
+    <script>
+        $(function(){
+            initdata();
+        })
+        initdata=function(){
+            $.ajax({
+                url:"../queryCart",
+                dataType:"json",
+                success:function(data){
+                var tr = '<tr class="table_head" >' +
+                    '                                    <th class="column-1">产品</th>' +
+                    '                                    <th class="column-2"></th>' +
+                    '                                    <th class="column-3">价格</th>' +
+                    '                                    <th class="column-2">数量</th>' +
+                    '                                    <th class="column-5">总计</th>' +
+                    '                                    <th class="column-6"></th>' +
+                    '                                </tr>';
+                for (var i = 0; i < data.length; i++) {
+                    tr += '<tr class="table_row frist-row">' +
+                        '                                    <td class="column-1">' +
+                        '                                        <div class="cart-img">' +
+                        '                                            <img src="'+data[i].img+'" alt="IMG">' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+                        '                                    <td class="column-2">'+data[i].productname+'</td>' +
+                        '                                    <td class="column-3">'+data[i].productprice+'</td>' +
+                        '                                    <td class="column-2">' +
+                        '                                        <div class="quantity-input">' +
+                        '                                            <div class="quantity-down" id="quantityDown'+data[i].img+'" onclick="price(1)"><i class="ti ti-angle-left"></i></div>' +
+                        '                                            <input id="count" type="number" value="1" name="quantity">' +
+                        '                                            <div class="quantity-up" id="quantityUP'+data[i].img+'" onclick="price(2)"><i class="ti ti-angle-right"></i></div>' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+                        '                                    <td class="column-5">'+$("#count").val()*data[i].productprice+'</td>' +
+                        '                                    <td class="column-6"><i class="ti ti-trash"></i></td>' +
+                        '                                    <a href="javascript:deleteshoucang()"><i class="ti ti-tra"></i></a>' +
+                        '                                </tr>';
+                }
+                    $("#tableid").append(tr)
+            }
+            })
+        }
+        price=function(id){
+
+        }
+    </script>
+</html>

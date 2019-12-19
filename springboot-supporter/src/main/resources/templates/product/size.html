@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery.min.js"></script>
+</head>
+<body>
+    <p th:text="${colorid}" id="colorid" style="display: none"></p>
+    <button type="button" class="layui-btn layui-btn-warm" onclick="addSize()">新增</button>
+    <table class="layui-hide" id="sizeTable"></table>
+    <div id="addsiz" style = "display : none">
+        <input type="hidden" name="cid" id="cid">
+        <form class="layui-form" action="" lay-filter="example1">
+            <input type="hidden" id="colorIds" name="colorId"/>
+            <div class="layui-form-item">
+                <label class="layui-form-label">尺码</label>
+                <div class="layui-input-block">
+                    <input type="text" id="sizeName" name="sizeName" lay-verify="title" autocomplete="off" placeholder="尺码" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">库存</label>
+                <div class="layui-input-block">
+                    <input type="text" id="sizeCount" name="sizeCount" lay-verify="title" autocomplete="off" placeholder="库存" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">价格</label>
+                <div class="layui-input-block">
+                    <input type="text" id="sizePrice" name="sizePrice" lay-verify="title" autocomplete="off" placeholder="价格" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">包装</label>
+                <div class="layui-input-block">
+                    <input type="text" id="sizePack" name="sizePack" lay-verify="title" autocomplete="off" placeholder="包装" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-block">
+                    <div class="layui-upload">
+                        <div class="col-sm-1"> </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="layui-btn" id="test1">上传图片</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img"  id="demo1" style="width:400px;height:100px;">
+                                <p id="demoText" ></p>
+                                <input name="B_Url" type="hidden" value=""/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="addsi">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<script>
+    layui.use(['table','jquery','layer'], function() {
+        var table = layui.table;
+        var $ = layui.jquery;
+        var id = $("#colorid").html();
+        table.render({
+            elem: '#sizeTable'
+            , url: '../product/querySize?id=' + id
+            , cols: [
+                [
+                      {field: 'sizeName', width: '10%', title: '尺码', align: "center"}
+                    , {field: 'sizeCount', width: '10%', title: '库存', align: "center"}
+                    , {field: 'sizePrice', width: '10%', title: '价格', align: "center"}
+                    , {field: 'sizePack', width: '10%', title: '包装', align: "center"}
+                    , {field: 'sizeImg', width: '30%', title: '图片', align: "center"}
+                    , {field: 'colorName', width: '10%', title: '颜色', align: "center"}
+                    , {
+                    field: 'xxx', width: '20%', title: '操作', align: "center", templet: function (a) {
+                        return "<button type='button' class='layui-btn layui-btn-danger layui-btn-sm' onclick='deleteSize(" + a.sizeId + ")'><i class='layui-icon'>&#x1006;</i></button>"
+                    }
+                }
+                ]
+            ]
+        });
+        deleteSize=function (sizeId) {
+            $.ajax({
+                url:"../product/deleteSize?sizeId="+sizeId,
+                success:function () {
+                    location.reload();
+                }
+            })
+        }
+    })
+    layui.use(['table','jquery','layer','form','laydate'], function() {
+        var layer = layui.layer;
+        var form = layui.form;
+        var laydate = layui.laydate
+        var table = layui.table
+        var $ = layui.jquery;
+        var colorid = $("#colorid").html();
+        $("#colorIds").val(colorid);
+        addSize = function () {
+            layer.open({
+                type: 1,
+                title: "新增弹框",
+                area: ['70%', '70%'],
+                content: $("#addsiz").html(),
+                success: function () {
+                    form.render()
+                    form.on('submit(addsi)', function (data) {
+                        console.log(data)
+                        console.log(data.field)
+                        var node = data.field
+                        $.ajax({
+                            url: "../product/addSize",
+                            data: node,
+                            success: function () {
+                                form.render();
+                                layer.closeAll()
+                            }
+                        })
+                        location.reload();
+                        return false;
+                    })
+                },
+                end: function () {
+                    table.reload();
+                }
+
+            })
+
+        }
+    })
+</script>
+</body>
+</html>

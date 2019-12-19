@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery.min.js"></script>
+</head>
+<body>
+<input class="layui-btn layui-btn-warm" type="button" onclick="putAll()" value="批量上架商品"/>
+<table class="layui-hide" id="productTable2"></table>
+<script>
+    layui.use(['table','jquery','layer'], function() {
+        var table = layui.table;
+        var $ = layui.jquery;
+        table.render({
+            elem: '#productTable2'
+            , url: '../product/queryProduct2'
+            , cols: [
+                [
+                    {type: 'checkbox'},
+                    {field: 'productName', title: '商品名称', width: '10%', align: "center"}
+                    , {field: 'productArt', width: '10%', title: '货号', align: "center"}
+                    , {field: 'fashionElement', width: '17.3%', title: '流行元素', align: "center"}
+                    , {
+                    field: 'market', width: '10%', title: '上市时间', align: "center",
+                    templet: function (a) {
+                        return a.market.toLocaleString().substr(0, 10);
+                    }
+                }
+                    , {field: 'areaName', width: '10%', title: '商品产地', align: "center"}
+                    , {field: 'typeName', width: '10%', title: '商品类型', align: "center"}
+                    , {
+                    field: 'productStatus', width: '10%', title: '状态', align: "center", templet: function (a) {
+                        if (a.productStatus == 1) {
+                            return "上架";
+                        }
+                        if (a.productStatus == 2) {
+                            return "下架"
+                        }
+                    }
+                }
+                    , {
+                    field: 'sdTime', width: '10%', title: '下架时间', align: "center",
+                    templet: function (a) {
+                        return  new Date(a.market).toLocaleString().substr(0,10);
+                    }
+                }
+                    , {
+                    field: 'xxx', width: '10%', align: "center", title: '操作', templet: function (a) {
+                        return "<button type='button' class='layui-btn layui-btn-danger layui-btn-sm' onclick='deleteProduct(" + a.productId + ")'>删除</button><button type='button' class='layui-btn layui-btn-sm' onclick='upperShelf(" + a.productId + ")'>上架</button>"
+                    }
+                }
+                ]
+            ]
+            , page: true
+        });
+        upperShelf = function (id) {
+            $.ajax({
+                url:"../product/upperShelf?id="+id,
+                success:function () {
+                    location.reload();
+                }
+            })
+        }
+        deleteProduct = function (id) {
+            layer.confirm('你确定要删除这件商品吗?', {icon: 3, title:'提示'}, function(index){
+                $.ajax({
+                    url:"../product/deleteProduct?id="+id,
+                    success:function () {
+                        layer.alert('删除商品成功', {icon: 6});
+                        location.reload();
+                    }
+                })
+                layer.close(index);
+            });
+        }
+        putAll = function () {
+            var ids =  table.checkStatus("productTable2");
+            var arr = ids.data;
+            var id = "";
+            for (var i=0;i<arr.length;i++){
+                id +=","+arr[i].productId
+            }
+            var idss = id.substr(1);
+            if(idss.length>0){
+                $.ajax({
+                    url:"../product/putAll?ids="+idss,
+                    success:function () {
+                        location.reload();
+                    }
+                })
+            }else{
+                layer.alert('请选择上架商品', {icon: 6});
+            }
+
+        }
+    })
+</script>
+</body>
+</html>

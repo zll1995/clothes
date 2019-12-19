@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>依衣</title>
+
+    <!-- 主CSS文件===================================
+	======================================================= -->
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <!-- Mean Menu CSS -->
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="assets/css/slick-1.9.0.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&display=swap" rel="stylesheet">
+    <!-- Helper Css -->
+    <link rel="stylesheet" href="assets/css/helper.css" >
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/css/zimate-1.0.css" >
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="assets/css/responsive-1.0.css">
+    <!-- modernizr js -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery-1.8.0.js"></script>
+    <!--vue-->
+    <script type="text/javascript" src="../vue/vue.js"></script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- 标题开始  -->
+    <header>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Site Menu -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <nav class="main-menu fs-12 lh-70">
+                        <ul>
+                            <li class="active">
+                                <a  href="index.html">主页</a>
+                                <ul class="sub-menu">
+                                    <li><a href="index.html">个人资料</a></li>
+                                    <li><a href="home-02.html">我的收藏</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="category.html">类别</a>
+                            </li>
+
+                            
+                            
+                            <li>
+                                <a href="blog.html">博客</a>
+                            </li>
+                            <li>
+                                <a href="../main">购物车</a>
+                            </li>
+                            <li>
+                                <a href="checkout.html">结帐</a>
+                            </li>
+                            <li>
+                                <a href="contact.html">接触</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- 结束列 -->
+                <!-- 网站徽标 -->
+                <div class="col-lg-2 col-6">
+                    <div class="logo text-center">
+                        <a href="index.html"><img src="assets/img/logo.png" alt="zimate"></a>
+                    </div>
+                </div>
+
+                <!-- 站点Hader cart -->
+                <div class="col-lg-5 col-6">
+                    <div class="header-right text-right">
+                        <ul>
+                            <li><a href=""><i class="ti ti-user"></i></a></li>
+                            <li class="search"><a href="#"><i class="ti ti-search"></i></a></li>
+                            <li class="cart"><a href="#"><i class="ti ti-bag"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 d-none menu-show">
+                    <div class="mobilemenu"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 收割台末端 -->
+
+    <!-- 主包装开始 -->
+    <main>
+        <!-- 主横幅区域开始 -->
+        <section class="main-banner">
+            <div class="banner-slider-wrapper" id="bannerSlider">
+                <div class="single-banner-slide bg-img h-870 d-flex align-items-center" style="background-image: url(assets/img/banner/01.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="slide-text">
+                                    <span class="top-small-text" data-animation="fadeInDown" data-delay=".2s">新时尚潮流</span>
+                                    <h1 class="fs-70 ln-80 m-t-45 m-b-60" data-animation="fadeInDown" data-delay=".4s">对于女性的 <br>  高级时装</h1>
+                                    <a href="#" class="btn boxed-btn" data-animation="fadeInUp" data-delay=".6s">立即探索</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-banner-slide bg-img h-870 d-flex align-items-center" style="background-image: url(assets/img/banner/02.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="slide-text slide-white-text">
+                                    <span class="top-small-text" data-animation="fadeInDown" data-delay=".2s">新品上市</span>
+                                    <h1 class="fs-72 ln-82 m-t-35 m-b-25" data-animation="fadeInDown" data-delay=".4s">简单的 <br>时尚制造</h1>
+                                    <a href="#" class="btn border-btn" data-animation="fadeInUp" data-delay=".6s">立即探索</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 主横幅区域结束-->
+
+        <!-- 提供区域开始 -->
+        <section class="offer-section p-t-60 p-b-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="single-offer-box bg-img h-630 p-l-50 p-t-80" style="background-image: url(assets/img/offer/01.jpg);">
+                            <span class="top-small-text">购买 & 保存</span>
+                            <h2 class="fs-36 lh-45 m-t-25 m-b-35">独家 聚会 <br> 时尚</h2>
+                            <a href="#" class="btn border-bottom-btn">立即探索</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-6">
+                                <div class="single-offer-box bg-img h-300 p-l-50 p-t-80 m-b-30" style="background-image: url(assets/img/offer/02.jpg);">
+                                    <span class="top-small-text">八折</span>
+                                    <h2 class="fs-36 lh-45 m-t-25 m-b-35">男装</h2>
+                                    <a href="#" class="btn border-bottom-btn">立即探索</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="single-offer-box bg-img h-300 p-l-50 p-t-80" style="background-image: url(assets/img/offer/03.jpg);">
+                                    <span class="top-small-text">新产品</span>
+                                    <h2 class="fs-36 lh-45 m-t-25 m-b-35">运动 手表</h2>
+                                    <a href="#" class="btn border-bottom-btn">立即探索</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 提供区域端 -->
+        <!-- 激发产品启动 -->
+        <section class="inspire-products p-t-60 p-b-60">
+            <div class="container">
+                <!-- 章节标题开始 -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-center m-b-60">
+                            <h2 class="fs-40 lh-16 m-b-35">激励 产品</h2>
+                            <p>Fish fruitful were together don't bring replenish dominion so evening.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 章节标题结束 -->
+                <div class="row" id="cha">
+                    <!-- 单一产品 -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12"  v-for="site in sites">
+
+        <div class="single-product m-b-60 text-center">
+             <div class="product-action position-relative">
+               <div class="product-img">
+                      <img src="assets/img/product/01.jpg" alt="Product">
+                  </div>
+               <div class="action-list ab-b-l w-full trans-06">
+                  <ul>
+                      <li><a href="single-product.html"><i class="ti ti-search"></i></a></li>
+                      <li><a href="single-product.html" class="add-to-cart" data-name="Woman Pink Purse Isolated"><i class="ti ti-bag"></i></a></li>
+                      <li><a href="javascript:add()"><i class="ti ti-heart"></i></a></li>
+                      </ul>
+                          </div>
+             </div><!--{{site.sizeimg}}-->
+                   <div class="product-content m-t-30">
+                      <h6><a href="single-product.html" >{{site.productname}}</a></h6>
+                             <p class="price">${{site.sizeprice}}</p>
+        </div>
+            </div>
+                 </div>
+
+                    </div>
+
+                         </div>
+        </section>
+        <!-- 激发产品端 -->
+        <section class="lastest-post p-t-60 p-b-60">
+            <div class="container">
+                <!-- 章节标题开始 -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-center m-b-60">
+                            <h2 class="fs-40 lh-16 m-b-35">最新的故事</h2>
+                            <p>Fish fruitful were together don't bring replenish dominion so evening.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 章节标题结束-->
+                <!-- 让后循环 -->
+                <div class="row">
+                    <!-- 单柱  -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="single-lastest-post">
+                            <div class="lastst-post-image bg-img" style="background-image: url(assets/img/lastest-post/01.jpg);"></div>
+                            <div class="latest-post-content">
+                                <span>马丁 / 2019.8.28  </span>
+                                <h4><a href="single-post.html">移动人猿鼹鼠</a></h4>
+                                <div class="meta">
+                                    <ul>
+                                        <li><a href="#"><i class="ti ti-pencil-alt"></i>生活方式</a></li>
+                                        <li><a href="#"><i class="ti ti-comment"></i>03 评论</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 单柱 -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="single-lastest-post">
+                            <div class="lastst-post-image bg-img" style="background-image: url(assets/img/lastest-post/02.jpg);"></div>
+                            <div class="latest-post-content">
+                                <span>马丁 / 2019.8.28 </span>
+                                <h4><a href="single-post.html">草苍穹之上</a></h4>
+                                <div class="meta">
+                                    <ul>
+                                        <li><a href="#"><i class="ti ti-pencil-alt"></i>生活方式</a></li>
+                                        <li><a href="#"><i class="ti ti-comment"></i>03 评论</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 单柱 -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="single-lastest-post">
+                            <div class="lastst-post-image bg-img" style="background-image: url(assets/img/lastest-post/03.jpg);"></div>
+                            <div class="latest-post-content">
+                                <span>马丁 / 2019.8.28 </span>
+                                <h4><a href="single-post.html">给一个让步给一个形象</a></h4>
+                                <div class="meta">
+                                    <ul>
+                                        <li><a href="#"><i class="ti ti-pencil-alt"></i>生活方式</a></li>
+                                        <li><a href="#"><i class="ti ti-comment"></i>03 评论</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 最新故事结尾 -->
+        <!-- 订阅开始 -->
+        <section class="subscribe-section p-t-120 p-b-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="section-title text-center m-b-60">
+                            <h2 class="fs-40 lh-16 m-b-30">  订阅并享受高达20%的折扣</h2>
+                            <p>Fish fruitful were together don't bring replenish dominion so evening.</p>
+                        </div>
+                        <div class="subs-form text-center">
+                            <form>
+                                <input type="text" placeholder="输入您的电子邮件">
+                                <button type="submit" class="btn boxed-btn">订阅</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 下标端 -->
+
+
+    <!-- 主包装端-->
+    <!-- 页脚开始  -->
+    <footer>
+        <!-- 页脚顶部区域 -->
+        <div class="footer-widget-area p-t-100 p-b-100 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- 小部件 -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">关于我们</h4>
+                            <ul>
+                                <li><a href="">我们是谁</a></li>
+                                <li><a href="">使用 </a></li>
+                                <li><a href="">成为供应商</a></li>
+                                <li><a href="">投资者关系</a></li>
+                                <li><a href="">我们的设备</a></li>
+                                <li><a href="">附属计划</a></li>
+                            </ul>
+                        </div>
+                        <!-- 结束小部件 -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- 小部件 -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">有用的链接</h4>
+                            <ul>
+                                <li><a href="">联系我们</a></li>
+                                <li><a href="">常见问题解答</a></li>
+                                <li><a href="">条款和条件</a></li>
+                                <li><a href="">退货政策</a></li>
+                                <li><a href="">取消预约</a></li>
+                                <li><a href="">轨道 </a></li>
+                            </ul>
+                        </div>
+                        <!-- 结束小部件 -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- 小部件 -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">跟我们来</h4>
+                            <ul>
+                                <li><a href=""><i class="ti ti-facebook"></i>脸谱网</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>推特</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>一款图片分享应用</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>Youtube网站</a></li>
+                            </ul>
+                        </div>
+                        <!-- 结束小部件 -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- 小部件 -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">网上购物</h4>
+                            <ul>
+                                <li><a href="">时尚男士购物</a></li>
+                                <li><a href="">女性购物 2019</a></li>
+                                <li><a href="">礼品卡和优惠券</a></li>
+                                <li><a href="">家庭生活费</a></li>
+                                <li><a href="">电子小工具</a></li>
+                            </ul>
+                        </div>
+                        <!-- 结束小部件 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 页脚底部区域 -->
+        <div class="footer-bottom-area p-t-30 p-b-30 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="copyright-text">
+                            <p>版权 © 2019 <a href="http://www.bootstrapmb.com/" target="_blank">1905班三组</a>. 保留所有权利</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="payment-method text-right">
+                            <ul>
+                                <li><a href="#"><img src="assets/img/payment/01.png" alt="Paypal"></a></li>
+                                <li><a href="#"><img src="assets/img/payment/02.png" alt="Visa"></a></li>
+                                <li><a href="#"><img src="assets/img/payment/03.png" alt="Master Crad"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- 页脚端 -->
+
+            </main>
+
+    <!-- 主JS文件===================================
+	======================================================= -->
+    <!-- jQuery -->
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <!-- Bootstrap js-->
+    <script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Poper js -->
+    <script src="assets/js/popper-1.14.7.js"></script>
+    <!-- Mean Menu js -->
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <!-- Slick JS -->
+    <script src="assets/js/slick.min-1.9.0.js"></script>
+    <!-- sweetalert -->
+    <script src="assets/js/sweetalert.min-1.0.js"></script>
+    <!-- Theme js -->
+    <script src="assets/js/zimate-1.0.js"></script>
+
+</body>
+
+<script type="text/javascript">
+    $(function(){
+        queryMovie();
+    })
+function add(){
+    layer.confirm('亲,您确定加入收藏吗?', {icon: 3, title:''},
+        function(index){
+        //do something
+        alert("aaa")
+        layer.close(index);
+    });
+}
+
+function queryMovie() {
+    $.ajax({
+        url: "../queryProduct",
+        type: "post",
+        datatype:"text",
+        success: function (data) {
+            new Vue({
+                el: '#cha',
+                data: {
+                    sites:data
+                }
+            })
+
+        }
+    })
+}
+</script>
+
+</html>
