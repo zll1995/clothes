@@ -56,30 +56,18 @@
                     <nav class="main-menu fs-12 lh-70">
                         <ul>
                             <li class="active">
-                                <a  href="index.html">主页</a>
-                                <ul class="sub-menu">
-                                    <li><a href="index.html">个人资料</a></li>
-                                    <li><a href="home-02.html">我的收藏</a></li>
-                                </ul>
+                                <a  href="../query">主页</a>
                             </li>
                             <li>
-                                <a href="category.html">类别</a>
+                                <a href="../main">全部商品</a>
                             </li>
-
-                            
-                            
                             <li>
-                                <a href="blog.html">博客</a>
+                                <a href="../shou">我的收藏</a>
                             </li>
                             <li>
                                 <a href="../main">购物车</a>
                             </li>
-                            <li>
-                                <a href="checkout.html">结帐</a>
-                            </li>
-                            <li>
-                                <a href="contact.html">接触</a>
-                            </li>
+
                         </ul>
                     </nav>
                 </div>
@@ -95,9 +83,8 @@
                 <div class="col-lg-5 col-6">
                     <div class="header-right text-right">
                         <ul>
-                            <li><a href=""><i class="ti ti-user"></i></a></li>
-                            <li class="search"><a href="#"><i class="ti ti-search"></i></a></li>
-                            <li class="cart"><a href="#"><i class="ti ti-bag"></i></a></li>
+                            <li><a href="../users"><i class="ti ti-user"></i></a></li>
+                            <li class="search"><a href=""><i class="ti ti-search"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -151,7 +138,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-12">
                         <div class="single-offer-box bg-img h-630 p-l-50 p-t-80" style="background-image: url(assets/img/offer/01.jpg);">
-                            <span class="top-small-text">购买 & 保存</span>
+                            <span class="top-small-text">购买 & 收藏</span>
                             <h2 class="fs-36 lh-45 m-t-25 m-b-35">独家 聚会 <br> 时尚</h2>
                             <a href="#" class="btn border-bottom-btn">立即探索</a>
                         </div>
@@ -160,7 +147,6 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-6">
                                 <div class="single-offer-box bg-img h-300 p-l-50 p-t-80 m-b-30" style="background-image: url(assets/img/offer/02.jpg);">
-                                    <span class="top-small-text">八折</span>
                                     <h2 class="fs-36 lh-45 m-t-25 m-b-35">男装</h2>
                                     <a href="#" class="btn border-bottom-btn">立即探索</a>
                                 </div>
@@ -199,19 +185,19 @@
         <div class="single-product m-b-60 text-center">
              <div class="product-action position-relative">
                <div class="product-img">
-                      <img src="assets/img/product/01.jpg" alt="Product">
+                      <img :src="site.sizeimg" alt="Product">
                   </div>
-               <div class="action-list ab-b-l w-full trans-06">
+               <!--<div class="action-list ab-b-l w-full trans-06" >
                   <ul>
                       <li><a href="single-product.html"><i class="ti ti-search"></i></a></li>
                       <li><a href="single-product.html" class="add-to-cart" data-name="Woman Pink Purse Isolated"><i class="ti ti-bag"></i></a></li>
-                      <li><a href="javascript:add()"><i class="ti ti-heart"></i></a></li>
+                      <li><a href="javascript:add()">{{site.productid}}<i class="ti ti-heart"></i></a></li>
                       </ul>
-                          </div>
+                          </div>-->
              </div><!--{{site.sizeimg}}-->
                    <div class="product-content m-t-30">
                       <h6><a href="single-product.html" >{{site.productname}}</a></h6>
-                             <p class="price">${{site.sizeprice}}</p>
+                      <p class="price"> 价格:  ${{site.sizeprice}}</p>
         </div>
             </div>
                  </div>
@@ -234,52 +220,15 @@
                 </div>
                 <!-- 章节标题结束-->
                 <!-- 让后循环 -->
-                <div class="row">
+                <div class="row" id="xun">
                     <!-- 单柱  -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12" v-for="si in sites">
                         <div class="single-lastest-post">
-                            <div class="lastst-post-image bg-img" style="background-image: url(assets/img/lastest-post/01.jpg);"></div>
+                            <div><img :src="si.advImg" alt="Product" height="500%"></div>
                             <div class="latest-post-content">
-                                <span>马丁 / 2019.8.28  </span>
-                                <h4><a href="single-post.html">移动人猿鼹鼠</a></h4>
-                                <div class="meta">
-                                    <ul>
-                                        <li><a href="#"><i class="ti ti-pencil-alt"></i>生活方式</a></li>
-                                        <li><a href="#"><i class="ti ti-comment"></i>03 评论</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 单柱 -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="single-lastest-post">
-                            <div class="lastst-post-image bg-img" style="background-image: url(assets/img/lastest-post/02.jpg);"></div>
-                            <div class="latest-post-content">
-                                <span>马丁 / 2019.8.28 </span>
-                                <h4><a href="single-post.html">草苍穹之上</a></h4>
-                                <div class="meta">
-                                    <ul>
-                                        <li><a href="#"><i class="ti ti-pencil-alt"></i>生活方式</a></li>
-                                        <li><a href="#"><i class="ti ti-comment"></i>03 评论</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 单柱 -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                        <div class="single-lastest-post">
-                            <div class="lastst-post-image bg-img" style="background-image: url(assets/img/lastest-post/03.jpg);"></div>
-                            <div class="latest-post-content">
-                                <span>马丁 / 2019.8.28 </span>
-                                <h4><a href="single-post.html">给一个让步给一个形象</a></h4>
-                                <div class="meta">
-                                    <ul>
-                                        <li><a href="#"><i class="ti ti-pencil-alt"></i>生活方式</a></li>
-                                        <li><a href="#"><i class="ti ti-comment"></i>03 评论</a></li>
-                                    </ul>
-                                </div>
+                                    <span><a :href="si.advHref">查看详情</a></span>
+                                <h4>{{si.advName}}</h4>
+                                <h5>{{si.info}}</h5>
                             </div>
                         </div>
                     </div>
@@ -287,28 +236,7 @@
             </div>
         </section>
         <!-- 最新故事结尾 -->
-        <!-- 订阅开始 -->
-        <section class="subscribe-section p-t-120 p-b-120">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3">
-                        <div class="section-title text-center m-b-60">
-                            <h2 class="fs-40 lh-16 m-b-30">  订阅并享受高达20%的折扣</h2>
-                            <p>Fish fruitful were together don't bring replenish dominion so evening.</p>
-                        </div>
-                        <div class="subs-form text-center">
-                            <form>
-                                <input type="text" placeholder="输入您的电子邮件">
-                                <button type="submit" class="btn boxed-btn">订阅</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- 下标端 -->
-
-
     <!-- 主包装端-->
     <!-- 页脚开始  -->
     <footer>
@@ -324,6 +252,7 @@
                                 <li><a href="">我们是谁</a></li>
                                 <li><a href="">使用 </a></li>
                                 <li><a href="">成为供应商</a></li>
+
                                 <li><a href="">投资者关系</a></li>
                                 <li><a href="">我们的设备</a></li>
                                 <li><a href="">附属计划</a></li>
@@ -382,7 +311,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="copyright-text">
-                            <p>版权 © 2019 <a href="http://www.bootstrapmb.com/" target="_blank">1905班三组</a>. 保留所有权利</p>
+                            <p>版权 © 2019 <a href="../query" target="_blank">1905班三组</a>. 保留所有权利</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
@@ -424,21 +353,23 @@
 <script type="text/javascript">
     $(function(){
         queryMovie();
+        queryadv();
     })
-function add(){
+
+/*function add(id){
     layer.confirm('亲,您确定加入收藏吗?', {icon: 3, title:''},
         function(index){
-        //do something
-        alert("aaa")
         layer.close(index);
     });
-}
+}*/
+
+
+
 
 function queryMovie() {
     $.ajax({
         url: "../queryProduct",
         type: "post",
-        datatype:"text",
         success: function (data) {
             new Vue({
                 el: '#cha',
@@ -450,6 +381,29 @@ function queryMovie() {
         }
     })
 }
+    function queryadv() {
+        $.ajax({
+            url: "../queryadvertising",
+            type: "post",
+            success: function (data) {
+
+                new Vue({
+                    el: '#xun',
+                    data: {
+                        sites:data
+                    }
+                })
+
+            }
+        })
+    }
+
+
+
+
+
+
+
 </script>
 
 </html>

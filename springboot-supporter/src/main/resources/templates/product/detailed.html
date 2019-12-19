@@ -32,10 +32,11 @@
      </div>
 
      <script>
-        layui.use(['table','jquery','layer'], function() {
+        layui.use(['table','jquery','layer','upload'], function() {
             var table = layui.table;
             var $ = layui.jquery;
             var id = $("#id").html();
+            var upload = layui.upload;
             table.render({
                 elem: '#detailedTable'
                 , url: '../product/queryDetailed?id='+id
@@ -44,7 +45,7 @@
                           {field: 'colorName', width: '50%', title: '颜色',align:"center"}
                         , {
                         field: 'xxx', width: '50%', title: '操作',align:"center", templet: function (a) {
-                            return "<button type='button' class='layui-btn layui-btn-danger layui-btn-sm' onclick='deleteColor(" + a.colorid + ")'><i class='layui-icon'>&#x1006;</i></button><button type='button' class='layui-btn layui-btn-warm layui-btn-sm' onclick='specifications(" + a.colorid + ")'><i class='layui-icon'>&#xe654;</i></button>"
+                            return "<button type='button' class='layui-btn layui-btn-danger layui-btn-sm' onclick='deleteColor(" + a.colorid + ")'><i class='layui-icon'>&#x1006;</i></button><button type='button' class='layui-btn layui-btn-warm layui-btn-sm' onclick='specifications(" + a.colorid + ")'><i class='layui-icon'>&#xe654;</i></button></button><button type='button' class='layui-btn layui-btn-warm layui-btn-sm' onclick='aaa(" + a.colorid + ")'><i class='layui-icon'>&#xe654;</i></button>"
                         }
                     }
                     ]
@@ -63,10 +64,17 @@
                     type: 2,
                     title: "弹框",
                     area: ['50%', '70%'],
-                    content:"../product/toSpecifications?colorid="+colorid
+                    content:"../product/toSpecifications?colorid="+colorid,
+                    success:function () {
+                        upload.render()
+                    }
                 })
             }
         })
+
+        aaa =function(id){
+          location.href="../product/addproduct?id="+id;
+        }
         function toProduct() {
             location.href="../product/toQueryproduct";
         }

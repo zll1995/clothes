@@ -23,7 +23,17 @@ public class UserCarts implements Serializable {
     @Id
     private  Integer userid;
 
+    private String shoucangid;
+
     private List<Cart> list;
+
+    public String getShoucangid() {
+        return shoucangid;
+    }
+
+    public void setShoucangid(String shoucangid) {
+        this.shoucangid = shoucangid;
+    }
 
     public Integer getUserid() {
         return userid;

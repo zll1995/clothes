@@ -1,5 +1,6 @@
 package com.jk.lcw.controller;
 
+import com.jk.lcw.model.Advertising;
 import com.jk.lcw.model.Product;
 import com.jk.lcw.service.ProductService;
 import com.jk.lcw.service.ProductServiceEntity;
@@ -19,9 +20,17 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
     @PostMapping("queryProduct")
     @ResponseBody
     public List queryProduct(){
-        return productService.queryProduct();
+        List list = productService.queryProduct();
+        return list;
+    }
+    @RequestMapping("queryadvertising")
+    @ResponseBody
+    public List<Advertising> queryadvertising(){
+        List<Advertising> list = productService.queryadvertising();
+        return list;
     }
 }

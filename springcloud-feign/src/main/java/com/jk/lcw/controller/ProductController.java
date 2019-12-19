@@ -1,10 +1,12 @@
 package com.jk.lcw.controller;
 
+import com.jk.lcw.model.Advertising;
 import com.jk.lcw.model.Cart;
 import com.jk.lcw.model.Product;
 import com.jk.lcw.model.UserCarts;
 import com.jk.lcw.service.ProductService;
 import com.jk.lcw.service.ProductServiceEntity;
+import com.jk.lcw.utils.Conf;
 import com.jk.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -91,6 +93,47 @@ public class ProductController {
     public void  removeCart(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute(request.getSession().getId());
         mongoTemplate.remove(new Query().addCriteria(Criteria.where("userid").is(user.getUserid())),UserCarts.class);
+    }
+
+ @RequestMapping("shou")
+    public String shou(){
+        return "lcw/shou";
+    }
+    @RequestMapping("queryadvertising")
+    @ResponseBody
+    public List<Advertising> queryadvertising(){
+
+        return productService.queryadvertising();
+    }
+
+    @RequestMapping("addShouCang")
+    @ResponseBody
+    public void addShouCang(HttpServletRequest request, Cart cart){
+       String key= Conf.SHOUCANG;
+        User user = (User) request.getSession().getAttribute(request.getSession().getId());
+        Query query = new Query();
+        query.addCriteria(Criteria.where("userid").is(user.getUserid()));
+        boolean exists = mongoTemplate.exists(query, UserCarts.class);
+        UserCarts userCarts = new UserCarts();
+        userCarts.setShoucangid(key);
+        if(!exists){
+            userCarts.setUserid(user.getUserid());
+            List<Cart> carts = new ArrayList<>();
+            carts.add(cart);
+            mongoTemplate.save(userCarts);
+        }else{
+            List<UserCarts> userCarts1 = mongoTemplate.find(query, UserCarts.class);
+            List<Cart> list = userCarts1.get(0).getList();
+            list.add(cart);
+            userCarts.setUserid(user.getUserid());
+            userCarts.setList(list);
+            mongoTemplate.save(userCarts);
+        }
+
+    }
+    @RequestMapping("users")
+    public String users(){
+        return "lcw/users";
     }
 
 }

@@ -2,13 +2,18 @@ package com.jk.product.controller;
 
 import com.jk.product.model.*;
 import com.jk.product.service.ProductService;
+import com.jk.product.util.UploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,10 +89,11 @@ public class ProductController {
         map.put("data",list);
         return map;
     }
-    @RequestMapping("addSize")
+    @RequestMapping("addsize")
     @ResponseBody
     public void  addSize(Size size){
-        productService.addSize(size);
+        System.err.println(size);
+         productService.addSize(size);
     }
     @RequestMapping("deleteSize")
     @ResponseBody
@@ -146,5 +152,40 @@ public class ProductController {
         return "product/detailed";
     }
 
+    @RequestMapping("addproduct")
+    public String addproduct(Integer id,HttpSession session){
+        session.setAttribute("id",id);
+        return "product/add";
+    }
+
+    @RequestMapping("upload")
+    @ResponseBody
+    public Map<String,Object> uploadImage(@RequestParam("file") MultipartFile file, HttpSession session) {
+
+        session.removeAttribute("img");
+        Map<String,Object> map  = new HashMap<>();
+        String uploadDir = "D:/picture";
+
+        try {
+            // 图片路径
+            String imgUrl = null;
+            //上传
+            String filename = UploadUtils.upload(file, uploadDir, file.getOriginalFilename());
+            if (filename != null) {
+                imgUrl = new File(uploadDir).getName() + "/" + filename;
+            }
+            map.put("code",0);
+            session.setAttribute("img",imgUrl);
+            map.put("msg","上传成功");
+            map.put("data",imgUrl);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code",500);
+            map.put("msg","上传失败");
+            map.put("data",null);
+            return map;
+        }
+    }
 
 }

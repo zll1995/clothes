@@ -1,6 +1,7 @@
 package com.jk.lcw.service;
 
 import com.jk.lcw.mapper.ProductMapper;
+import com.jk.lcw.model.Advertising;
 import com.jk.lcw.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,10 @@ public class ProductServiceImpl implements ProductService{
 
         return productMapper.queryProduct();
     }
+
+    @Override
+    public List<Advertising> queryadvertising() {
+        return productMapper.queryadvertising();
+    }
+
 }
