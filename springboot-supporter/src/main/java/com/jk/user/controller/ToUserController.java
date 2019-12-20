@@ -27,4 +27,15 @@ public class ToUserController {
         return "user/addUser";
     }
 
+    //后台登陆页面
+    @RequestMapping("tologin")
+    public String toLogin(){
+        return "user/demo";
+    }
+
+    //图形展示
+    @RequestMapping("toHighcharts")
+    public String toHighcharts(){
+        return "user/highcharts";
+    }
 }

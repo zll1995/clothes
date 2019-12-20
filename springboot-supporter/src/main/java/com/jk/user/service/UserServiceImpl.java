@@ -67,4 +67,26 @@ public class UserServiceImpl implements UserService {
 
         userMapper.addUser(user);
     }
+
+    @Override
+    public User queryUserByUsername(String name) {
+        return userMapper.queryUserByUsername(name);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryUserBiao() {
+        return userMapper.queryUserBiao();
+    }
+
+    @Override
+    public List<Map<String, Object>> queryCakeMoney() {
+        return userMapper.queryCakeMoney();
+    }
+
+    @Override
+    public List<Map<String, Object>> queryColumn() {
+        return userMapper.queryColumn();
+    }
+
+
 }

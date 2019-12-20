@@ -41,12 +41,33 @@
         where id = #{id}
 
     </update>
-
     <insert id="addUser"  parameterType="com.jk.user.model.User">
-
         insert into user (name, age, sex, img, birthday,powerid)
         values (#{name},#{age},#{sex},#{img},#{birthday},#{powerid})
-
     </insert>
+
+
+
+
+    <!--登录-->
+    <select id="queryUserByUsername" resultType="com.jk.user.model.User">
+        select * from user t where t.name=#{name}
+    </select>
+
+    <!--线型图-->
+    <select id="queryUserBiao" resultType="java.util.LinkedHashMap">
+    select COUNT(*) count,DATE_FORMAT(birthday,'%Y-%m-%d') time  from user GROUP BY DATE_FORMAT(birthday,'%Y-%m-%d')
+    </select>
+
+    <!--柱状图-->
+    <select id="queryColumn" resultType="java.util.Map">
+          select COUNT(*) count,DATE_FORMAT(birthday,'%Y-%m-%d') time  from user GROUP BY DATE_FORMAT(birthday,'%Y-%m-%d')
+    </select>
+
+    <!--饼状图-->
+    <select id="queryCakeMoney" resultType="java.util.LinkedHashMap">
+     select price y , t_product 老师姓名 from t_order group by teacher
+    </select>
+
 
 </mapper>
