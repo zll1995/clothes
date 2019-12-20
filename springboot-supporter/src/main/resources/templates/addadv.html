@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>广告新增</title>
+
+</head>
+<title>Title</title><!--引入layui的js、css-->
+<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+<script src="../layui/layui.all.js"></script>
+<!--引入jquery-->
+<script src="../layui/jquery.min.js"></script>
+<link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css"/>
+<script type="text/javascript" src="../js/bootstrap3/js/bootstrap.js"></script>
+<!-- bootstrap上传插件 -->
+<script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
+<link rel="stylesheet" href="../js/bootstrap-fileinput/css/fileinput.css">
+<body>
+<form class="layui-form" action="" lay-filter="example">
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">广告名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="advName" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">广告图片</label>
+        <div class="layui-input-block" style="width: 30%">
+            <input type="hidden" id="testimg" name="img" />
+            <input type="file" multiple class="projectfile" accept="image/*" name="img" id="img">
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">广告路径</label>
+        <div class="layui-input-block">
+            <input type="text" name="advHref" lay-verify="title" autocomplete="off" placeholder="请输入广告路径" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">广告上线时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="minutes" lay-verify="title" autocomplete="off" placeholder="广告上线时间" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">广告简介</label>
+        <div class="layui-input-block">
+            <input type="text" name="info" lay-verify="title" autocomplete="off" placeholder="请输入广告简介" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
+</form>
+<script>
+
+    layui.use(['form','layer','laydate','jquery'],function(){
+        var $ = layui.jquery;
+        var laydata = layui.laydate;
+        var form = layui.form;
+        form.render()
+        laydata.render({
+            elem:'#date1'
+        })
+        form.on('submit(demo1)',function (data) {
+
+            var node = data.field
+            console.log(node)
+            $.ajax({
+                url:"../adv/addadv",
+                data:{advName:$("[name=advName]").val(),advImg:$("#testimg").val(),advHref:$("[name=advHref]").val(),statuss:$("[name=statuss]").val(),minutes:$("[name=minutes]").val(),info:$("[name=info]").val()},
+                success:function () {
+                    form.render();
+                }
+
+            })
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+        })
+    })
+
+
+
+    //文件上传--
+    $(function () {
+        uploadify();
+    })
+    function uploadify() {
+        $('#img').fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '../adv/updaloadImg', //上传的地址
+            allowedFileExtensions: ['jpg', 'png', 'jpeg', 'gif', 'bmp'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            maxFileCount: 3, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var imgval = $('#testimg').val();
+            if (imgval == null || imgval == "" || imgval == undefined) {
+                imgval = data.response.imgUrl;
+            } else {
+                imgval += "," + data.response.imgUrl;
+            }
+            $('#testimg').val(imgval);
+        });
+
+    }
+
+
+</script>
+</body>
+</html>

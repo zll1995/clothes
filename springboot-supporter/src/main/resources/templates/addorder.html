@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>添加订单</title>
+
     <title>Title</title><!--引入layui的js、css-->
     <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
     <script src="../layui/layui.all.js"></script>
@@ -13,70 +15,45 @@
     <script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
     <script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
     <link rel="stylesheet" href="../js/bootstrap-fileinput/css/fileinput.css">
-
-
 </head>
 <body>
 <form class="layui-form" action="" lay-filter="example">
     <div class="layui-form-item">
-        <label class="layui-form-label">名称</label>
-        <div class="layui-input-block">
-            <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="名称" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">年龄</label>
-        <div class="layui-input-block">
-            <input type="text" name="age" placeholder="年龄" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">密码</label>
-        <div class="layui-input-block">
-            <input type="text" name="password" placeholder="密码" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">职位</label>
-        <div class="layui-input-block">
-            <select  name="powerid">
-                <option value="-1">请选择</option>
-                <option value="1">boss</option>
-                <option value="2">财务</option>
-                <option value="3">库管</option>
-            </select>
-        </div>
-    </div>
-    <div cqqlass="layui-form-item">
-        <label class="layui-form-label">性别</label>
-        <div class="layui-input-block">
-            <input type="radio" name="sex" value="1"  title="男">
-            <input type="radio" name="sex" value="2"  title="女">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">生日</label>
-        <div class="layui-input-inline">
-            <input type="text" name="birthday" id="date1"  lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">头像</label>
+        <label class="layui-form-label">商品图片</label>
         <div class="layui-input-block" style="width: 30%">
             <input type="hidden" id="testimg" name="img" />
             <input type="file" multiple class="projectfile" accept="image/*" name="img" id="img">
         </div>
     </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">商品名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="productName" lay-verify="title" autocomplete="off" placeholder="请输入商品名称" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">商品价格</label>
+        <div class="layui-input-block">
+            <input type="text" name="sizePrice" lay-verify="title" autocomplete="off" placeholder="请输入商品价格" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">商品尺码</label>
+        <div class="layui-input-block">
+            <input type="text" name="sizeName" lay-verify="title" autocomplete="off" placeholder="请输入商品尺码" class="layui-input">
+        </div>
+    </div>
+
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button type="submit" class="layui-btn" lay-submit="" lay-filter="formDemo">立即提交</button>
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
         </div>
     </div>
 </form>
+</body>
+
 <script>
+
     layui.use(['form','layer','laydate','jquery'],function(){
         var $ = layui.jquery;
         var laydata = layui.laydate;
@@ -85,13 +62,13 @@
         laydata.render({
             elem:'#date1'
         })
-        form.on('submit(formDemo)',function (data) {
+        form.on('submit(demo1)',function (data) {
 
             var node = data.field
-             console.log(node)
+            console.log(node)
             $.ajax({
-                url:"../user/addUser",
-                data:{name:$("[name=name]").val(),password:$("[name=password]").val(),birthday:$("[name=birthday]").val(),age:$("[name=age]").val(),sex:$("[name=sex]:checked").val(),powerid:$("[name=powerid]").val(),img:$("#testimg").val()},
+                url:"../order/addorder",
+                data:{productName:$("[name=productName]").val(),sizeImg:$("#testimg").val(),sizeName:$("[name=sizeName]").val(),sizePrice:$("[name=sizePrice]").val()},
                 success:function () {
                     form.render();
                 }
@@ -100,6 +77,9 @@
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
             parent.layer.close(index); //再执行关闭
         })
+    })
+
+
 
     //文件上传--
     $(function () {
@@ -108,7 +88,7 @@
     function uploadify() {
         $('#img').fileinput({
             language: 'zh', //设置语言
-            uploadUrl: '../user/updaloadImg', //上传的地址
+            uploadUrl: '../adv/updaloadImg', //上传的地址
             allowedFileExtensions: ['jpg', 'png', 'jpeg', 'gif', 'bmp'],//接收的文件后缀
             showUpload: true, //是否显示上传按钮
             showCaption: false,//是否显示标题
@@ -130,6 +110,6 @@
 
     }
 
+
 </script>
-</body>
 </html>
