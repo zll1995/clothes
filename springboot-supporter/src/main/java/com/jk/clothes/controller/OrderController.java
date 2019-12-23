@@ -6,11 +6,13 @@ import com.jk.clothes.model.Order;
 import com.jk.clothes.service.AreaService;
 import com.jk.clothes.util.ExportExcel;
 import com.jk.clothes.util.LayuiUtil;
+import com.jk.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,8 +23,6 @@ import java.util.UUID;
 @Controller
 @RequestMapping("order")
 public class OrderController {
-
-
     @Autowired
     private AreaService areaService;
 
@@ -38,8 +38,6 @@ public class OrderController {
 
         return layuiUtil ;
     }
-
-
     @RequestMapping("delorder")
     @ResponseBody
     public  void delorder(String [] ids){
@@ -49,7 +47,7 @@ public class OrderController {
 
     @RequestMapping("addorder")
     @ResponseBody
-    public void addorder(Order order){
+    public void addorder(Order order, HttpServletRequest request){
      /*   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println(sdf.format(new Date()));
         long timeStamp = System.currentTimeMillis();
@@ -57,7 +55,9 @@ public class OrderController {
         System.out.println(aa);*/
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         System.out.println(uuid);
-        order.setUserId(2);
+        User user = (User) request.getSession().getAttribute("user");
+        System.err.println(user.getId());
+        order.setUserId(user.getId());
         order.setOrderNum(uuid);
         areaService.addorder(order);
 
@@ -80,8 +80,6 @@ public class OrderController {
             List<Object[]>  dataList = new ArrayList<Object[]>();
 
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-
-
             //循环数据把数据存放到 List<Object[]>
             for (Order order:list) {
                 Object[] obj=new Object[rowName.length];
@@ -91,7 +89,6 @@ public class OrderController {
                 obj[3]=order.getSizePrice();
                 obj[4]=order.getSizeImg();
                 obj[5]=order.getSizeName();
-
                 dataList.add(obj);
             }
             ExportExcel exportExcel=new ExportExcel(title,rowName,dataList,response);

@@ -1,5 +1,6 @@
 package com.jk.product.service;
 
+import com.jk.product.mapper.ProductElschConfig;
 import com.jk.product.mapper.ProductMapper;
 import com.jk.product.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.Map;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private ProductElschConfig productElschConfig;
 
     @Override
     public List<Area> queryArea() {
@@ -113,6 +117,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Integer id) {
+        ProductEs productes=productMapper.queryProductId(id);
+        productElschConfig.delete(productes);
         List<Integer> colorIds = productMapper.queryColorIdByProductId(id);
         String coloridss = "";
         for (Integer colorId : colorIds) {
@@ -135,5 +141,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void putAll(String ids) {
         productMapper.putAll(ids);
+    }
+
+    @Override
+    public List<Type> type(Integer id) {
+        return productMapper.type(id);
     }
 }

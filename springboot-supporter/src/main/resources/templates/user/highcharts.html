@@ -62,49 +62,7 @@
 
     })
 
-  /*  //饼状图
-    $(function () {
-        $.ajax({
-            url:"../user/queryCake",
-            type:"post",
-            dataType:"json",
-            success:function (data) {
-                Highcharts.chart('container', {
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
-                        text: '奔奔课堂'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.y}</b> 元'
-                            }
-                        }
-                    },
-                    series: [{
-                        name: 'Brands',
-                        colorByPoint: true,
-                        data: data
-                    }]
-                });
-            },error:function () {
-                alert("查询失败")
-            }
-        })
-    })*/
 
-    //柱状图
     $(function () {
 
         $.ajax({

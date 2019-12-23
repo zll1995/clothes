@@ -63,6 +63,21 @@
     delete from t_color where colorid = #{colorid}
   </delete>
 
+    <select id="queryProductId" resultType="com.jk.product.model.ProductEs">
+                SELECT
+            tp.productId id,
+             tp.productName productname,
+             tsi.sizeImg sizeimg,
+             tsi.sizePrice sizeprice
+        FROM
+            t_product tp
+        LEFT JOIN t_color tc ON tp.productId=tc.productId
+        LEFT JOIN t_color_size tcs ON tc.colorid=tcs.colorId
+        LEFT JOIN t_size tsi ON tcs.sizeId=tsi.sizeId
+        WHERE  tp.productId=#{id}
+
+    </select>
+
   <select id="queryByIds" resultType="int">
     select tcs.sizeId from t_color_size tcs where tcs.colorId = #{colorid}
   </select>

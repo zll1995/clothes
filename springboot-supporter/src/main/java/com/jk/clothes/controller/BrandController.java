@@ -23,6 +23,7 @@ public class BrandController {
     @RequestMapping("querybrand")
     @ResponseBody
     public LayuiUtil querybrand(Integer page, Integer limit){
+
         PageInfo<Brand> info  = areaService.querybrand(page,limit);
         LayuiUtil layuiUtil = new LayuiUtil();
 

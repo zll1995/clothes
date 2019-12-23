@@ -2,6 +2,7 @@ package com.jk.product.mapper;
 
 import com.jk.product.model.*;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -180,4 +181,9 @@ public interface ProductMapper {
     void notAll(@Param("ids") String ids);
 
     void putAll(@Param("ids")String ids);
+
+    @Select("select * from t_type where brandid = #{id}")
+    List<Type> type(Integer id);
+
+    ProductEs queryProductId(Integer id);
 }

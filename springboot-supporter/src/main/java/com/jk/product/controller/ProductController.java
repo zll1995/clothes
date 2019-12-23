@@ -41,6 +41,11 @@ public class ProductController {
     public List<Brand> queryBrand(){
         return productService.queryBrand();
     }
+    @RequestMapping("type")
+    @ResponseBody
+    public List<Type> type(Integer id){
+        return productService.type(id);
+    }
     @RequestMapping("addProduct")
     @ResponseBody
     public void addProduct(Product product){

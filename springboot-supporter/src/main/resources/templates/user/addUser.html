@@ -2,42 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title><!--引入layui的js、css-->
-    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
-    <script src="../layui/layui.all.js"></script>
-    <!--引入jquery-->
-    <script src="../layui/jquery.min.js"></script>
-    <link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css"/>
-    <script type="text/javascript" src="../js/bootstrap3/js/bootstrap.js"></script>
-    <!-- bootstrap上传插件 -->
-    <script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
-    <script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
-    <link rel="stylesheet" href="../js/bootstrap-fileinput/css/fileinput.css">
-
-
+    <title>Title</title>
 </head>
+<!--引入layui的js、css-->
+<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+<script src="../layui/layui.all.js"></script>
+<!--引入jquery-->
+<script src="../layui/jquery.min.js"></script>
+<link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css"/>
+<script type="text/javascript" src="../js/bootstrap3/js/bootstrap.js"></script>
+<!-- bootstrap上传插件 -->
+<script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
+<link rel="stylesheet" href="../js/bootstrap-fileinput/css/fileinput.css">
+
 <body>
 <form class="layui-form" action="" lay-filter="example">
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="width:450px">
         <label class="layui-form-label">名称</label>
         <div class="layui-input-block">
             <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="名称" class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="width:450px">
         <label class="layui-form-label">年龄</label>
         <div class="layui-input-block">
             <input type="text" name="age" placeholder="年龄" autocomplete="off" class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="width:450px">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-block">
             <input type="text" name="password" placeholder="密码" autocomplete="off" class="layui-input">
         </div>
     </div>
 
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="width:450px">
         <label class="layui-form-label">职位</label>
         <div class="layui-input-block">
             <select  name="powerid">
@@ -48,7 +48,7 @@
             </select>
         </div>
     </div>
-    <div cqqlass="layui-form-item">
+    <div class="layui-form-item" >
         <label class="layui-form-label">性别</label>
         <div class="layui-input-block">
             <input type="radio" name="sex" value="1"  title="男">
@@ -56,9 +56,9 @@
         </div>
     </div>
 
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="width:450px">
         <label class="layui-form-label">生日</label>
-        <div class="layui-input-inline">
+        <div class="layui-input-block">
             <input type="text" name="birthday" id="date1"  lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
         </div>
     </div>
@@ -100,7 +100,7 @@
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
             parent.layer.close(index); //再执行关闭
         })
-
+    })
     //文件上传--
     $(function () {
         uploadify();
@@ -127,9 +127,7 @@
             }
             $('#testimg').val(imgval);
         });
-
     }
-
 </script>
 </body>
 </html>
