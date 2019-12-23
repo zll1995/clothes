@@ -185,7 +185,7 @@
         <div class="single-product m-b-60 text-center">
              <div class="product-action position-relative">
                <div class="product-img">
-                      <img :src="site.sizeimg" alt="Product">
+                      <img :src="site.sizeimg" alt="Product" style="width: 280px;height: 255px">
                   </div>
                <!--<div class="action-list ab-b-l w-full trans-06" >
                   <ul>
@@ -224,7 +224,7 @@
                     <!-- 单柱  -->
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12" v-for="si in sites">
                         <div class="single-lastest-post">
-                            <div><img :src="si.advImg" alt="Product" height="500%"></div>
+                            <div><img :src="si.advImg" alt="Product" style="width: 200px;height: 200px"></div>
                             <div class="latest-post-content">
                                     <span><a :href="si.advHref">查看详情</a></span>
                                 <h4>{{si.advName}}</h4>

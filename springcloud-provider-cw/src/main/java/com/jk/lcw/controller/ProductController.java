@@ -4,6 +4,7 @@ import com.jk.lcw.model.Advertising;
 import com.jk.lcw.model.Product;
 import com.jk.lcw.service.ProductService;
 import com.jk.lcw.service.ProductServiceEntity;
+import com.jk.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,4 +34,12 @@ public class ProductController {
         List<Advertising> list = productService.queryadvertising();
         return list;
     }
+    @RequestMapping("xiu")
+    @ResponseBody
+    public String xiu(User user){
+        productService.xiu(user);
+        return "1";
+
+    }
+
 }

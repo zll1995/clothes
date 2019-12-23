@@ -67,7 +67,7 @@
                 <!-- Site Logo -->
                 <div class="col-lg-2 col-6">
                     <div class="logo text-center">
-                        <a href="../../../../../../../../内网通/刘成伟/clothes/springcloud-feign/src/main/resources/templates/lcw/index.html"><img src="assets/img/logo.png" alt="zimate"></a>
+                        <a href=""><img src="assets/img/logo.png" alt="zimate"></a>
                     </div>
                 </div>
 
@@ -84,6 +84,7 @@
                 <div class="col-12 d-none menu-show">
                     <div class="mobilemenu"></div>
                 </div>
+
             </div>
         </div>
     </header>
@@ -98,9 +99,9 @@
                     <div class="col-12 text-center">
                         <h2 class="m-b-30 fs-40 fw-600">个人资料</h2>
                         <ul class="list-inline">
-                            <li><a href="../../../../../../../../内网通/刘成伟/clothes/springcloud-feign/src/main/resources/templates/lcw/index.html">Home</a></li>
+                            <li><a href="#">Home</a></li>
                             <li>-</li>
-                            <li><a href="single-post.html">Shopping shou</a></li>
+                            <li><a href="#">Shopping shou</a></li>
                         </ul>
                     </div>
                 </div>
@@ -112,28 +113,32 @@
         <section class="cart-content-wrapper p-t-120 p-b-120">
             <div class="container">
 			<div>
-			<form>
-				<center><img src="assets\img\blog\07.jpg" width="150px"><br/>
+			<form id="updateform">
+                <input type="hidden" name="userid" value="${list.userid}"/>
+				<center><img src="assets\img\blog\07.jpg" width="150px"><br/><br/>
 				<button type="button" class="btn btn-link">更换头像</button>
-				</center><br/><br/>
-               姓名:<input type="text" class="form-control" id="firstname"
-				   placeholder="请输入名字" style="width:400px"> <br/><br/>
+				<br/><br/><br/>
+               昵称<input type="text" class="form-control" name="username"
+				   placeholder="请输入名字" value="${list.username}" style="width:400px"> <br/><br/>
 			  
-			   年龄:<input type="text" class="form-control" id="firstna"
-				   placeholder="请输入年龄" style="width:400px"><br/><br/>
-			   <label>性别:</label>
-		<select class="form-control" style="width:400px">
+			   年龄<input type="text" class="form-control" name="useravg"
+				   placeholder="请输入年龄" value="${list.useravg}" style="width:400px"><br/><br/>
+			   <label>性别</label>
+		<select class="form-control" name="usersex" style="width:400px">
 			<option>--请选择--</option>
-			<option>男</option>
-			<option>女</option>
+			<option value="${list.usersex==1}">男</option>
+			<option value="${list.usersex==2}">女</option>
 		</select><br/><br/>
-			   生日:<input type="date" class="form-control" id="first"
-                         placeholder="请选择生日" style="width:400px">
+			   生日<input type="date" name="ceratedate" class="form-control"
+                         placeholder="请选择生日" value="${list.ceratedate}" style="width:400px">
 				   <br/><br/>
-			   <label>个人简介:</label>
-		<textarea class="form-control" rows="3"></textarea><br/><br/>
+			   <label>个人简介</label>
+		<textarea class="form-control" rows="3" name="userinfo" value="${list.userinfo}"></textarea><br/><br/></center>
+
+          <center><input type="button" value="保存" onclick="xiugai()" style="width:80px"></center>
 
 		</form>
+
 		</div>
 </div>
 </section>
@@ -246,4 +251,30 @@
     <!-- Theme js -->
     <script src="assets/js/zimate-1.0.js"></script>
 </body>
+<script>
+
+    xiugai = function(){
+
+        var formid=$("#updateform").serialize();
+        $.ajax({
+            url:"../xiu",
+            type:"post",
+            data:formid,
+            success:function(data){
+                if (data) {
+                    bootbox.alert("保存成功");
+
+                }else{
+                    bootbox.alert("保存失败");
+                }
+            }
+        })
+    }
+
+
+
+
+
+
+</script>
 </html>

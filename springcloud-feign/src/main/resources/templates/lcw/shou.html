@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -128,7 +128,7 @@
                                             <img src="assets/img/cart/01.jpg" alt="IMG">
                                         </div>
                                     </td>
-                                    <td class="column-2">男士粉色夹克</td>
+                                    <td class="column-2" th:text="${list.productname}"></td>
                                     <td class="column-3">$258.00</td>
                                     <td class="column-4"><a href="javascript:" class="update-cart btn border-btn">取消收藏</a></td>
                                 </tr>
@@ -256,11 +256,13 @@
     <script src="assets/js/zimate-1.0.js"></script>
 </body>
 <script>
-    function add(){
-        $.ajax({
-            url:"../addSouCang",
-            data:{}
-        })
+
+    $(function(){
+        queryshoucang();
+    })
+
+    queryshoucang =function () {
+       location.href="../queryshou"
     }
 
 

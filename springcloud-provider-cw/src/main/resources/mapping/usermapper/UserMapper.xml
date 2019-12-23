@@ -12,6 +12,7 @@
         LEFT JOIN t_color tc ON tp.productId=tc.productId
         LEFT JOIN t_color_size tcs ON tc.colorid=tcs.colorId
         LEFT JOIN t_size tsi ON tcs.sizeId=tsi.sizeId
+        group by tp.productId
         limit 0,8
     </select>
 
@@ -21,4 +22,15 @@
     and DATE_ADD(startTime,INTERVAL minutes MINUTE)) LIMIT 0,3
 
     </select>
+
+    <update id="xiu" parameterType="com.jk.user.model.User">
+    update t_user set
+    username = #{username},
+    userinfo = #{userinfo},
+    useravg = #{useravg},
+    usersex = #{usersex},
+    createdate = #{createdate}
+    where userid = #{userid}
+
+    </update>
 </mapper>
