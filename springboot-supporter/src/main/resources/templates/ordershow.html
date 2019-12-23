@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单管理</title>
+
+
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../layui/js/bootstrap3/css/bootstrap.css"/>
+    <script type="text/javascript" src="../layui/js/bootstrap3/js/bootstrap.js"></script>
+    <!-- bootstrap上传插件 -->
+    <script src="../layui/js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="../layui/js/bootstrap-fileinput/js/locales/zh.js"></script>
+    <link rel="stylesheet" href="../layui/js/bootstrap-fileinput/css/fileinput.css">
+
+    <style type="text/css">
+        .layui-table-cell{
+            height:auto!important;
+            white-space:normal;
+        }
+
+    </style>
+</head>
+<body>
+<!--
+<div id="add" style = "display : none">
+
+    <form class="layui-form" action="" lay-filter="example">
+
+        <input name="id" style="display: none">
+
+        <div class="layui-form-item" style="width:450px">
+            <label class="layui-form-label">广告名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="advName" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:450px">
+            <label class="layui-form-label">广告图片</label>
+            <div class="layui-input-block" style="width: 30%">
+                <input type="" id="testimg" name="advImg" />
+                <input type="file" multiple class="projectfile" accept="image/*" name="advImg" id="img">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:450px">
+            <label class="layui-form-label">广告路径</label>
+            <div class="layui-input-block">
+                <input type="text" name="advHref" lay-verify="title" autocomplete="off" placeholder="请输入广告路径" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:450px">
+            <label class="layui-form-label">广告状态</label>
+            <div class="layui-input-block">
+                <input type="text" name="statuss" lay-verify="title" autocomplete="off" placeholder="广告状态" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:450px">
+            <label class="layui-form-label">广告时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="minutes" lay-verify="title" autocomplete="off" placeholder="广告上架时间" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:450px">
+            <label class="layui-form-label">广告简介</label>
+            <div class="layui-input-block">
+                <input type="text" name="info" lay-verify="title" autocomplete="off" placeholder="请输入广告简介" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+-->
+
+
+<!--//修改弹框-->
+<div id="update" style = "display : none">
+
+    <form class="layui-form" action="" lay-filter="example1">
+
+        <input name="id" style="display: none">
+
+        <div class="layui-form-item" style="width:460px">
+            <label class="layui-form-label">广告名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="advName" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
+            </div>
+        </div>
+                <input type="hidden" id="testimg" name="advImg" />
+        <div class="layui-form-item" style="width:460px">
+            <label class="layui-form-label">广告路径</label>
+            <div class="layui-input-block">
+                <input type="text" name="advHref" lay-verify="title" autocomplete="off" placeholder="请输入广告路径" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item"  style="width:460px">
+            <label class="layui-form-label">广告上线时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="minutes" lay-verify="title" autocomplete="off" placeholder="广告上线时间" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:460px">
+            <label class="layui-form-label">广告简介</label>
+            <div class="layui-input-block">
+                <input type="text" name="info" lay-verify="title" autocomplete="off" placeholder="请输入广告简介" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="updatearea">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<button type="button" class="layui-btn layui-btn-normal layui-btn-radius" onclick="del()">批量删除</button>
+<!--<button type="button" class="layui-btn layui-btn-radius layui-btn-warm" onclick="add()">新增</button>-->
+<button type="button" class="layui-btn layui-btn-radius layui-btn-warm" onclick="daochu()">导出</button>
+<table class="layui-hide" id="test"></table>
+</body>
+<script>
+    function daochu(){
+       location.href="../order/export"
+    }
+
+
+    layui.use(['table','jquery','layer'], function() {
+
+        var table = layui.table;
+
+        var $ = layui.jquery;
+
+        table.render({
+            elem: '#test'
+            , url: '../order/queryorder'
+            ,limit:8
+            ,limits:[2,4,6,8,10]
+            , cols: [
+                [
+
+                    {type: 'checkbox'},
+                    {field: 'id', title: 'ID', width: '7%', sort: true,align:"center"}
+                    , {field: 'userId', width: '15%', title: '用户Id',align:"center"}
+                    , {field: 'orderNum', width: '15%', title: '订单号',align:"center"}
+                    , {field: 'sizeImg', width: '15%',title: '图片',align:"center", templet:function (c) {
+                        return '<img src='+c.sizeImg+' >';
+                    }
+                    }
+                    , {field: 'productName', width: '15%', title: '名称',align:"center"}
+                    , {field: 'sizePrice', width: '15%', title: '价格',align:"center"}
+                    , {field: 'sizeName', width: '15%', title: '尺码',align:"center"}
+                   ,
+                ]
+            ]
+            , page: true
+        })
+
+        //删除
+        del = function () {
+            var ids =  table.checkStatus("test");
+            var arr = ids.data;
+            var id = "";
+            for (var i=0;i<arr.length;i++){
+                id +=","+arr[i].id
+            }
+            var idss = id.substr(1);
+            $.ajax({
+
+                url:'../order/delorder',
+                data:{'ids':idss},
+                success:function(){
+
+                },error:function () {
+                }
+            })
+            location.reload()
+        }
+    })
+
+
+
+
+    //新增
+    layui.use(['table','jquery','layer','form','laydate'], function(){
+
+        var layer = layui.layer;
+
+        var form = layui.form;
+
+        var laydate = layui.laydate;
+
+        var table = layui.table;
+
+        add = function() {
+
+            layer.open({
+
+                type: 1,
+
+                title: "新增弹框",
+
+                area: ['50%', '90%'],
+
+                content: $("#add").html(),
+
+                success: function () {
+
+                    laydate.render({
+                        elem: '#date1'
+                    })
+                    form.render()
+
+                    form.on('submit(demo1)', function (data) {
+
+                        var node = data.field
+
+                        $.ajax({
+
+                            url: "../adv/addadv",
+
+                            data: node,
+
+                            success: function () {
+                                form.render();
+                                layer.closeAll()
+                            }
+                        })
+                    })
+                },
+                end: function () {
+                    table.reload();
+                }
+            })
+        }
+    })
+
+    //修改
+    upda = function (id) {
+        var layer=layui.layer;
+        var form = layui.form;
+        var laydate = layui.laydate;
+        var table = layui.table;
+        $.ajax({
+            url: '../adv/queryadvId',
+            data: {'id': id},
+            success: function (data) {
+                layer.open({
+                    type: 1,
+                    title: "修改弹框",
+                    area: ['30%', '70%'],
+                    content: $("#update").html(),
+                    success: function () {
+                        laydate.render({
+                            elem: "#date2"
+                        })
+                        form.val('example1', {
+                            "id": data.id,
+                            "advName": data.advName,
+                            "advImg": data.advImg,
+                            "advHref": data.advHref,
+                            "statuss": data.statuss,
+                            "startTime": data.startTime,
+                            "minutes": data.minutes,
+                            "info": data.info,
+                        })
+                        form.on('submit(updatearea)', function (data) {
+                            var node = data.field;
+                            $.ajax({
+                                url: "../adv/addadv",
+                                data: node,
+                                success: function () {
+                                    form.render();
+                                    layer.closeAll()
+                                }
+                            })
+                        })
+
+                    }, end: function () {
+                        table.reload()
+                    }
+                })
+            }
+        })
+    }
+
+    //下架
+    updaxiajia = function (id){
+
+        var layer=layui.layer;
+        var form = layui.form;
+        var laydate = layui.laydate;
+        var table = layui.table;
+
+        $.ajax({
+            url:"../adv/updaxiajia",
+            type:"post",
+            data:{'id':id},
+            success:function () {
+                location.reload();
+            }
+        })
+    }
+
+    //上架
+    updashangjia = function (id){
+        var layer=layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        $.ajax({
+            url:"../adv/updashangjia",
+            type:"post",
+            data:{'id':id},
+            success:function () {
+                location.reload();
+            }
+        })
+    }
+
+
+    //文件上传--
+    $(function () {
+        uploadify();
+    })
+    function uploadify() {
+        $('#img').fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '../adv/updaloadImg', //上传的地址
+            allowedFileExtensions: ['jpg', 'png', 'jpeg', 'gif', 'bmp'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            maxFileCount: 3, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var imgval = $('#testimg').val();
+            if (imgval == null || imgval == "" || imgval == undefined) {
+                imgval = data.response.imgUrl;
+            } else {
+                imgval += "," + data.response.imgUrl;
+            }
+            $('#testimg').val(imgval);
+        });
+
+    }
+
+
+</script>
+</html>

@@ -3,6 +3,7 @@ package com.jk.user.service;
 import com.jk.user.model.User;
 import com.jk.user.model.WebUser;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,4 +28,11 @@ public interface UserService {
 
     void addUser(User user);
 
+    User queryUserByUsername(String name);
+
+    List<Map<String, Object>> queryUserBiao();
+
+    List<Map<String, Object>> queryCakeMoney();
+
+    List<Map<String, Object>> queryColumn();
 }

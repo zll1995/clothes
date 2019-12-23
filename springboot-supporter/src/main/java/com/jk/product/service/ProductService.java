@@ -44,4 +44,6 @@ public interface ProductService {
     void notAll(String ids);
 
     void putAll(String ids);
+
+    List<Type> type(Integer id);
 }

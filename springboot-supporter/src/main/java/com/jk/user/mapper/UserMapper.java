@@ -4,6 +4,7 @@ import com.jk.user.model.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @创建人 原国庆
@@ -23,4 +24,11 @@ public interface UserMapper {
 
     void addUser(User user);
 
+    List<Map<String, Object>> queryUserBiao();
+
+    List<Map<String, Object>> queryCakeMoney();
+
+    List<Map<String, Object>> queryColumn();
+
+    User queryUserByUsername(@Param("name") String name);
 }

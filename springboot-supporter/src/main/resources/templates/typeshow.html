@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类型管理</title>
+
+
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery.min.js"></script>
+</head>
+<body>
+<div id="add" style = "display : none">
+
+    <form class="layui-form" action="" lay-filter="example">
+
+       <div class="layui-form-item" style="width:300px">
+           <label class="layui-form-label">品牌</label>
+           <div class="layui-input-block">
+               <select name="brandId" id="brand" lay-filter="myselect" ></select>
+           </div>
+        </div>
+        <div class="layui-form-item" style="width:450px">
+            <label class="layui-form-label">类型名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="typeName" lay-verify="title" autocomplete="off" placeholder="请输入地区名称" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!--//修改弹框-->
+<div id="update" style = "display : none">
+
+    <form class="layui-form" action="" lay-filter="example1">
+
+        <input name="typeId" style="display: none">
+        <div class="layui-form-item" style="width:300px">
+            <label class="layui-form-label">品牌</label>
+            <div class="layui-input-block">
+                <select name="brandId" id="brands" lay-filter="myselect" disabled></select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:500px">
+            <label class="layui-form-label">类型名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="typeName" lay-verify="title" autocomplete="off" placeholder="类型名称" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="updatearea">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<button type="button" class="layui-btn layui-btn-normal layui-btn-radius" onclick="del()">批量删除</button>
+<button type="button" class="layui-btn layui-btn-radius layui-btn-warm" onclick="add()">新增</button>
+<table class="layui-hide" id="test"></table>
+</body>
+<script>
+
+    layui.use(['table','jquery','layer'], function() {
+
+        var table = layui.table;
+
+        var $ = layui.jquery;
+
+        table.render({
+            elem: '#test'
+            , url: '../type/queryType'
+            ,limit:8
+            ,limits:[2,4,6,8,10]
+            , cols: [
+                [
+                    {type: 'checkbox'},
+                    {field: 'typeId', title: 'ID', width: '20%', sort: true,align:"center"}
+                    , {field: 'brandName', width: '25%', title: '品牌名称',align:"center"}
+                    , {field: 'typeName', width: '25%', title: '类型名称',align:"center"}
+                    , {
+                    field: 'xxx', width: '30.4%', align:"center",title: '操作', templet: function (a) {
+                        return "<button type='button' class='layui-btn layui-btn-sm' onclick='upda(" + a.typeId + ")'><i class='layui-icon'></i></button>"
+                    }
+                }
+                ]
+            ]
+            , page: true
+        })
+
+        //删除
+        del = function () {
+            var ids =  table.checkStatus("test");
+            var arr = ids.data;
+            var id = "";
+            for (var i=0;i<arr.length;i++){
+                id +=","+arr[i].typeId
+            }
+            var idss = id.substr(1);
+            $.ajax({
+
+                url:'../type/deltype',
+                data:{'ids':idss},
+                success:function(){
+
+                },error:function () {
+                }
+            })
+            location.reload()
+        }
+    })
+
+
+
+
+    //新增
+    layui.use(['table','jquery','layer','form','laydate'], function(){
+
+        var layer = layui.layer;
+
+        var form = layui.form;
+
+        var laydate = layui.laydate;
+
+        var table = layui.table;
+
+        add = function() {
+
+            layer.open({
+
+                type: 1,
+
+                title: "新增弹框",
+
+                area: ['35%', '65%'],
+
+                content: $("#add").html(),
+
+                success: function () {
+
+                    laydate.render({
+                        elem: '#date1'
+                    })
+                    form.render()
+
+                    form.on('submit(demo1)', function (data) {
+
+                        var node = data.field
+
+                        $.ajax({
+
+                            url: "../type/addtype",
+
+                            data: node,
+
+                            success: function () {
+                                form.render();
+                                layer.closeAll()
+                            }
+                        })
+                    })
+                },
+                end: function () {
+                    table.reload();
+                }
+            })
+        }
+    })
+
+    //修改
+    upda = function (id) {
+        var layer=layui.layer;
+        var form = layui.form;
+        var laydate = layui.laydate;
+        var table = layui.table;
+        $.ajax({
+            url: '../type/querytypeId',
+            data: {'id': id},
+            success: function (data) {
+                layer.open({
+                    type: 1,
+                    title: "修改弹框",
+                    area: ['40%', '60%'],
+                    content: $("#update").html(),
+                    success: function () {
+                        laydate.render({
+                            elem: "#date2"
+                        })
+                        form.val('example1', {
+                            "brandId": data.brandId,
+                            "typeId":data.typeId,
+                            "typeName": data.typeName,
+
+                        })
+                        form.on('submit(updatearea)', function (data) {
+                            var node = data.field;
+                            $.ajax({
+                                url: "../type/addtype",
+                                data: node,
+                                success: function () {
+                                    form.render();
+                                    layer.closeAll()
+                                }
+                            })
+                        })
+
+                    }, end: function () {
+                        table.reload()
+                    }
+                })
+            }
+        })
+    }
+
+    $(function(){
+        getbrand();
+    })
+    getbrand=function(){
+        var option="<option value='00000'>请选择</option>"
+        $.ajax({
+            url:"../brand/querybrandname",
+            type:"post",
+            success:function(data){
+
+                for(var i=0;i<data.length;i++){
+                    option+="<option value='"+data[i].brandId+"'>"+data[i].brandName+"</option>"
+                }
+                $("#brand").html(option);
+            }
+        })
+    }
+
+
+    $(function(){
+        getbrands();
+    })
+    getbrands=function(){
+        var option="<option value='00000'>请选择</option>"
+        $.ajax({
+            url:"../brand/querybrandname",
+            type:"post",
+            success:function(data){
+
+                for(var i=0;i<data.length;i++){
+                    option+="<option value='"+data[i].brandId+"'>"+data[i].brandName+"</option>"
+                }
+                $("#brands").html(option);
+            }
+        })
+    }
+</script>
+</html>

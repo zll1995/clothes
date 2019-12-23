@@ -16,6 +16,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("query")
+    public String query(){
+        return "lcw/index";
+    }
+    @RequestMapping("index")
+    public String index(){
+        return "index";
+    }
+    @RequestMapping("toMain")
+    public String main(){
+        return "main";
+    }
+
     /*
     * 登录
     * */
@@ -40,56 +53,6 @@ public class UserController {
         }
         return null;
     }
-    @RequestMapping("queryUser")
-    @ResponseBody
-    public Map queryUser(Integer page, Integer limit, User user){
-        return  userService.queryUser(page,limit,user);
-    }
-
-    @RequestMapping("addUser")
-    @ResponseBody
-    public  void addUser(User user){
-        userService.addUser(user);
-    }
-
-    @RequestMapping("deleteUser")
-    @ResponseBody
-    public void deleteUser(Integer userId){
-        userService.deleteUser(userId);
-    }
-
-    @RequestMapping("queryUserById")
-    @ResponseBody
-    public  User queryUserById(Integer userId){
-        return userService.queryUserById(userId);
-    }
-
-    @RequestMapping("updateUser")
-    @ResponseBody
-    public void updateUser(User user){
-        userService.updateUser(user);
-    }
-    @RequestMapping("showUser")
-    public String showUser(){
-        return "user/showUser";
-    }
-
-    @RequestMapping("query")
-    public String query(){
-        return "lcw/index";
-    }
-
-
-    @RequestMapping("index")
-    public String index(){
-        return "index";
-    }
-    @RequestMapping("toMain")
-    public String main(){
-        return "main";
-    }
-	
-	
 
 
 }

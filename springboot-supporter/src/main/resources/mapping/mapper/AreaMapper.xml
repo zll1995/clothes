@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.clothes.mapper.AreaMapper" >
+
+    <select id="queryArea" resultType="com.jk.clothes.model.Area">
+        select * from t_area
+    </select>
+
+
+    <insert id="addarea" parameterType="com.jk.clothes.model.Area">
+        insert into t_area (areaName)  values (#{areaName})
+    </insert>
+
+    <delete id="delarea" parameterType="java.lang.String">
+        delete from t_area
+        where id in
+        <foreach collection="ids" open="(" separator="," close=")" index="index" item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="queryById" resultType="com.jk.clothes.model.Area" parameterType="java.lang.Integer">
+        select * from t_area where id=#{id}
+    </select>
+
+    <update id="updatearea" parameterType="com.jk.clothes.model.Area">
+        update t_area set areaName=#{areaName}  where id=#{id}
+    </update>
+
+   <!-- 品牌表-->
+    <select id="querybrand" resultType="com.jk.clothes.model.Brand">
+        select * from t_brand
+    </select>
+
+    <insert id="addbrand" parameterType="com.jk.clothes.model.Brand">
+        insert into t_brand (brandName) values (#{brandName})
+    </insert>
+
+    <select id="querybrandId" resultType="com.jk.clothes.model.Brand" parameterType="java.lang.Integer">
+        select * from t_brand where brandId=#{id}
+    </select>
+
+    <update id="updatebrand" parameterType="com.jk.clothes.model.Brand">
+        update t_brand set brandName=#{brandName} where brandId=#{brandId}
+    </update>
+
+    <delete id="delbrand">
+        delete from t_brand
+        where brandId in
+        <foreach collection="ids" open="(" separator="," close=")" index="index" item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <!--类型表-->
+    <select id="queryType" resultType="com.jk.clothes.model.Type">
+        select * from t_type t left join  t_brand b on t.brandId=b.brandId
+    </select>
+
+    <delete id="deltype">
+        delete from t_type
+        where typeId in
+        <foreach collection="ids" open="(" separator="," close=")" index="index" item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="querybrandname" resultType="com.jk.clothes.model.Brand">
+        select * from t_brand
+    </select>
+
+    <insert id="addtype" parameterType="com.jk.clothes.model.Type">
+        insert into t_type (typeName,brandId) values (#{typeName},#{brandId})
+    </insert>
+
+    <select id="querytypeId" resultType="com.jk.clothes.model.Type" parameterType="java.lang.Integer">
+        select * from t_type where typeId=#{id}
+    </select>
+
+    <update id="updatetype" parameterType="com.jk.clothes.model.Type">
+        update t_type set typeName=#{typeName} where typeId=#{typeId}
+    </update>
+
+
+    <!--广告表-->
+    <select id="queryadv" resultType="com.jk.clothes.model.Advertising">
+        select * from t_advertising
+    </select>
+
+    <delete id="deladv" >
+        delete from t_advertising
+        where id in
+        <foreach collection="ids" open="(" separator="," close=")" index="index" item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <update id="updaxiajia" parameterType="java.lang.Integer">
+        update t_advertising set statuss=2 where id=#{id}
+    </update>
+
+    <update id="updashangjia" parameterType="java.lang.Integer">
+        update t_advertising set statuss=1 where id=#{id}
+    </update>
+
+    <select id="queryadvId" parameterType="java.lang.Integer" resultType="com.jk.clothes.model.Advertising">
+        select * from t_advertising where id=#{id}
+    </select>
+
+    <insert id="addadv" parameterType="com.jk.clothes.model.Advertising">
+        insert  into t_advertising (advName,advImg,startTime,minutes,advHref,statuss,info) values
+            (#{advName},#{advImg},SYSDATE(),#{minutes},#{advHref},1,#{info})
+    </insert>
+
+    <update id="updateadv" parameterType="com.jk.clothes.model.Advertising">
+        update t_advertising set advName=#{advName},advImg=#{advImg},
+            minutes=#{minutes},advHref=#{advHref},statuss=#{statuss},info=#{info} where id=#{id}
+    </update>
+
+<!--订单 表-->
+    <select id="queryorder" resultType="com.jk.clothes.model.Order">
+        select * from t_order
+    </select>
+
+    <delete id="delorder">
+        delete from t_order
+        where id in
+        <foreach collection="ids" open="(" separator="," close=")" index="index" item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="queryorders" resultType="com.jk.clothes.model.Order">
+        select * from t_order
+    </select>
+
+    <insert id="addorder" parameterType="com.jk.clothes.model.Order">
+        insert into t_order (userId,orderNum,productName,sizePrice,sizeImg,sizeName) values
+                (#{userId},#{orderNum},#{productName},#{sizePrice},#{sizeImg},#{sizeName})
+    </insert>
+</mapper>
