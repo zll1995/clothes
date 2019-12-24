@@ -191,7 +191,21 @@
                             return "<img   src='"+a.img+"'/>";
                         }
                 },
-                    {field: 'powerid', width: '15%', title: '职位'}
+                    {field: 'powerid', width: '15%', title: '职位',templet:function(b){
+                        str="";
+                        if(b.powerid==1){
+                            str+="boss";
+                        }
+                        if(b.powerid==2){
+                            str+="财务";
+                        }
+                        if(b.powerid==3){
+                            str+="库管";
+                        }
+                            return str;
+                        }
+
+                    }
                     , {
                     field: 'xxx', width: '20%', title: '操作', templet: function (a) {
                         return "<button type='button' class='layui-btn layui-btn-sm' onclick='update("+a.id+")'>修改</button>"
