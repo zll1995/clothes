@@ -253,7 +253,6 @@
 
     xiugai = function(){
         var formid=$("#updateform").serialize();
-        alert(formid);
         $.ajax({
             url:"../xiu",
             type:"post",
@@ -262,7 +261,6 @@
                alert("修改成功")
             },
             error:function () {
-                alert("修改没成功")
             }
         })
     }

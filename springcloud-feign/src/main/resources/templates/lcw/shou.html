@@ -251,7 +251,6 @@
                 url: "../queryshou",
                 type: "post",
                 success:function(data){
-                    alert(data);
                     var tr = '<tr class="table_head" >' +
                         '                                    <th class="column-1">产品</th>' +
                         '                                    <th class="column-2"></th>' +
@@ -274,7 +273,6 @@
                     $("#one1").append(tr)
                 },
                 error:function(){
-                    alert("错误");
                 }
 
             })

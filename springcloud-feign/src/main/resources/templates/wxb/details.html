@@ -261,6 +261,7 @@
                             <!-- Gallery Slider area -->
                             <div id="product-gallery-active">
                                 <div class="single-gallery-itam" >
+                                    <span style="display: none" th:text="${p.getSizeName()}" id="sizeName"></span>
                                     <img th:src="${p.getSizeName()}" alt="Product Image" bigimage id="colorImg">
                                 </div>
                             </div>
@@ -269,7 +270,7 @@
                     <div class="col-lg-4 col-12">
                         <!-- Single-product summary -->
                         <div class="single-product-summary lh-27">
-                            <h4 class="fs-22 lh-45"><span th:text="${p.getProductName()}"></span></h4>
+                            <h4 class="fs-22 lh-45"><span th:text="${p.getProductName()}" id="productName"></span></h4>
                             <p class="lh-45 fs-18 color-1">$<span th:text="${p.getPrice()}" id="pprice"> </span></p>
                             <p th:text="${p.getDescribes()}"> </p>
                             <form>
@@ -306,7 +307,7 @@
                                 </p>
                                 <p><span>库存：</span><span th:text="${p.getCount()}"> </span>
                                 <div class="divider-2 m-t-25 m-b-25"></div>
-                                <input type="button" onclick="toShowCang()" class="btn boxed-btn" value="加入我的收藏"/>
+                                <input type="button" onclick="funtoShowCang()" class="btn boxed-btn" value="加入我的收藏"/>
                                 </p>
                             </div>
                             <div class="divider-2 m-t-25 m-b-25"></div>
@@ -526,6 +527,16 @@
         }
         function   funtoShowCang() {
             var id = $("#spanId").html();
+            var productName = $("#productName").html();
+            var sizeName  = $("#sizeName").html();
+            var pprice = $("#pprice").html();
+            $.ajax({
+                url:"../addShouCang",
+                data:{productid:id,productname:productName,productimg:sizeName,productprice:pprice},
+                success:function () {
+                    toastr.success('收藏成功');
+                }
+            })
         }
         function toquery1() {
            var p =  $("#productId1").val();

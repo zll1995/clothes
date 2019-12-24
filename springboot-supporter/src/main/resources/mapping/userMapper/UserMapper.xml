@@ -59,9 +59,10 @@
     select COUNT(*) count,DATE_FORMAT(birthday,'%Y-%m-%d') time  from user GROUP BY DATE_FORMAT(birthday,'%Y-%m-%d')
     </select>
 
+
     <!--柱状图-->
     <select id="queryColumn" resultType="java.util.Map">
-          select COUNT(*) count,DATE_FORMAT(birthday,'%Y-%m-%d') time  from user GROUP BY DATE_FORMAT(birthday,'%Y-%m-%d')
+          select COUNT(*) count,DATE_FORMAT(market,'%Y-%m-%d') time  from t_product GROUP BY DATE_FORMAT(market,'%Y-%m-%d')
     </select>
 
 

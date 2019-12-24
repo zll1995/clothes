@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+
     <!-- 这是jquery的核心包  -->
     <script   type="text/javascript" src="../js/jquery.min.js"></script>
     <script   src="../highcharts/code/highcharts.js"></script>
     <script   src="../highcharts/code/modules/exporting.js"></script>
     <script   src="../highcharts/code/modules/export-data.js"></script>
+
 </head>
+
 <div style="float:left;margin-bottom: 10px">
+
     <div id="container1" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left;  "></div>
-    <div id="container"  style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; margin-left:100px;"></div>
-    <div id="container3" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; margin-left:100px; "></div>
+    <div id="container"  style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:right; margin-left:300px;"></div><br>
+    <div id="container3" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; "></div>
+
 </div>
+
 </body>
 <script>
+
     //线型图
     $(function () {
         $.ajax({
@@ -27,6 +34,7 @@
                 var xtext = [];//X轴TEXT
                 var nums = [];//y轴数量
                 for (var i=0;i<data.length;i++){
+
                     nums.push(data[i].count);
                     xtext.push(data[i].time);
                 }
@@ -47,10 +55,13 @@
                         name:"数据",
                         data:nums
                     }]
+
                 });
             }
         })
+
     })
+
     //饼状图
     $(function () {
         $.ajax({
@@ -77,7 +88,7 @@
                             cursor: 'pointer',
                             dataLabels: {
                                 enabled: true,
-                                format: '<b>{point.y}</b> 元'
+                                format: '<b>{point.y}</b> 个'
                             }
                         }
                     },
@@ -92,8 +103,10 @@
             }
         })
     })
+
     //柱状图
     $(function () {
+
         $.ajax({
             url:"../user/queryColumn",
             type:"post",
@@ -104,7 +117,7 @@
                         type: 'column'
                     },
                     title: {
-                        text: '每月平台收入'
+                        text: '平台商品入驻'
                     },
                     subtitle: {
                         text: '数据来源: WorldClimate.com'
@@ -116,14 +129,14 @@
                     yAxis: {
                         min: 0,
                         title: {
-                            text: '收入钱数 (元)'
+                            text: '个数'
                         }
                     },
                     tooltip: {
                         // head + 每个 point + footer 拼接成完整的 table
                         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                            '<td style="padding:0"><b>{point.y:.1f} 元</b></td></tr>',
+                            '<td style="padding:0"><b>{point.y:.1f} 个</b></td></tr>',
                         footerFormat: '</table>',
                         shared: true,
                         useHTML: true
@@ -134,12 +147,17 @@
                         }
                     },
                     series: [{
-                        name:'收入',
+                        name:'',
                         data:data.data
                     }]
                 });
             }
         })
     })
+
+
+
+
+
 </script>
 </html>

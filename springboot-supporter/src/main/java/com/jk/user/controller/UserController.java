@@ -139,18 +139,14 @@ public class UserController {
                 map3.put("name","cxf");
                 map3.put("sliced",true);
                 map3.put("selected",true);
-            }else if(map.get("服装类型").toString().equals("张三")){
-                map3.put("name","张三");
-            }else if(map.get("服装类型").toString().equals("李四")){
-                map3.put("name","李四");
-            }else if(map.get("服装类型").toString().equals("陈光")){
-                map3.put("name","陈光");
-            }else if(map.get("服装类型").toString().equals("陈晓峰")){
-                map3.put("name","陈晓峰");
-            }else if(map.get("服装类型").toString().equals("王五")){
-                map3.put("name","王五");
-            }else if(map.get("服装类型").toString().equals("ycx")){
-                map3.put("name","ycx");
+            }else if(map.get("服装类型").toString().equals("T恤")){
+                map3.put("name","T恤");
+            }else if(map.get("服装类型").toString().equals("夹克")){
+                map3.put("name","夹克");
+            }else if(map.get("服装类型").toString().equals("棉服")){
+                map3.put("name","棉服");
+            }else if(map.get("服装类型").toString().equals("羽绒服")){
+                map3.put("name","羽绒服");
             }else {
                 map3.put("name","阿华1");
             }
