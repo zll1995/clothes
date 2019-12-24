@@ -32,4 +32,18 @@
     where userid = #{userid}
 
     </update>
+
+    <select id="queryProEs" resultType="Map">
+        SELECT
+            tp.productId id,
+             tp.productName productname,
+             tsi.sizeImg sizeimg,
+             tsi.sizePrice sizeprice
+        FROM
+            t_product tp
+        LEFT JOIN t_color tc ON tp.productId=tc.productId
+        LEFT JOIN t_color_size tcs ON tc.colorid=tcs.colorId
+        LEFT JOIN t_size tsi ON tcs.sizeId=tsi.sizeId
+        GROUP BY  tp.productId
+    </select>
 </mapper>

@@ -34,6 +34,8 @@
     <!-- modernizr js -->
     <script src="assets/js/modernizr-2.8.3.min.js"></script>
 
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -126,91 +128,55 @@
                 <!-- Cart Table start -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="cart-table">
+                        <div class="cart-table" id="cart-table">
                             <table class="table-shopping-cart" id="tableid">
-                                
-
+                            <tr class="table_head" >
+                                <th>&nbsp;&nbsp;</th>
+                                <th class="column-1">产品</th>
+                                <th class="column-2"></th>
+                                <th class="column-3">价格</th>
+                                <th class="column-2">数量</th>
+                                <th class="column-5">总计</th>
+                                <th class="column-6"></th>
+                            </tr>
+                            <tr class="table_row frist-row" v-for="item in CartviewList">
+                                <td><input type="checkbox" name="check"><span style="display: none">{{item.productid}}</span></td>
+                                <td class="column-1">
+                                      <div class="cart-img">
+                                            <img :src="item.productimg" alt="IMG">
+                                      </div>
+                                </td>
+                               <td class="column-2">{{item.productname}}</td>
+                               <th class="column-3" v-model="price">{{item.productprice}}</th>
+                               <td class="column-2">
+                                     <div class="quantity-input" >
+                                            <button  @click="changeMoney(item,-1)" >-</button>
+                                             <span class="moneyCount" v-model = "productCount">{{item.productCount}}</span>
+                                               <button  @click="changeMoney(item,1)" >+</button>
+                                     </div>
+                                   </td>
+                               <td class="column-5">
+                                   {{(item.productCount)*(item.productprice)}}
+                                   <!--<input type="text" style="display: none" v-model = "moneyAll" value="">-->
+                               </td>
+                               <td class="column-6"><i class="ti ti-trash"></i></td>
+                              <a href="javascript:deleteshoucang()"><i class="ti ti-tra"></i></a>
+                          </tr>
                             </table>
                         </div>
 
                         <div class="table-bootm clearfix m-t-30">
                             <div class="table-bootm-left float-l">
-                                <a href="#" class="continune-shop btn boxed-btn m-r-22">继续购物</a>
-                                <a href="#" class="update-cart btn border-btn">更新购物车</a>
+                                <a href="../query" class="continune-shop btn boxed-btn m-r-22">继续购物</a>
+                                <a href="../removeCart" class="update-cart btn border-btn">清空购物车</a>
                             </div>
                             <div class="table-bootm-right float-r">
-                                <a href="#" class="clear-cart btn border-btn">清空购物车</a>
+                                <a href="javascript:settleAccounts()" class="clear-cart btn border-btn">结算</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Cart Table end -->
 
-              <!--  <div class="row m-t-80">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <div class="shop-shipping">
-                            <h4 class="fs-22 m-b-40">装运详细信息</h4>
-                            <div class="shop-shipping-form">
-                                <form action="#">
-                                    <p class="m-b-30">
-                                        <label for="country">国家</label>
-                                        <select name="country" id="country">
-                                            <option value="england">中国</option>
-                                            <option value="bangladesh">美国</option>
-                                            <option value="india">印度</option>
-                                        </select>
-                                    </p>
-                                    <p class="m-b-30">
-                                        <label for="state">国家</label>
-                                        <select name="state" id="state">
-                                            <option value="1">西安</option>
-                                            <option value="2">洛杉矶</option>
-                                            <option value="3">达卡</option>
-                                        </select>
-                                    </p>
-                                    <p class="m-b-30">
-                                        <label for="state">国家</label>
-                                        <input type="text" placeholder="邮政编码">
-                                    </p>
-                                    <p>
-                                        <button class="btn boxed-btn">计算运费</button>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <div class="cart-note">
-                            <h4 class="fs-22 m-b-40">购物车备注</h4>
-                            <div class="cart-note-form">
-                                <form>
-                                    <p>
-                                        <label for="note">注意</label>
-                                        <textarea name="note" id="note"></textarea>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="cart-total">
-                            <h4 class="fs-22 m-b-40">购物车合计</h4>
-                            <div class="cart-total-form p-all-40">
-                                <ul class="clearfix">
-                                    <li class="clearfix">
-                                        <p class="float-l">小计 </p>
-                                        <p class="float-r">$250.60</p>
-                                    </li>
-                                    <li class="clearfix">
-                                        <p class="float-l">总计</p>
-                                        <p class="float-r">$250.60</p>
-                                    </li>
-                                </ul>
-                                <a href="" class="btn boxed-btn">计算运费</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </section>
         <!-- Cart content Wrapper End-->
@@ -325,48 +291,76 @@
     <script src="assets/js/zimate-1.0.js"></script>
 </body>
     <script>
-        $(function(){
-            initdata();
-        })
-        initdata=function(){
-            $.ajax({
-                url:"../queryCart",
-                dataType:"json",
-                success:function(data){
-                var tr = '<tr class="table_head" >' +
-                    '                                    <th class="column-1">产品</th>' +
-                    '                                    <th class="column-2"></th>' +
-                    '                                    <th class="column-3">价格</th>' +
-                    '                                    <th class="column-2">数量</th>' +
-                    '                                    <th class="column-5">总计</th>' +
-                    '                                    <th class="column-6"></th>' +
-                    '                                </tr>';
-                for (var i = 0; i < data.length; i++) {
-                    tr += '<tr class="table_row frist-row">' +
-                        '                                    <td class="column-1">' +
-                        '                                        <div class="cart-img">' +
-                        '                                            <img src="'+data[i].img+'" alt="IMG">' +
-                        '                                        </div>' +
-                        '                                    </td>' +
-                        '                                    <td class="column-2">'+data[i].productname+'</td>' +
-                        '                                    <td class="column-3">'+data[i].productprice+'</td>' +
-                        '                                    <td class="column-2">' +
-                        '                                        <div class="quantity-input">' +
-                        '                                            <div class="quantity-down" id="quantityDown'+data[i].img+'" onclick="price(1)"><i class="ti ti-angle-left"></i></div>' +
-                        '                                            <input id="count" type="number" value="1" name="quantity">' +
-                        '                                            <div class="quantity-up" id="quantityUP'+data[i].img+'" onclick="price(2)"><i class="ti ti-angle-right"></i></div>' +
-                        '                                        </div>' +
-                        '                                    </td>' +
-                        '                                    <td class="column-5">'+$("#count").val()*data[i].productprice+'</td>' +
-                        '                                    <td class="column-6"><i class="ti ti-trash"></i></td>' +
-                        '                                    <a href="javascript:deleteshoucang()"><i class="ti ti-tra"></i></a>' +
-                        '                                </tr>';
+        var vm = new Vue({
+            el: '#cart-table',
+            data: {
+                CartviewList:[],
+                price:2,
+                productCount : 0,
+                moneyAll:0
+            },mounted(){
+                this.initdata();
+            },
+            methods:{
+                initdata:function(){
+                    var _this=this;
+                    $.ajax({
+                        url:"../queryCart",
+                        dataType:"json",
+                        success:function(data){
+                            _this.CartviewList=data
+                        }
+                    })
+                },
+                changeMoney:function(product,way){
+                    console.log(product)
+                    if(way>0){
+                        product.productCount++;
+                    }else{
+                        product.productCount--;
+                        if(product.productCount<1){
+                            product.productCount=1;//当数量少于1个时保持1个不变
+                        }
+                    }
+                   /* console.log(product.productCount)*/
+
+                },
+            },
+            watch : {
+                price:function(val) {
+                    this.price = val;
+                },
+                productCount:function(val) {
+                    this.productCount = val;
+                    this.moneyAll = this.productCount * this.price
+                },
+                moneyAll : function (val) {
+                    this.productCount = val/ this.price;
+                    this.moneyAll = val;
                 }
-                    $("#tableid").append(tr)
             }
-            })
+        });
+        delMoney=function(b){
+            var a = $(b).siblings(".moneyCount").html();
+            $(b).siblings(".moneyCount").html(--a);
+            alert($("b .column-3").html())
+            alert($(b).siblings(".moneyCount").html())
         }
-        price=function(id){
+        addMoney=function(b){
+            vm.productCount=++(vm.productCount)
+            console.log(vm.productCount)
+        }
+
+
+        function settleAccounts(){
+            var ids="";
+            var moneyAll=0;
+            $("[name=check]:checked").each(function(){
+                ids+= ids=="" ? $(this).next().text() : ","+$(this).next().text();
+                moneyAll+=eval($(this).parent().next().next().next().next().next().text());
+                //moneyAll+=$(this).next().next().next().next().next().text()
+            })
+            location.href="../goAlipay?price="+moneyAll;
 
         }
     </script>

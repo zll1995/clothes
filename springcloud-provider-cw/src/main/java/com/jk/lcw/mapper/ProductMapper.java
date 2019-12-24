@@ -13,4 +13,6 @@ public interface ProductMapper {
     List<Advertising> queryadvertising();
 
     void xiu(User user);
+
+    List queryProEs();
 }

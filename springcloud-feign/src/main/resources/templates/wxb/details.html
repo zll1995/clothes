@@ -114,25 +114,19 @@
                 <div class="col-lg-5 d-none d-lg-block">
                     <nav class="main-menu fs-12 lh-70">
                         <ul>
-                            <li >
-                                <a href="index.html">主页</a>
+                            <li>
+                                <a  href="../query">主页</a>
                             </li>
                             <li>
-                                <a href="category.html">类别</a>
-                            </li>
-                            
-                            <li>
-                                <a href="blog.html">博客</a>
+                                <a href="../main">全部商品</a>
                             </li>
                             <li>
-                                <a href="cart.html">购物车</a>
+                                <a href="../shou">我的收藏</a>
                             </li>
-                            <li >
-                                <a href="checkout.html">结账</a>
+                            <li>
+                                <a href="../toCarts">购物车</a>
                             </li>
-                            <li class="active">
-                                <a href="contact.html">Contact</a>
-                            </li>
+
                         </ul>
                     </nav>
                 </div><!-- end col -->
@@ -147,9 +141,8 @@
                 <div class="col-lg-5 col-6" >
                     <div class="header-right text-right">
                         <ul>
-                            <li><a href=""><i class="ti ti-user"></i></a></li>
-                            <li class="search"><a href="#"><i class="ti ti-search"></i></a></li>
-                            <li class="cart"><a href="#"><i class="ti ti-bag"></i> <span>2</span></a></li>
+                            <li><a href="../users"><i class="ti ti-user"></i></a></li>
+                            <li class="search"><a href=""><i class="ti ti-search"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -313,7 +306,7 @@
                             <div class="divider-2 m-t-25 m-b-25"></div>
                             <!-- Add to cart btn -->
                             <div class="add-to-cart m-t-35">
-                                <input type="submit" class="btn boxed-btn" value="添加到购物车">
+                                <input type="button" onclick="togouwu()" class="btn boxed-btn" value="添加到购物车">
                             </div>
                         </div>
                     </div>
@@ -570,6 +563,21 @@
                     })
                 }
             })
+        }
+
+        function togouwu() {
+            var id = $("#spanId").html();
+            var productName = $("#productName").html();
+            var sizeName  = $("#sizeName").html();
+            var pprice = $("#pprice").html();
+            $.ajax({
+                url:"../addCart",
+                data:{productid:id,productname:productName,productprice:pprice,productCount:1,productimg:sizeName},
+                success:function () {
+                    toastr.success('新增成功');
+                }
+            })
+
         }
         function queryColor(id) {
             $.ajax({

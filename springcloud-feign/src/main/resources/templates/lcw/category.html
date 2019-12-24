@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>所有商品</title>
+
+    <!-- MAIN CSS FILES===================================
+	======================================================= -->
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <!-- Mean Menu CSS -->
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="assets/css/slick-1.9.0.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&display=swap" rel="stylesheet">
+    <!-- Helper Css -->
+    <link rel="stylesheet" href="assets/css/helper.css" >
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/css/zimate-1.0.css" >
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="assets/css/responsive-1.0.css">
+    <!-- modernizr js -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!--引入layui的js、css-->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+    <script src="../layui/layui.all.js"></script>
+    <!--引入jquery-->
+    <script src="../layui/jquery-1.8.0.js"></script>
+    <!--vue-->
+    <script type="text/javascript" src="../vue/vue.js"></script>
+
+    <script src="https://unpkg.com/vue"></script>
+
+    <style>
+
+        .pagination_page {
+            padding: 0 4px;
+            border: 1px solid #d1dbe5;
+            border-right: 0;
+            background: #fff;
+            font-size: 13px;
+            min-width: 28px;
+            height: 28px;
+            line-height: 28px;
+            cursor: pointer;
+            box-sizing: border-box;
+            text-align: center;
+            float: left;
+        }
+
+        .pagination_page_right {
+            border-right: 1px solid #d1dbe5;
+        }
+
+        .pagination_page:hover {
+            color: #20a0ff;
+        }
+
+        .disabled {
+            color: #e4e4e4 !important;
+            background-color: #fff;
+            cursor: not-allowed;
+        }
+
+        .pagination_page_active {
+            border-color: #20a0ff;
+            background-color: #20a0ff;
+            color: #fff !important;;
+            cursor: default;
+        }
+    </style>
+
+</head>
+<body class="animsition">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Header Start  -->                 
+    <header>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Site Menu -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <nav class="main-menu fs-12 lh-70">
+                        <ul>
+                           <li>
+                                <a  href="../query">首页</a>
+                            </li>
+                            <li   >
+                                <a href="../toEsCategory">全部商品</a>
+                            </li>
+                            
+                            <li>
+                                <a href="../shou">收藏</a>
+                            </li>
+                            <li>
+                                <a href="../toCarts">购物车</a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div><!-- end col -->
+                <!-- Site Logo -->
+                <div class="col-lg-2 col-6">
+                    <div class="logo text-center">
+                        <a href="index.html"><img src="assets/img/logo.png" alt="zimate"></a>
+                    </div>
+                </div>
+
+                <!-- Site Hader cart -->
+                <div class="col-lg-5 col-6">
+                    <div class="header-right text-right">
+                        <ul>
+                            <li><a href=""><i class="ti ti-user"></i></a></li>
+                            <li class="cart"><a href="javascript:queryCarts()"><i class="ti ti-bag"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 d-none menu-show">
+                    <div class="mobilemenu"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+    <!-- Cart Aera Start -->
+    <div class="cart-section">
+        <div class="cart-content">
+            <div class="cart-title m-b-30">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="fs-20 m-b-20 fw-600 m-t-10">Your Cart</h4>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="cart-close">
+                            <i class="ti ti-close"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <div class="single-cart-item">
+                    <div class="row">
+                        <div class="col-4"><img src="assets/img/cart/01.jpg" alt="Cart-Item"></div>
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="item-details">
+                                <a href="" class="item-name">Man Pink Purse Isolated</a>
+                                <span>1 x $19.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-cart-item">
+                    <div class="row">
+                        <div class="col-4"><img src="assets/img/cart/02.jpg" alt="Cart-Item"></div>
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="item-details">
+                                <a href="" class="item-name">Woman Blue Top Isolated</a>
+                                <span>1 x $20.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-cart-item">
+                    <div class="row">
+                        <div class="col-4"><img src="assets/img/cart/03.jpg" alt="Cart-Item"></div>
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="item-details">
+                                <a href="" class="item-name">Latest Apple Smart Watch</a>
+                                <span>1 x $15.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-total-price">
+                <h6 class="m-t-30 fw-600">Total: $54.00 </h6>
+            </div>
+
+            <div class="cart-action">
+                <a href="cart.html" class="cart-action-btn">View Cart</a>
+                <a href="checkout.html" class="cart-action-btn">Check Out</a>
+            </div>
+        </div>
+
+        <div class="cart-overly"></div>
+    </div>
+    <!-- Cart Aera End -->
+    <!-- Mian Wrapper Start -->
+    <main>
+        <!-- Breadcrumb Area Start -->																
+        <section class="breadcrumb-area bg-light p-t-80 p-b-120 fs-14 link-color-2" style="background:url('assets/img/cart/01.jpg')">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="m-b-30 fs-40 fw-600">Shop Category</h2>
+                        <ul class="list-inline">
+                            <li><a href="index.html">Home</a></li>
+                            <li>-</li>
+                            <li><a href="single-post.html">Category</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumb Area End -->
+        <!-- Shop Category Content Start -->
+        <section class="shop-category-wrapper p-t-120 p-b-120">
+            <div class="container">
+                <div class="row">
+                    
+                    <!-- Shop Category Sidebar End-->
+                    <!-- Shop Category Item start-->
+                    <div class="col-lg-12">
+                        <div class="category-before-loop clearfix m-b-30">
+                            <div class="cat-before-left float-l">
+                                <div class="cat-sorting">
+                                    <select name="sorting" id="sorting">
+                                        <option value="Default">Default Sorting</option>
+                                        <option value="low-to-hight">Low To High</option>
+                                        <option value="high-to-low">High To Low</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="cat-before-right float-r">
+                                <div class="pro-search position-relative" >
+                                    <form >
+                                        <input type="text" placeholder="Search" style="width:700px" id="productName">
+                                        <button type="button" onclick="queryProductEs(0)"><i class="ti ti-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-shop-loop">
+                            <div class="row" id="app">
+                                <!-- Single Product -->
+                                <div class="col-lg-3 col-md-6 col-sm-6 col-12" v-for="todo in todos">
+                                    <div class="single-product m-b-60 text-center" >
+                                        <div class="product-action position-relative">
+                                            <div class="product-img">
+                                                <img :src="todo.sizeimg" alt="Product" style="width: 262.5px;height: 262.5px"/>
+                                            </div>
+                                        </div>
+                                        <div class="product-content m-t-30 m-t-30">
+                                            <h6><span v-on:click="xiangqing(todo.id)" v-html="todo.productname">{{todo.productname}}</span></h6>
+                                            <p class="price">￥{{todo.sizeprice}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- End Single Product -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shop Category item End-->
+                </div>
+            </div>
+            <div id="app1" style="height: 28px;margin-left:580px">
+               <pageination :total="model.total" :size="model.size" :page="model.page" :changge="pageFn" ></pageination>
+            </div>
+            <script src="../js/pageination.js"></script>
+        </section>
+
+        <!-- subscribetion end -->
+    </main>
+    <!-- Mian Wrapper End -->
+    <!-- Footer Start  -->
+    <footer class="footer-black">
+        <!-- Footer Top Area -->
+        <div class="footer-widget-area p-t-100 p-b-100 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">关于我们</h4>
+                            <ul>
+                                <li><a>历史简介</a></li>
+                                <li><a>合作伙伴</a></li>
+                                <li><a>商品供应商</a></li>
+                                <li><a>投资者咨询</a></li>
+                                <li><a>我们实力</a></li>
+                                <li><a>会员特权</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">链接</h4>
+                            <ul>
+                                <li><a>联系我们</a></li>
+                                <li><a>常见问题</a></li>
+                                <li><a>条款及细则</a></li>
+                                <li><a>退货政策</a></li>
+                                <li><a>清除</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">跟随我们</h4>
+                            <ul>
+                                <li><a><i class="ti ti-facebook"></i>腾讯</a></li>
+                                <li><a><i class="ti ti-facebook"></i>推特</a></li>
+                                <li><a><i class="ti ti-facebook"></i>布达拉斯</a></li>
+                                <li><a><i class="ti ti-facebook"></i>爱因斯坦</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">网上购物</h4>
+                            <ul>
+                                <li><a>男士时尚购物</a></li>
+                                <li><a>女性购物2019</a></li>
+                                <li><a>礼品卡和优惠券</a></li>
+                                <li><a>居家生活</a></li>
+                                <li><a>电子产品</a></li>
+                                <li><a>礼品卡和优惠券</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom-area -->
+        <div class="footer-bottom-area p-t-30 p-b-30 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="copyright-text">
+                            <p>Copyright © 2019 <a href="http://www.bootstrapmb.com/" target="_blank">SmartSoftCode</a>. All Rights Reserved</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="payment-method text-right">
+                            <ul>
+                                <li><a href="#"><img src="assets/img/payment/01-white.png" alt="Paypal"></a></li>
+                                <li><a href="#"><img src="assets/img/payment/02-white.png" alt="Visa"></a></li>
+                                <li><a href="#"><img src="assets/img/payment/03-white.png" alt="Master Crad"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="totalId">
+    </footer>
+    <!-- Footer End -->
+
+
+    <!-- MAIN JS FILES===================================
+	======================================================= -->
+    <!-- jQuery -->
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <!-- Bootstrap js-->
+    <script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Poper js -->
+    <script src="assets/js/popper-1.14.7.js"></script>
+    <!-- Mean Menu js -->
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <!-- Slick JS -->
+    <script src="assets/js/slick.min-1.9.0.js"></script>
+    <!-- sweetalert -->
+    <script src="assets/js/sweetalert.min-1.0.js"></script>
+    <!-- Theme js -->
+    <script src="assets/js/zimate-1.0.js"></script>
+
+
+    <script>
+        $(function(){
+            queryProductEs(0);
+        })
+
+
+       var vm = new Vue({
+            el:"#app",
+            data:{
+                todos:[]
+            },
+           methods:{
+                xiangqing:function(e){
+                    location.href="../product/todetails?productId="+e;
+                }
+           }
+        })
+
+        function queryProductEs(pa){
+            $.ajax({
+                url:"../queryProductAll",
+                data:{productname:$("#productName").val(),page:pa},
+                success:function(data){
+                    console.log(data);
+                    vm.todos=[];
+                    for(let index in data.rows) {
+                        Vue.set(vm.todos, index, data.rows[index]);
+                    }
+                    new Vue({
+                        el:"#app1",
+                        data() {
+                            return {
+                                model: {
+                                    total:data.total ,//总页数
+                                    size: 12,//每页显示条目个数不传默认10
+                                    page: 1,//当前页码
+                                }
+                            }
+                        },methods: {
+                            //页码切换执行方法
+                            pageFn(val) {
+                                $.ajax({
+                                    url:"../queryProductAll",
+                                    data:{productname:$("#productName").val(),page:val},
+                                    success:function(data){
+                                        console.log(data);
+                                        vm.todos=[];
+                                        for(let index in data.rows) {
+                                            Vue.set(vm.todos, index, data.rows[index]);
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+            })
+        }
+        function queryCarts(){
+            location.href="../toCarts";
+        }
+    </script>
+</body>
+</html>

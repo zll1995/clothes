@@ -38,5 +38,10 @@ public class ProductController {
         productService.xiu(user);
     }
 
+    @PostMapping("queryProductAll")
+    @ResponseBody
+    public List queryProEs(){
+        return productService.queryProEs();
+    }
 
 }

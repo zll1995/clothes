@@ -32,4 +32,9 @@ public class ProductServiceImpl implements ProductService{
         productMapper.xiu(user);
     }
 
+    @Override
+    public List queryProEs() {
+        return productMapper.queryProEs();
+    }
+
 }

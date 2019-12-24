@@ -14,4 +14,6 @@ public interface ProductService {
     List<Advertising> queryadvertising();
 
     void xiu(User user);
+
+    List queryProEs();
 }
