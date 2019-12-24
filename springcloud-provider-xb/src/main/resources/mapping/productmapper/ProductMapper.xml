@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.product.mapper.ProductMapper" >
+    <select id="queryProductById" resultType="com.jk.product.model.Product">
+        select tpr.productId,tpr.productName productName,tpr.describes describes,tz.sizeImg sizeName,tz.sizePrice price,tz.sizeCount count from t_product tpr
+
+        LEFT JOIN t_color tc on tpr.productId = tc.productId
+
+        LEFT JOIN t_color_size tcz on tc.colorid = tcz.colorId
+
+        LEFT JOIN t_size tz on tcz.sizeId = tz.sizeId
+
+        where tpr.productId = #{productId}
+
+        GROUP BY tpr.productId
+    </select>
+    <select id="queryColorById" resultType="com.jk.product.model.Color">
+        select * from t_color where productId = #{productId}
+    </select>
+
+    <select id="querySizeById" resultType="com.jk.product.model.Size">
+        select ts.sizeId,ts.sizeName sizeName,ts.sizeImg,ts.sizePrice from t_size ts
+
+        LEFT JOIN t_color_size tcz on ts.sizeId = tcz.sizeId
+
+        LEFT JOIN t_color tc on tcz.colorId = tc.colorid
+
+        where tc.colorid = #{colorid}
+    </select>
+
+    <select id="queryColor" resultType="com.jk.product.model.Size">
+        SELECT ts.sizeId,ts.sizeName,ts.sizeImg from t_size ts
+
+        LEFT JOIN t_color_size tcs on ts.sizeId = tcs.sizeId
+
+        LEFT JOIN t_color tc on tcs.colorId = tc.colorid
+
+        where tc.colorid = #{id}
+    </select>
+
+    <select id="queryXiangGuan" resultType="int">
+        select tb.brandId from t_product tp
+
+        LEFT JOIN t_type tt on tp.typeid = tt.typeId
+
+        LEFT JOIN t_brand tb on tt.brandId = tb.brandId
+
+        where tp.productId = #{id}
+
+    </select>
+
+    <select id="queryProduct" resultType="com.jk.product.model.Product">
+        select tp.productId,tp.productName from t_product tp
+
+        LEFT JOIN t_type tt on tp.typeid = tt.typeId
+
+        LEFT JOIN t_brand tb on tt.brandId = tb.brandId
+
+        where tb.brandId = #{brandId}
+
+        LIMIT 0,3
+    </select>
+</mapper>

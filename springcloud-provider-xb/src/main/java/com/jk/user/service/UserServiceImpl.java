@@ -2,6 +2,7 @@ package com.jk.user.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jk.comment.model.Comment;
 import com.jk.user.mapper.UserMapper;
 import com.jk.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +51,6 @@ public class UserServiceImpl implements UserService {
     public List queryTree() {
         return userMapper.queryTree();
     }
+
+
 }

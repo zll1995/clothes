@@ -19,4 +19,10 @@ public interface UserMapper {
     List queryTree();
 
     User queryUserByName(String userName);
+
+    User queryPhone(String phone);
+
+    void userAdd(User user);
+
+    User userByName(String username);
 }

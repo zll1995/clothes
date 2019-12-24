@@ -196,7 +196,7 @@
                           </div>-->
              </div><!--{{site.sizeimg}}-->
                    <div class="product-content m-t-30">
-                      <h6><a href="single-product.html" >{{site.productname}}</a></h6>
+                      <h6><a :href="'javaScript:todetails('+site.productid+')'">{{site.productname}}</a></h6>
                       <p class="price"> 价格:  ${{site.sizeprice}}</p>
         </div>
             </div>
@@ -364,7 +364,9 @@
 }*/
 
 
-
+function todetails(id) {
+    location.href="../product/todetails?productId="+id;
+}
 
 function queryMovie() {
     $.ajax({

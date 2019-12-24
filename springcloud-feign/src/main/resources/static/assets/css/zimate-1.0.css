@@ -820,17 +820,17 @@ button.swal-button.swal-button--confirm {
 }
 /* ================ Shoping Cart ================== */
 table.table-shopping-cart {
-     width: 100%;
-     text-align: left;
-     line-height: 26px;
- }
+    width: 100%;
+    text-align: left;
+    line-height: 26px;
+}
 
 .column-1 {
     width: 120px;
 }
 
 .column-2 {
-    width: 300px;
+    width: 480px;
     padding-left: 40px;
     line-height: 16px;
     color: #000;

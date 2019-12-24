@@ -67,7 +67,7 @@
                 <!-- Site Logo -->
                 <div class="col-lg-2 col-6">
                     <div class="logo text-center">
-                        <a href="index.html"><img src="assets/img/logo.png" alt="zimate"></a>
+                        <a href="index.html"><img src="assets/img/logo.png" ></a>
                     </div>
                 </div>
 
@@ -115,23 +115,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="cart-table">
-                            <table class="table-shopping-cart">
-                                <tr class="table_head">
-                                    <th class="column-1">产品</th>
-                                    <th class="column-2"></th>
-                                    <th class="column-3">价格</th>
-                                    <th class="column-4"></th>
-                                </tr>
-                                <tr class="table_row frist-row">
-                                    <td class="column-1">
-                                        <div class="cart-img">
-                                            <img src="assets/img/cart/01.jpg" alt="IMG">
-                                        </div>
-                                    </td>
-                                    <td class="column-2" th:text="${list.productname}"></td>
-                                    <td class="column-3">$258.00</td>
-                                    <td class="column-4"><a href="javascript:" class="update-cart btn border-btn">取消收藏</a></td>
-                                </tr>
+                            <table class="table-shopping-cart" id="one1">
+
+
                             </table>
                         </div>
 
@@ -254,17 +240,52 @@
     <script src="assets/js/sweetalert.min-1.0.js"></script>
     <!-- Theme js -->
     <script src="assets/js/zimate-1.0.js"></script>
+    <script>
+
+        $(function(){
+            queryshoucang();
+        })
+
+        queryshoucang =function () {
+            $.ajax({
+                url: "../queryshou",
+                type: "post",
+                success:function(data){
+                    alert(data);
+                    var tr = '<tr class="table_head" >' +
+                        '                                    <th class="column-1">产品</th>' +
+                        '                                    <th class="column-2"></th>' +
+                        '                                    <th class="column-3">价格</th>' +
+                        '                                    <th class="column-4"></th>' +
+                        '                                </tr>';
+                    for (var i = 0; i < data.length; i++) {
+                        tr += '<tr class="table_row frist-row">' +
+                            '                                    <td class="column-1">' +
+                            '                                        <div class="cart-img">' +
+                            '                                            <img src="'+data[i].productimg+'" alt="zimate">' +
+                            '                                        </div>' +
+                            '                                    </td>' +
+                            '                                    <td class="column-2">'+data[i].productname+'</td>' +
+                            '                                    <td class="column-3">'+data[i].productprice+'</td>'
+                            + '         <td class="column-4"><a href="javascript:del('+data[i].productid+')" class="update-cart btn border-btn">取消收藏</a>'
+                            + '         </td>'
+                            + '         </tr>'
+                    }
+                    $("#one1").append(tr)
+                },
+                error:function(){
+                    alert("错误");
+                }
+
+            })
+        }
+
+
+
+
+
+
+    </script>
 </body>
-<script>
 
-    $(function(){
-        queryshoucang();
-    })
-
-    queryshoucang =function () {
-       location.href="../queryshou"
-    }
-
-
-</script>
 </html>

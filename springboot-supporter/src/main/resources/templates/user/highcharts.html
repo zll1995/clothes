@@ -3,26 +3,19 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
-
     <!-- 这是jquery的核心包  -->
     <script   type="text/javascript" src="../js/jquery.min.js"></script>
     <script   src="../highcharts/code/highcharts.js"></script>
     <script   src="../highcharts/code/modules/exporting.js"></script>
     <script   src="../highcharts/code/modules/export-data.js"></script>
-
 </head>
-
 <div style="float:left;margin-bottom: 10px">
-
-<div id="container1" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left;  "></div>
-<div id="container"  style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; margin-left:100px;"></div>
-<div id="container3" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; margin-left:100px; "></div>
-
+    <div id="container1" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left;  "></div>
+    <div id="container"  style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; margin-left:100px;"></div>
+    <div id="container3" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; margin-left:100px; "></div>
 </div>
-
 </body>
 <script>
-
     //线型图
     $(function () {
         $.ajax({
@@ -34,7 +27,6 @@
                 var xtext = [];//X轴TEXT
                 var nums = [];//y轴数量
                 for (var i=0;i<data.length;i++){
-
                     nums.push(data[i].count);
                     xtext.push(data[i].time);
                 }
@@ -55,16 +47,53 @@
                         name:"数据",
                         data:nums
                     }]
-
                 });
             }
         })
-
     })
-
-
+    //饼状图
     $(function () {
-
+        $.ajax({
+            url:"../user/queryCake",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                Highcharts.chart('container', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: '依衣服装'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.y}</b> 元'
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Brands',
+                        colorByPoint: true,
+                        data: data
+                    }]
+                });
+            },error:function () {
+                alert("查询失败")
+            }
+        })
+    })
+    //柱状图
+    $(function () {
         $.ajax({
             url:"../user/queryColumn",
             type:"post",
@@ -112,10 +141,5 @@
             }
         })
     })
-
-
-
-
-
 </script>
 </html>

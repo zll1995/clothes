@@ -53,4 +53,22 @@
         </set>
         where userId = #{userId}
     </update>
+
+    <!--验证手机号-->
+    <select id="queryPhone" resultType="com.jk.user.model.User">
+		select * from t_user where userphone=#{phone}
+	</select>
+
+    <!--验正用户名是否存在-->
+    <select id="userByName" resultType="com.jk.user.model.User">
+		select * from t_user where username=#{username}
+	</select>
+
+    <!--前台注册-->
+    <insert id="userAdd" parameterType="com.jk.user.model.User">
+        insert into t_user (username,password,userinfo,img,userage,usersex,createdate,userphone)
+        values(#{username},#{password},#{userinfo},#{img},#{userage},#{usersex},#{createdate},#{userphone})
+    </insert>
+
+
 </mapper>

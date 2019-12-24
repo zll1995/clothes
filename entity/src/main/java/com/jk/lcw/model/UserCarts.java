@@ -17,7 +17,7 @@ import java.util.List;
  *@Date 2019/12/18 10:52
  *@Version 1.0
  **/
-
+@Document(collection = "userCarts")
 public class UserCarts implements Serializable {
     private static final long serialVersionUID = 4340596636229154913L;
     @Id

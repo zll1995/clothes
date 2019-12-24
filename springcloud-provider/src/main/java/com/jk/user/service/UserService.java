@@ -20,4 +20,10 @@ public interface UserService {
     List queryTree();
 
     User queryUserByName(String userName);
+
+    User queryPhone(String phone);
+
+    User userByName(String username);
+
+    void userAdd(User user);
 }

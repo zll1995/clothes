@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -97,10 +98,8 @@ public class ProductController {
         mongoTemplate.remove(new Query().addCriteria(Criteria.where("userid").is(user.getUserid())),UserCarts.class);
     }
 
- @RequestMapping("shou")
-    public String shou(){
-        return "lcw/shou";
-    }
+
+
     @RequestMapping("queryadvertising")
     @ResponseBody
     public List<Advertising> queryadvertising(){
@@ -113,8 +112,6 @@ public class ProductController {
     public void addShouCang(HttpServletRequest request, Cart cart){
        String key= Conf.SHOUCANG;
         User user = (User) request.getSession().getAttribute(request.getSession().getId());
-        user=new User();
-        user.setUserid(111);
         Query query = new Query();
         query.addCriteria(Criteria.where("userid").is(user.getUserid()));
         boolean exists = mongoTemplate.exists(query, UserCarts.class);
@@ -137,30 +134,32 @@ public class ProductController {
 
     }
     @RequestMapping("queryshou")
-    public String queryshou(HttpServletRequest request,Model model){
+    @ResponseBody
+    public List<Cart> queryshou(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute(request.getSession().getId());
-        user=new User();
-        user.setUserid(111);
         List<UserCarts> list = mongoTemplate.find(new Query().addCriteria(Criteria.where("userid").is(user.getUserid())),UserCarts.class);
-        model.addAttribute("list",list.get(0).getList());
-        return "shou";
+        return list.get(0).getList();
     }
 
 
+    @RequestMapping("shou")
+    public String shou(){
+      return "lcw/shou";
+    }
+
     @RequestMapping("users")
-    public String queryusers(HttpServletRequest request, HttpSession session, Model model, User user){
+    public String queryusers(HttpServletRequest request, HttpSession session, Model model){
     User user1= (User) request.getSession().getAttribute(request.getSession().getId());
-    model.addAttribute("list",user1);
+
+    session.setAttribute("list",user1);
         return "lcw/users";
     }
 
 
     @RequestMapping("xiu")
     @ResponseBody
-    public String xiu(User user){
+    public void xiu(User user){
         productService.xiu(user);
-        return "1";
-
     }
 
 

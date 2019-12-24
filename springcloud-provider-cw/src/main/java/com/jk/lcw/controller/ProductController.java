@@ -7,10 +7,7 @@ import com.jk.lcw.service.ProductServiceEntity;
 import com.jk.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,12 +31,12 @@ public class ProductController {
         List<Advertising> list = productService.queryadvertising();
         return list;
     }
-    @RequestMapping("xiu")
-    @ResponseBody
-    public String xiu(User user){
-        productService.xiu(user);
-        return "1";
 
+    @RequestMapping(value="xiu",method = RequestMethod.POST)
+    @ResponseBody
+    public void updateUser(@RequestBody User user){
+        productService.xiu(user);
     }
+
 
 }

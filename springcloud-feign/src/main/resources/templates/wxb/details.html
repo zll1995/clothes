@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>商品详情页面</title>
+
+    <!-- MAIN CSS FILES===================================
+	======================================================= -->
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="../assets/css/animate.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="../assets/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/themify-icons.css">
+    <!-- Mean Menu CSS -->
+    <link rel="stylesheet" href="../assets/css/slicknav.min.css">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="../assets/css/slick-1.9.0.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&display=swap" rel="stylesheet">
+    <!-- Helper Css -->
+    <link rel="stylesheet" href="../assets/css/helper.css" >
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../assets/css/zimate-1.0.css" >
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="../assets/css/responsive-1.0.css">
+    <!-- modernizr js -->
+    <script src="../assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!-- MAIN JS FILES===================================
+ ======================================================= -->
+    <!-- jQuery -->
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <!-- Bootstrap js-->
+    <script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Poper js -->
+    <script src="../assets/js/popper-1.14.7.js"></script>
+    <!-- Mean Menu js -->
+    <script src="../assets/js/jquery.slicknav.min.js"></script>
+    <!-- Slick JS -->
+    <script src="../assets/js/slick.min-1.9.0.js"></script>
+    <!-- sweetalert -->
+    <script src="../assets/js/sweetalert.min-1.0.js"></script>
+    <!-- Theme js -->
+    <script src="../assets/js/zimate-1.0.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/comment.css">
+
+    <script type="text/javascript" src="../js/jquery.flexText.js"></script>
+
+    <link href="../toastr.css" rel="stylesheet" />
+
+    <script src="../toastr.min.js"></script>
+
+    <script type="text/javascript" src="../vue.js"></script>
+
+    <style>
+        #contain{
+            width:80%;
+            height:500px;
+            margin:0 auto;
+        }
+        .left{
+            float:left;
+        }
+        .right{
+            float:left;
+            width:350px;
+            height:350px;
+            overflow:hidden;/*超出部分隐藏*/
+            padding:0px;
+            display:none;/*默认先不显示*/
+        }
+        .up{
+            width:320px;
+            height:200px;
+            padding:30px;
+        }
+        .up img{
+            width:320px;
+            height:200px;
+        }
+        .down{
+            padding:20px;
+            padding-left:35px;
+        }
+        .down img{
+            width:64px;
+            height:40px;
+            border:3px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Header Start  -->                 
+    <header>
+        <span th:text="${id}" id="spanId"  style="display: none"> </span>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Site Menu -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <nav class="main-menu fs-12 lh-70">
+                        <ul>
+                            <li >
+                                <a href="index.html">主页</a>
+                            </li>
+                            <li>
+                                <a href="category.html">类别</a>
+                            </li>
+                            
+                            <li>
+                                <a href="blog.html">博客</a>
+                            </li>
+                            <li>
+                                <a href="cart.html">购物车</a>
+                            </li>
+                            <li >
+                                <a href="checkout.html">结账</a>
+                            </li>
+                            <li class="active">
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- end col -->
+                <!-- Site Logo -->
+                <div class="col-lg-2 col-6">
+                    <div class="logo text-center">
+                        <a href="index.html"><img src="../assets/img/logo.png" alt="zimate"></a>
+                    </div>
+                </div>
+
+                <!-- Site Hader cart -->
+                <div class="col-lg-5 col-6" >
+                    <div class="header-right text-right">
+                        <ul>
+                            <li><a href=""><i class="ti ti-user"></i></a></li>
+                            <li class="search"><a href="#"><i class="ti ti-search"></i></a></li>
+                            <li class="cart"><a href="#"><i class="ti ti-bag"></i> <span>2</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 d-none menu-show">
+                    <div class="mobilemenu"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+    <!-- Cart Aera Start -->
+    <div class="cart-section">
+        <div class="cart-content">
+            <div class="cart-title m-b-30">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="fs-20 m-b-20 fw-600 m-t-10">您的购物车</h4>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="cart-close">
+                            <i class="ti ti-close"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <div class="single-cart-item">
+                    <div class="row">
+                        <div class="col-4"><img src="../assets/img/cart/01.jpg" alt="Cart-Item"></div>
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="item-details">
+                                <a href="" class="item-name">Man Pink Purse Isolated</a>
+                                <span>1 x $19.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-cart-item">
+                    <div class="row">
+                        <div class="col-4"><img src="../assets/img/cart/02.jpg" alt="Cart-Item"></div>
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="item-details">
+                                <a href="" class="item-name">Woman Blue Top Isolated</a>
+                                <span>1 x $20.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-cart-item">
+                    <div class="row">
+                        <div class="col-4"><img src="../assets/img/cart/03.jpg" alt="Cart-Item"></div>
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="item-details">
+                                <a href="" class="item-name">Latest Apple Smart Watch</a>
+                                <span>1 x $15.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-total-price">
+                <h6 class="m-t-30 fw-600">Total: $54.00 </h6>
+            </div>
+
+            <div class="cart-action">
+                <a href="cart.html" class="cart-action-btn">View Cart</a>
+                <a href="checkout.html" class="cart-action-btn">Check Out</a>
+            </div>
+        </div>
+
+        <div class="cart-overly"></div>
+    </div>
+    <!-- Cart Aera End -->
+    <!-- Mian Wrapper Start -->
+    <main>
+       <!-- Breadcrumb Area Start -->
+        <section class="breadcrumb-area bg-light p-t-80 p-b-120 fs-14 link-color-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="m-b-30 fs-40 fw-600">单一产品</h2>
+                        <ul class="list-inline">
+                            <li><a href="index.html">主页</a></li>
+                            <li>-</li>
+                            <li><a href="details.html">单一产品</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumb Area End -->
+        <!-- Details Wrapper -->
+        <section class="single-product-wrapper p-t-120 p-b-120">
+            <div class="container">
+                <!-- Product Gallery and Single-product summary -->
+                <div class="row">
+                    <div class="col-lg-2 col-sm-3 col-3">
+                        <!-- Gallery Dots -->
+                        <div></div>
+                    </div>
+                    <div class="col-lg-6 col-sm-9 col-9">
+                        <div class="product-gallery position-relative">
+                            <!-- Gallery arrows -->
+                            <div class="gallery-arrows"></div>
+                            <!-- Gallery Slider area -->
+                            <div id="product-gallery-active">
+                                <div class="single-gallery-itam" >
+                                    <img th:src="${p.getSizeName()}" alt="Product Image" bigimage id="colorImg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <!-- Single-product summary -->
+                        <div class="single-product-summary lh-27">
+                            <h4 class="fs-22 lh-45"><span th:text="${p.getProductName()}"></span></h4>
+                            <p class="lh-45 fs-18 color-1">$<span th:text="${p.getPrice()}" id="pprice"> </span></p>
+                            <p th:text="${p.getDescribes()}"> </p>
+                            <form>
+                                <!-- quantity input -->
+                                <div class="quantity-area clearfix d-flex align-items-center">
+                                    <label for="quantity">数量: </label>
+                                    <div class="quantity-input m-l-20" id="jiajia">
+                                        <div class="quantity-down"  id="quantityDown"><i @click="counter--" class="ti ti-angle-left"></i></div>
+                                        <input id="quantity" type="number" value="{{ counter }}" name="quantity">
+                                        <div class="quantity-up" id="quantityUP"><i @click="counter++" class="ti ti-angle-right"></i></div>
+                                    </div>
+                                </div>
+                                <div class="divider-2 m-t-25 m-b-25"></div>
+                                <div class="color-option">
+                                    <label for="quantity">颜色：
+                                        <div id="app" style="display: inline-block">
+                                            <span v-for="site in sites">
+                                                <a :href="'javaScript:queryColor('+site.colorid+')'"><font color="black">{{site.colorName}}</font></a>
+                                                &nbsp;
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </form>
+                            <!-- Products Meta -->
+                            <div class="product-meta m-t-20">
+                                <p class="m-b-20" style="display: inline-block"><span >尺寸： &nbsp;</span>
+                                    <div id="appSize" style="display: inline-block">
+                                                <span v-for="site in sites">
+                                                    <a  :href="'javaScript:querySize('+site.sizeId+',this)'"><font class="fontId" color="black">{{site.sizeName}}</font></a>
+                                                    &nbsp;&nbsp;
+                                                </span>
+                                    </div>
+                                </p>
+                                <p><span>库存：</span><span th:text="${p.getCount()}"> </span>
+                                <div class="divider-2 m-t-25 m-b-25"></div>
+                                <input type="button" onclick="toShowCang()" class="btn boxed-btn" value="加入我的收藏"/>
+                                </p>
+                            </div>
+                            <div class="divider-2 m-t-25 m-b-25"></div>
+                            <!-- Add to cart btn -->
+                            <div class="add-to-cart m-t-35">
+                                <input type="submit" class="btn boxed-btn" value="添加到购物车">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Tabs -->
+                <div class="product-tabs p-t-100">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item"><a href="#description" class="nav-link active" data-toggle="tab" role="tab">评论</a></li>
+                    </ul>
+
+                    <div class="tab-content m-t-45 lh-27">
+                        <div class="tab-pane fade in active show" id="description" role="tabpanel">
+                            <div class="commentAll">
+                                <!--评论区域 begin-->
+                                <div class="reviewArea clearfix">
+                                    <textarea class="content comment-input" placeholder="Please enter a comment&hellip;" onkeyup="keyUP(this)"></textarea>
+                                    <a href="javascript:;" class="plBtn">评论</a>
+                                </div>
+                                <!--评论区域 end-->
+                                <!--回复区域 begin-->
+                                <div class="comment-show">
+                                    <div class="comment-show-con clearfix" id="ppppp">
+                                    </div>
+                                </div>
+                                <!--回复区域 end-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Related Product -->
+                <div class="related-products p-t-100">
+                    <h2 class="fs-40 m-b-55">相关产品</h2>
+
+                    <div class="m-r--15 m-l--15" id="relatedSlideActive">
+                        <div class="related-slider">
+                            <div class="single-product text-center p-r-15 p-l-15">
+                                <div class="product-action position-relative">
+                                    <div class="product-img">
+                                        <img id="product1" alt="Product">
+                                    </div>
+                                    <div class="action-list ab-b-l w-full trans-06">
+                                        <ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-content m-t-30 text-left">
+                                    <h6><input type="hidden" id="productId1"/><a href="javaScript:toquery1()"><span id="productName1"></span></a></h6>
+                                    <p class="price" style="display: inline-block">$<p id="productPrice1" style="display: inline-block"></p></p>
+                                </div>
+                            </div>
+                            <div class="single-product text-center p-r-15 p-l-15">
+                                <div class="product-action position-relative">
+                                    <div class="product-img">
+                                        <img id="product2" alt="Product">
+                                    </div>
+                                    <div class="action-list ab-b-l w-full trans-06">
+                                        <ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-content m-t-30 text-left">
+                                    <h6><input type="hidden" id="productId2"/><a href="javaScript:toquery2()"><span id="productName2"></span></a></h6>
+                                    <p class="price" style="display: inline-block">$<p id="productPrice2" style="display: inline-block"></p></p>
+                                </div>
+                            </div>
+                            <div class="single-product text-center p-r-15 p-l-15">
+                                <div class="product-action position-relative">
+                                    <div class="product-img">
+                                        <img id="product3" alt="Product">
+                                    </div>
+                                    <div class="action-list ab-b-l w-full trans-06">
+                                        <ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-content m-t-30 text-left">
+                                    <h6><input type="hidden" id="productId3"/><a href="javaScript:toquery3()"><span id="productName3"></span></a></h6>
+                                    <p class="price" style="display: inline-block">$<p id="productPrice3" style="display: inline-block"></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Mian Wrapper End -->
+    <!-- Footer Start  -->
+    <footer class="footer-black">
+        <!-- Footer Top Area -->
+        <div class="footer-widget-area p-t-100 p-b-100 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">关于我们</h4>
+                            <ul>
+                                <li><a href="">我们是谁</a></li>
+                                <li><a href="">使用 </a></li>
+                                <li><a href="">成为供应商</a></li>
+                                <li><a href="">投资者关系</a></li>
+                                <li><a href="">我们的设备</a></li>
+                                <li><a href="">附属计划</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">有用的链接</h4>
+                            <ul>
+                                <li><a href="">联系我们</a></li>
+                                <li><a href="">常见问题解答</a></li>
+                                <li><a href="">条款和条件</a></li>
+                                <li><a href="">退货政策</a></li>
+                                <li><a href="">取消</a></li>
+                                <li><a href="">轨道 </a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">跟我们来</h4>
+                            <ul>
+                                <li><a href=""><i class="ti ti-facebook"></i>脸谱网</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>推特</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>一款图片分享应用</a></li>
+                                <li><a href=""><i class="ti ti-facebook"></i>Youtube网站</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <!-- Widgets -->
+                        <div class="widgets footer-menu">
+                            <h4 class="widgets-title">网上购物</h4>
+                            <ul>
+                                <li><a href="">时尚男士购物</a></li>
+                                <li><a href="">女性购物2019</a></li>
+                                <li><a href="">礼品卡和优惠券</a></li>
+                                <li><a href="">家庭生活费</a></li>
+                                <li><a href="">电子小工具</a></li>
+                                
+                            </ul>
+                        </div>
+                        <!-- End Widgets -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom-area -->
+        <div class="footer-bottom-area p-t-30 p-b-30 divider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="copyright-text">
+                            <p>二千零一十九<a href="http://www.bootstrapmb.com/" target="_blank">智能软件</a>保留所有权利</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="payment-method text-right">
+                            <ul>
+                                <li><a href="#"><img src="../assets/img/payment/01-white.png" alt="Paypal"></a></li>
+                                <li><a href="#"><img src="../assets/img/payment/02-white.png" alt="Visa"></a></li>
+                                <li><a href="#"><img src="../assets/img/payment/03-white.png" alt="Master Crad"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <script type="text/javascript">
+        $(function () {
+            $('.content').flexText();
+            queryComment();
+            queryColorSize();
+            $("#quantity").val(1);
+            queryXiangGuan();
+        });
+
+        function queryXiangGuan() {
+            var id = $("#spanId").html();
+            $.ajax({
+                url:"../product/queryXiangGuan",
+                data:{id:id},
+                success:function (data) {
+                    var color1 = data[0].showColor[0];
+                    var color2 = data[1].showColor[0];
+                    var color3 = data[2].showColor[0];
+                    $("#product1").attr("src",color1.showSize[0].sizeImg);
+                    $("#product2").attr("src",color2.showSize[0].sizeImg);
+                    $("#product3").attr("src",color3.showSize[0].sizeImg);
+                    $("#productName1").html(data[0].productName);
+                    $("#productName2").html(data[1].productName);
+                    $("#productName3").html(data[2].productName);
+                    $("#productId1").val(data[0].productId);
+                    $("#productId2").val(data[1].productId);
+                    $("#productId3").val(data[2].productId);
+                    $("#productPrice1").html(color1.showSize[0].sizePrice);
+                    $("#productPrice2").html(color2.showSize[0].sizePrice);
+                    $("#productPrice3").html(color3.showSize[0].sizePrice);
+                }
+            })
+        }
+        function   funtoShowCang() {
+            var id = $("#spanId").html();
+        }
+        function toquery1() {
+           var p =  $("#productId1").val();
+           location.href="../product/todetails?productId="+p;
+        }
+        function toquery2() {
+            var p = $("#productId2").val();
+            location.href="../product/todetails?productId="+p;
+        }
+        function toquery3() {
+            var p = $("#productId3").val();
+            location.href="../product/todetails?productId="+p;
+        }
+        function queryColorSize() {
+            var id = $("#spanId").html();
+            $.ajax({
+                url:"../product/queryColorAndSize",
+                data:{id:id},
+                success:function (data) {
+                    new Vue({
+                        el: '#app',
+                        data: {
+                            sites: data.showColor
+                        }
+                    })
+                    new Vue({
+                        el: '#appSize',
+                        data: {
+                            sites: data.showColor[0].showSize
+                        }
+                    })
+                }
+            })
+        }
+        function queryColor(id) {
+            $.ajax({
+                url:"../product/queryColor",
+                data:{id:id},
+                success:function (data) {
+                    $("#colorImg").attr("src",data.colorImg);
+                }
+            })
+        }
+        var vm = new Vue({
+            el: '#jiajia',
+            data: {
+                counter: 1
+            }
+        });
+        vm.$watch('counter', function(nval, oval) {
+        });
+        $("[bigimage]").mousemove(function(even){
+            //获取大图的相对文档的偏移量
+            var offset = $(this).offset();
+            //获取鼠标相对于大图左上角的x轴偏移量
+            var x = even.pageX - offset.left;
+            //获取鼠标相对于大图左上角的y轴偏移量
+            var y = even.pageY - offset.top;
+            //设置放大镜放大倍数，可自行设置
+            var multiple = 8;
+            //获取放大镜所在div的宽度和高度
+            var mirrorwidth = $(".right").width();
+            var mirrorHeight = $(".right").height();
+            //获取bigimage此时的src的值
+            var address = $(this).attr("src");
+        }).mouseout(function(){
+            $(".right").css("display","none");
+        });
+    </script>
+    <!--textarea限制字数-->
+    <script type="text/javascript">
+        function keyUP(t){
+            var len = $(t).val().length;
+            if(len > 139){
+                $(t).val($(t).val().substring(0,140));
+            }
+        }
+    </script>
+    <!--点击评论创建评论条-->
+    <script type="text/javascript">
+        toastr.options.positionClass = 'toast-bottom-right';
+        $('.commentAll').on('click','.plBtn',function(){
+            var myDate = new Date();
+            //获取当前年
+            var year=myDate.getFullYear();
+            //获取当前月
+            var month=myDate.getMonth()+1;
+            //获取当前日
+            var date=myDate.getDate();
+            var h=myDate.getHours();       //获取当前小时数(0-23)
+            var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+            if(m<10) m = '0' + m;
+            var s=myDate.getSeconds();
+            if(s<10) s = '0' + s;
+            var now=year+'-'+month+"-"+date+" "+h+':'+m+":"+s;
+            //获取输入内容
+            var oSize = $(this).siblings('.flex-text-wrap').find('.comment-input').val();
+            //  console.log(oSize);
+            var id = $("#spanId").html();
+            $.ajax({
+                url:"../comment/addComment",
+                data:{commentContent:oSize,commentDate:now,productId:id},//,
+                success:function () {
+                    toastr.success('新增评论成功');
+                    queryComment();
+                }
+            })
+        });
+        queryComment = function () {
+            var id = $("#spanId").html();
+            $.ajax({
+                url:"../comment/queryComment",
+                data:{productId:id},
+                success:function (data) {
+                    var ot = "";
+                    for(var i=0;i<data.length;i++){
+                        ot += " <div class=\"comment-show-con-img pull-left\" ><input type='hidden' class='comment-hfrid' value='\""+data[i].id+"\"'/><img src=\""+data[i].userImg+"\" alt=\"\"></div>\n" +
+                            "            <div class=\"comment-show-con-list pull-left clearfix\">\n" +
+                            "                <div class=\"pl-text clearfix\">\n" +
+                            "                    <a href=\"#\" class=\"comment-size-name\">"+data[i].userName+"</a>:\n" +
+                            "                    <span class=\"my-pl-con\">&nbsp;"+data[i].commentContent+"</span>\n" +
+                            "                </div>\n" +
+                            "                <div class=\"date-dz\">\n" +
+                            "                    <span class=\"date-dz-left pull-left comment-time\">"+data[i].commentDate+"</span>\n" +
+                            "                    <div class=\"date-dz-right pull-right comment-pl-block\">\n" +
+                            "                        <a href=\"javascript:removeBlock(\'"+data[i].id+"\',"+data[i].userId+");\"  class=\"removeBlock\">删除</a>\n" +
+                            "                        <span class=\"pull-left date-dz-line\">|</span>\n<input type='hidden' class='comment-scid' value='\""+data[i].id+"\"'/>" +
+                            "                        <a href=\"javascript:queryPraise(\'"+data[i].id+"\');\" class=\"date-dz-z pull-left\"><i class=\"date-dz-z-click-red\"></i>赞 (<i class=\"z-num\">"+data[i].praise+"</i>)</a>\n" +
+                            "                    </div>\n" +
+                            "                </div>\n" +
+                            "                <div class=\"hf-list-con\"></div>\n" +
+                            "            </div>";
+                    }
+                    $("#ppppp").html(ot);
+                }
+            })
+        }
+    </script>
+    <!--删除评论块-->
+    <script type="text/javascript">
+        removeBlock = function (id,userId) {
+            alert(userId);
+            $.ajax({
+                url:"../comment/removeBlock",
+                data:{id:id,userId:userId},
+                success:function (data) {
+                    if(data){
+                        toastr.success('删除成功');
+                        queryComment();
+                    }else{
+                        toastr.error('不能删除 非自己写的评论');
+                    }
+                }
+            })
+        }
+    </script>
+    <!--点赞-->
+    <script type="text/javascript">
+        $('.comment-show').on('click','.date-dz-z',function(){
+            // var zNum = $(this).find('.z-num').html();
+            var zanid = $(this).siblings('.comment-scid').val();    //  点赞的评论id
+            var commentId = zanid.substr(1,zanid.length-2);
+            $.ajax({
+                url:"../comment/queryPraise",
+                data:{id:commentId},
+                success:function (data) {
+                    if(data){
+                        toastr.error('取消成功');
+                        queryComment();
+                    }else{
+                        toastr.success('点赞成功');
+                        queryComment();
+                    }
+                }
+            })
+        })
+    </script>
+
+
+</body>
+
+</html>

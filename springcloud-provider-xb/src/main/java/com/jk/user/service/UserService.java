@@ -1,5 +1,6 @@
 package com.jk.user.service;
 
+import com.jk.comment.model.Comment;
 import com.jk.user.model.User;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface UserService {
     void updateUser(User user);
 
     List queryTree();
+
 }

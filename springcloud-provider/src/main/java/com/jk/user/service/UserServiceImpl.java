@@ -16,6 +16,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
+
     @Override
     public Map queryUser(Integer page, Integer rows, User user) {
         Page<User> objects = PageHelper.startPage(page, rows);
@@ -53,6 +55,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User queryUserByName(String userName) {
+
         return userMapper.queryUserByName(userName);
+    }
+
+    //验证手机号
+    @Override
+    public User queryPhone(String phone) {
+        return userMapper.queryPhone(phone);
+    }
+
+    @Override
+    public void userAdd(User user) {
+        userMapper.userAdd(user);
+    }
+
+    @Override
+    public User userByName(String username) {
+        return  userMapper.userByName(username);
     }
 }

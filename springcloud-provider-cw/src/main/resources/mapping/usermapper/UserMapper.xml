@@ -27,9 +27,8 @@
     update t_user set
     username = #{username},
     userinfo = #{userinfo},
-    useravg = #{useravg},
-    usersex = #{usersex},
-    createdate = #{createdate}
+    userage = #{userage},
+    usersex = #{usersex}
     where userid = #{userid}
 
     </update>

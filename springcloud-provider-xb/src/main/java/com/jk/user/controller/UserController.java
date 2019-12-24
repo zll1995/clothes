@@ -1,5 +1,6 @@
 package com.jk.user.controller;
 
+import com.jk.comment.model.Comment;
 import com.jk.user.model.User;
 import com.jk.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,5 @@ public class UserController {
     }
 
 
-
+    
 }

@@ -13,7 +13,7 @@ import java.util.Date;
  * @Date 2019/12/2 15:14
  * @Version 1.0
  **/
-@Data
+
 public class User implements Serializable {
     private static final long serialVersionUID = -6670640310551713010L;
     private Integer userid;
@@ -21,12 +21,16 @@ public class User implements Serializable {
     private String password;
     private String usermoney;
     private String userinfo;
-    private String userimg;
+    private String img;
     private Integer userage;
     private Integer usersex;
     private Integer uservip;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdate;
+    private String userphone;
+
+    private String userimg;
+
 
     public Integer getUserid() {
         return userid;
@@ -35,7 +39,13 @@ public class User implements Serializable {
     public void setUserid(Integer userid) {
         this.userid = userid;
     }
+    public String getUserimg() {
+        return userimg;
+    }
 
+    public void setUserimg(String userimg) {
+        this.userimg = userimg;
+    }
     public String getUsername() {
         return username;
     }
@@ -68,12 +78,12 @@ public class User implements Serializable {
         this.userinfo = userinfo;
     }
 
-    public String getUserimg() {
-        return userimg;
+    public String getImg() {
+        return img;
     }
 
-    public void setUserimg(String userimg) {
-        this.userimg = userimg;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Integer getUserage() {
@@ -108,5 +118,28 @@ public class User implements Serializable {
         this.createdate = createdate;
     }
 
+    public String getUserphone() {
+        return userphone;
+    }
 
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", usermoney='" + usermoney + '\'' +
+                ", userinfo='" + userinfo + '\'' +
+                ", img='" + img + '\'' +
+                ", userage=" + userage +
+                ", usersex=" + usersex +
+                ", uservip=" + uservip +
+                ", createdate=" + createdate +
+                ", userphone='" + userphone + '\'' +
+                '}';
+    }
 }

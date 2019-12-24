@@ -1,6 +1,8 @@
 package com.jk.user.mapper;
 
+import com.jk.comment.model.Comment;
 import com.jk.user.model.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +19,6 @@ public interface UserMapper {
     void updateUser(User user);
 
     List queryTree();
+
+    User queryUserByUserId(@Param("userId") Integer userId);
 }

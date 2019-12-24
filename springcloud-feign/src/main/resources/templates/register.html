@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--引入layui的js、css-->
+<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+<script src="../layui/layui.all.js"></script>
+<!--引入jquery-->
+<script src="../layui/jquery.min.js"></script>
+<link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css"/>
+<script type="text/javascript" src="../js/bootstrap3/js/bootstrap.js"></script>
+<!-- bootstrap上传插件 -->
+<script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
+<link rel="stylesheet" href="../js/bootstrap-fileinput/css/fileinput.css">
+
+<body>
+<form class="layui-form" action="" lay-filter="example" id="userFormId">
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">昵称：</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="昵称" class="layui-input" onblur="aaa()"><span id="ooo"></span>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">姓名：</label>
+        <div class="layui-input-block">
+            <input type="text" name="userinfo" lay-verify="title" autocomplete="off" placeholder="真实姓名" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">年龄：</label>
+        <div class="layui-input-block">
+            <input type="text" name="userage" placeholder="年龄" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">手机：</label>
+        <div class="layui-input-block">
+            <input type="text" name="userphone" placeholder="手机号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">密码：</label>
+        <div class="layui-input-block">
+            <input type="text" name="password" placeholder="密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item" >
+        <label class="layui-form-label">性别：</label>
+        <div class="layui-input-block">
+            <input type="radio" name="usersex" value="1" >男
+            <input type="radio" name="usersex" value="2" >女
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="width:450px">
+        <label class="layui-form-label">日期：</label>
+        <div class="layui-input-block">
+            <input type="text" name="createdate" id="date1"  lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">头像：</label>
+        <div class="layui-input-block" style="width: 30%">
+            <input type="hidden" id="testimg" name="img" />
+            <input type="file" multiple class="projectfile" accept="image/*" name="img" id="img">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" lay-submit="" lay-filter="formDemo">立即提交</button>
+        </div>
+    </div>
+</form>
+<script>
+    layui.use(['form','layer','laydate','jquery'],function(){
+        var $ = layui.jquery;
+        var laydata = layui.laydate;
+        var form = layui.form;
+        form.render()
+        laydata.render({
+            elem:'#date1'
+        })
+        form.on('submit(formDemo)',function (data) {
+
+            var node = data.field
+            console.log(node)
+            $.ajax({
+                url:"../userAdd",
+                data:{username:$("[name=username]").val(),usersex:$("[name=usersex]").val(),password:$("[name=password]").val(),userinfo:$("[name=userinfo]").val(),userage:$("[name=userage]").val(),createdate:$("[name=createdate]").val(),userphone:$("[name=userphone]").val(),img:$("#testimg").val()},
+                success:function () {
+                    alert("注册成功");
+                    location.href="../index";
+                },error:function(){
+                    alert("注册失败");
+                }
+
+            })
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+        })
+    })
+    //文件上传--
+    $(function () {
+        uploadify();
+    })
+    function uploadify() {
+        $('#img').fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '../updaloadImg', //上传的地址
+            allowedFileExtensions: ['jpg', 'png', 'jpeg', 'gif', 'bmp'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            maxFileCount: 3, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var imgval = $('#testimg').val();
+            if (imgval == null || imgval == "" || imgval == undefined) {
+                imgval = data.response.imgUrl;
+            } else {
+                imgval += "," + data.response.imgUrl;
+            }
+            $('#testimg').val(imgval);
+        });
+
+    }
+    //验证用户名
+    function aaa(){
+        //文本框输入的值
+        var a= $("[name='username']").val();
+        $.ajax({
+            url: "../userByName",
+            type: "post",
+            data: $("#userFormId").serialize(),
+            success: function(data){
+                if(data == "fail"){
+                    $("#ooo").html("<font color='red'>用户名已存在</font>")
+                }else{
+                    $("#ooo").html("<font color='green'>√</font>")
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

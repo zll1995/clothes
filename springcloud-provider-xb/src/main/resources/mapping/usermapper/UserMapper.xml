@@ -49,4 +49,5 @@
         </set>
         where userId = #{userId}
     </update>
+
 </mapper>

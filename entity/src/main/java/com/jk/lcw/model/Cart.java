@@ -18,13 +18,11 @@ import java.util.List;
  *@Date 2019/12/17 19:29
  *@Version 1.0
  **/
-@Document(collection = "carts")
+
 public class Cart implements Serializable {
     private static final long serialVersionUID = -7710921873011703273L;
-
-
+    @Id
     private Integer productid;
-
 
     private String productname;
 

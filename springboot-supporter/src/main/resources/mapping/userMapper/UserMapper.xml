@@ -64,9 +64,10 @@
           select COUNT(*) count,DATE_FORMAT(birthday,'%Y-%m-%d') time  from user GROUP BY DATE_FORMAT(birthday,'%Y-%m-%d')
     </select>
 
+
     <!--饼状图-->
     <select id="queryCakeMoney" resultType="java.util.LinkedHashMap">
-     select price y , t_product 老师姓名 from t_order group by teacher
+     select count(*) y , typeName 服装类型 from t_type group by typeName
     </select>
 
 
