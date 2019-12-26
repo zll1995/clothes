@@ -2,6 +2,7 @@ package com.jk.lcw.service;
 
 import com.jk.lcw.mapper.ProductMapper;
 import com.jk.lcw.model.Advertising;
+import com.jk.lcw.model.Order;
 import com.jk.lcw.model.Product;
 import com.jk.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List queryProEs() {
         return productMapper.queryProEs();
+    }
+
+    @Override
+    public void addDingdan(Order order) {
+        productMapper.addDingdan(order);
     }
 
 }

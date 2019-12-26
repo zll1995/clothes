@@ -360,7 +360,8 @@
                 moneyAll+=eval($(this).parent().next().next().next().next().next().text());
                 //moneyAll+=$(this).next().next().next().next().next().text()
             })
-            location.href="../goAlipay?price="+moneyAll;
+            alert(moneyAll)
+            location.href="../goAlipay?price="+moneyAll+"&ids="+ids;
 
         }
     </script>

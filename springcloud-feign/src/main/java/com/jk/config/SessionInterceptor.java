@@ -14,8 +14,6 @@ public class SessionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("进入拦截器");
         User user = (User) request.getSession().getAttribute(request.getSession().getId());
-        System.err.println(user);
-        System.err.println(121212121);
         if (user != null) {
             return true;
         }

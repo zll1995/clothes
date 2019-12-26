@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> 我的订单 </title>
+
+    <!-- MAIN CSS FILES===================================
+	======================================================= -->
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="../assets/css/animate.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="../assets/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/themify-icons.css">
+    <!-- Mean Menu CSS -->
+    <link rel="stylesheet" href="../assets/css/slicknav.min.css">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="../assets/css/slick-1.9.0.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&display=swap" rel="stylesheet">
+    <!-- Helper Css -->
+    <link rel="stylesheet" href="../assets/css/helper.css" >
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../assets/css/zimate-1.0.css" >
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="../assets/css/responsive-1.0.css">
+    <!-- modernizr js -->
+    <script src="../assets/js/modernizr-2.8.3.min.js"></script>
+
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Header Start  -->
+<header>
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <!-- Site Menu -->
+            <div class="col-lg-5 d-none d-lg-block">
+                <nav class="main-menu fs-12 lh-70">
+                    <ul>
+                        <li>
+                            <a  href="../query">主页</a>
+                        </li>
+                        <li>
+                            <a href="../main">全部商品</a>
+                        </li>
+                        <li class="active">
+                            <a href="../shou">我的收藏</a>
+                        </li>
+                        <li>
+                            <a href="../main">购物车</a>
+                        </li>
+                        <li>
+                            <a href="#">我的订单</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div><!-- end col -->
+            <!-- Site Logo -->
+            <div class="col-lg-2 col-6">
+                <div class="logo text-center">
+                    <a href="index.html"><img src="../assets/img/logo.png" ></a>
+                </div>
+            </div>
+
+            <!-- Site Hader cart -->
+            <div class="col-lg-5 col-6">
+                <div class="header-right text-right">
+                    <ul>
+                        <li><a href="../users"><i class="ti ti-user"></i></a></li>
+                        <li class="search"><a href="../toEsCategory"><i class="ti ti-search"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-12 d-none menu-show">
+                <div class="mobilemenu"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Cart Aera End -->
+<!-- Mian Wrapper Start -->
+<main>
+    <!-- breadcrumb-area start -->
+    <section class="breadcrumb-area bg-light p-t-80 p-b-120 fs-14 link-color-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="m-b-30 fs-40 fw-600">我的订单</h2>
+                    <ul class="list-inline">
+                        <li><a href="index.html">Home</a></li>
+                        <li>-</li>
+                        <li><a href="single-post.html">Shopping shou</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- breadcrumb-area start -->
+    <!-- Cart content Wrapper -->
+    <section class="cart-content-wrapper p-t-120 p-b-120">
+        <div class="container">
+            <!-- Cart Table start -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="cart-table">
+                        <table class="table-shopping-cart" id="one1">
+
+                        </table>
+                    </div>
+
+                    <div class="table-bootm clearfix m-t-30">
+                        <div class="table-bootm-left float-l">
+                            <a href="../query" class="continune-shop btn boxed-btn m-r-22">继续购物</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Mian Wrapper End -->
+<!-- Footer Start  -->
+<footer class="footer-black">
+    <!-- Footer Top Area -->
+    <div class="footer-widget-area p-t-100 p-b-100 divider">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <!-- Widgets -->
+                    <div class="widgets footer-menu">
+                        <h4 class="widgets-title">关于我们</h4>
+                        <ul>
+                            <li><a href="#">我们是谁</a></li>
+                            <li><a href="#">使用 </a></li>
+                            <li><a href="#">成为供应商</a></li>
+                            <li><a href="#">投资者关系</a></li>
+                            <li><a href="#">我们的设备</a></li>
+                            <li><a href="#">附属计划</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Widgets -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <!-- Widgets -->
+                    <div class="widgets footer-menu">
+                        <h4 class="widgets-title">有用的链接</h4>
+                        <ul>
+                            <li><a href="#">联系我们</a></li>
+                            <li><a href="#">常见问题解答</a></li>
+                            <li><a href="#">条款和条件</a></li>
+                            <li><a href="#">退货政策</a></li>
+                            <li><a href="#">取消预约</a></li>
+                            <li><a href="#">轨道 </a></li>
+                        </ul>
+                    </div>
+                    <!-- End Widgets -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <!-- Widgets -->
+                    <div class="widgets footer-menu">
+                        <h4 class="widgets-title">跟我们来</h4>
+                        <ul>
+                            <li><a href="#"><i class="ti ti-facebook"></i>脸谱网</a></li>
+                            <li><a href="#"><i class="ti ti-facebook"></i>推特</a></li>
+                            <li><a href="#"><i class="ti ti-facebook"></i>一款图片分享应用</a></li>
+                            <li><a href="#"><i class="ti ti-facebook"></i>Youtube网站</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Widgets -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <!-- Widgets -->
+                    <div class="widgets footer-menu">
+                        <h4 class="widgets-title">网上购物</h4>
+                        <ul>
+                            <li><a href="#">时尚男士购物</a></li>
+                            <li><a href="#">女性购物 2019</a></li>
+                            <li><a href="#">礼品卡和优惠券</a></li>
+                            <li><a href="#">家庭生活费</a></li>
+                            <li><a href="#">电子小工具</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Widgets -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer-bottom-area -->
+    <div class="footer-bottom-area p-t-30 p-b-30 divider">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="copyright-text">
+                        <p>版权 © 2019 <a href="../query" target="_blank">1905班三组</a>. 保留所有权利</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="payment-method text-right">
+                        <ul>
+                            <li><a href="#"><img src="../assets/img/payment/01-white.png" alt="Paypal"></a></li>
+                            <li><a href="#"><img src="../assets/img/payment/02-white.png" alt="Visa"></a></li>
+                            <li><a href="#"><img src="../assets/img/payment/03-white.png" alt="Master Crad"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Footer End -->
+<!-- MAIN JS FILES===================================
+	======================================================= -->
+<!-- jQuery -->
+<script src="../assets/js/jquery-1.12.4.min.js"></script>
+<!-- Bootstrap js-->
+<script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Poper js -->
+<script src="../assets/js/popper-1.14.7.js"></script>
+<!-- Mean Menu js -->
+<script src="../assets/js/jquery.slicknav.min.js"></script>
+<!-- Slick JS -->
+<script src="../assets/js/slick.min-1.9.0.js"></script>
+<!-- sweetalert -->
+<script src="../assets/js/sweetalert.min-1.0.js"></script>
+<!-- Theme js -->
+<script src="../assets/js/zimate-1.0.js"></script>
+<script>
+
+    $(function(){
+        queryshoucang();
+    })
+
+    queryshoucang =function () {
+        $.ajax({
+            url: "../product/queryshoucang",
+            success:function(data){
+                var tr = '<tr class="table_head" >' +
+                    '                                    <th class="column-1">订单id</th>' +
+                    '                                    <th class="column-2">商品名称</th>' +
+                    '                                    <th class="column-3">价格</th>' +
+                    '                                    <th class="column-4">订单状态</th>' +
+                    '                                    <th class="column-5">操作</th>' +
+                    '                                </tr>';
+                for (var i = 0; i < data.length; i++) {
+                    tr += '<tr class="table_row frist-row">' +
+                        '                                    <th class="column-1">'+data[i].orderId+'</th>' +
+                        '                                    <th class="column-2">'+data[i].shangpinName+'</th>' +
+                        '                                    <th class="column-3">'+data[i].shangpinprice+'</th>' +
+                                                            '<th class="column-4">已付款</th>'
+                        + '         <th class="column-5"><a href="javascript:del('+data[i].orderId+')" >删除订单</a>'
+                        + '         </th>'
+                        + '         </tr>'
+                }
+                $("#one1").append(tr)
+            },
+
+        })
+    }
+    function del(id) {
+        $.ajax({
+            url:"../product/del?id="+id,
+            success:function () {
+                location.reload();
+            }
+        })
+    }
+
+
+
+
+
+</script>
+</body>
+
+</html>

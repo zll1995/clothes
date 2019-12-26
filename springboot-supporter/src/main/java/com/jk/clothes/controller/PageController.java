@@ -42,4 +42,9 @@ public class PageController {
     public String toaddorder(){
         return "addorder";
     }
+
+    @RequestMapping("toindex")
+    public String toindex(){
+        return "/user/index";
+    }
 }

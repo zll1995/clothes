@@ -7,6 +7,7 @@ package com.jk.user.service;/**
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jk.user.mapper.UserMapper;
+import com.jk.user.model.Order1;
 import com.jk.user.model.User;
 import com.jk.user.model.WebUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Map<String, Object>> queryColumn() {
         return userMapper.queryColumn();
+    }
+
+    @Override
+    public List<Order1> EcharsShow() {
+        return userMapper.EcharsShow();
     }
 
 

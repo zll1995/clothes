@@ -5,24 +5,40 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.jk.lcw.model.Cart;
+import com.jk.lcw.model.Order;
+import com.jk.lcw.model.UserCarts;
+import com.jk.lcw.service.ProductService;
+import com.jk.user.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+
 
 @Controller
 public class AlipayDemoController {
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping(value = "/goAlipay", produces = "text/html; charset=UTF-8")
     @ResponseBody
-    public String goAlipay(HttpServletRequest request, HttpServletRequest response,String price) throws Exception {
+    public String goAlipay(HttpServletRequest request, HttpServletRequest response,String price,String ids) throws Exception {
+
 
 
         //获得初始化的AlipayClient
@@ -39,10 +55,66 @@ public class AlipayDemoController {
         String out_trade_no = UUID.randomUUID().toString();
         //付款金额，必填
         String total_amount = price;
+
+        Date date = new Date();
+        int year = date.getYear()+1900;
+        int month=date.getMonth()+1;
+        int date1=date.getDate();
+        long time =date.getTime();
+
         //订单名称，必填
-        String subject = "2016101400688051";
+        String subject = year+""+month+""+date1+""+(time+"").substring(5);
+
         //商品描述，可空
         String body = "";
+
+        //获取用户id删除mongodb数据
+        User user = (User) request.getSession().getAttribute(request.getSession().getId());
+        Query query = new Query();
+        query.addCriteria(Criteria.where("userid").is(user.getUserid()));
+        List<UserCarts> list = mongoTemplate.find(query, UserCarts.class);
+        List<Cart> list1 = list.get(0).getList();
+        int i = ids.lastIndexOf(",");
+
+        System.out.println("--------------------------"+price+"---"+ids+"----"+i);
+        String[] arr=null;
+        if(i==-1){
+            arr[0]=ids;
+        }else{
+            arr=ids.split(",");
+        }
+        List<Cart> list2 = new ArrayList<>();
+
+        for(Cart car:list1){
+            for(int j=0;j<arr.length;j++){
+                if(car.getProductid()==Integer.parseInt(arr[j])){
+                    list2.add(car);
+                }
+            }
+        }
+
+        for(Cart car:list2){
+            list1.remove(car);
+            Order order = new Order();
+            order.setOrderDate(new Date());
+            order.setShangpinImg(car.getProductimg());
+            order.setShangpinId(car.getProductid());
+            order.setShangpinName(car.getProductname());
+            order.setShangpinprice(car.getProductprice()*car.getProductCount());
+            order.setXdrPhone(user.getUserphone());
+            order.setXiaDanRen(user.getUsername());
+            order.setZfbId(subject);
+            order.setAddress("西安金科培训学校");
+            productService.addDingdan(order);
+        }
+
+        mongoTemplate.remove(query,UserCarts.class);
+        if(list2.size()!=0){
+            UserCarts userCarts = new UserCarts();
+            userCarts.setUserid(user.getUserid());
+            userCarts.setList(list1);
+            mongoTemplate.save(userCarts);
+        }
 
         // 该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。
         String timeout_express = "1c";
@@ -56,7 +128,7 @@ public class AlipayDemoController {
 
         //请求
         String result = alipayClient.pageExecute(alipayRequest).getBody();
-        System.out.println("返回页面"+ result);
+
         return result;
     }
 

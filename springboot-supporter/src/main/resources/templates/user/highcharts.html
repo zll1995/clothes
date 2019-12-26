@@ -10,13 +10,28 @@
     <script   src="../highcharts/code/modules/exporting.js"></script>
     <script   src="../highcharts/code/modules/export-data.js"></script>
 
+    <script src="../layui/echarts/echarts.min.js"></script>
+    <script src="../layui/echarts/macarons.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+
 </head>
 
 <div style="float:left;margin-bottom: 10px">
 
-    <div id="container1" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left;  "></div>
-    <div id="container"  style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:right; margin-left:300px;"></div><br>
-    <div id="container3" style="min-width: 310px; height: 300px; max-width:  400px; margin:30px;float:left; "></div>
+<div id="container1" style="min-width: 500px; height: 300px; max-width:  400px; margin:30px;float:left;  "></div>
+<div id="container"  style="min-width: 350px; height: 300px; max-width:  400px; margin:30px;float:left; margin-left:300px;"></div><br>
+<div id="container3" style="min-width: 500px; height: 300px; max-width:  400px; margin:30px;float:left; "></div>
+    <div class="layui-col-md12">
+        <div class="layui-card" style="width: 815px;height:460px">
+            <div class="layui-card-header">订单信息</div>
+            <div class="layui-card-body">
+                <div id="main" style="width: 800px;height:400px;"></div>
+
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
@@ -39,6 +54,19 @@
                     xtext.push(data[i].time);
                 }
                 var chart = Highcharts.chart('container1', {
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        x: 150,
+                        y: 100,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                    },
+                    chart: {
+                        type: 'areaspline'
+                    },
                     title: {
                         text: '订单线型图'
                     },
@@ -47,6 +75,7 @@
                             text: '订单数量'
                         }
                     },
+
                     xAxis: {
                         categories: xtext,
                         crosshair: true
@@ -62,7 +91,7 @@
 
     })
 
-    //饼状图
+//饼状图
     $(function () {
         $.ajax({
             url:"../user/queryCake",
@@ -106,13 +135,23 @@
 
     //柱状图
     $(function () {
-
         $.ajax({
             url:"../user/queryColumn",
             type:"post",
             dataType:"json",
             success:function (data) {
                 Highcharts.chart('container3',{
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        x: 150,
+                        y: 100,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                    },
+
                     chart: {
                         type: 'column'
                     },
@@ -155,7 +194,94 @@
         })
     })
 
+    $(document).ready(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        //数据加载完之前先显示一段简单的loading动画
+        myChart.showLoading();
+        var names=[];    //横坐标数组（实际用来盛放X轴坐标值）
+        var values=[];    //纵坐标数组（实际用来盛放Y坐标值）
+        $.ajax({
+            type : "post",
+            async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+            url : "../user/echarsShow",    //请求发送到dataActiont处
+            data : {},
+            dataType : "json",        //返回数据形式为json
+            success : function(result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                if (result) {
+                    for(var i=0;i<result.length;i++){
+                        names.push(result[i].counts);
+                        values.push(result[i].orderDates);
+                    }
+                    myChart.hideLoading();    //隐藏加载动画
+                    myChart.setOption({        //加载数据图表
+                        tooltip: {},
+                        legend: {
 
+                        },
+                        xAxis: {
+                            data: values,
+                            axisLine: {
+                                lineStyle: {
+                                    // 设置y轴颜色
+                                    color: '#483D8B'
+                                }
+                            },
+
+                        },
+                        yAxis: {
+                            type: 'value',
+                            axisLine: {
+                                lineStyle: {
+                                    // 设置x轴颜色
+                                    color: '#483D8B'
+                                }
+                            },
+                        },
+                        series: [{
+                            areaStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgb(255, 158, 68)'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgb(255, 70, 131)'
+                                }]),
+                            },
+                            // 根据名字对应到相应的系列
+                            type: 'line',
+                            data: names,
+
+                            itemStyle: {
+                                normal: {
+                                    // 拐点上显示数值
+                                    label : {
+                                        show: true
+                                    },
+                                    lineStyle:{
+                                        type:'solid',  //'dotted'虚线 'solid'实线
+                                        // 使用rgba设置折线透明度为0，可以视觉上隐藏折线
+                                        color: '#EE0000',
+                                        /*  */
+                                        width:5,  // 设置线宽
+
+                                    }
+                                }
+                            }
+
+                        }]
+
+                    });
+                }
+            },
+            error : function(errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });//end ajax
+    });
 
 
 

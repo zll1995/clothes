@@ -4,11 +4,13 @@ package com.jk.user.controller;/**
  * @描述
  */
 
+import com.jk.user.model.Order1;
 import com.jk.user.model.User;
 import com.jk.user.service.UserService;
 import com.jk.user.utils.OSSClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -170,6 +172,15 @@ public class UserController {
         map2.put("time",time);
         map2.put("data",data);
         return map2;
+    }
+
+    @RequestMapping("echarsShow")
+    @ResponseBody
+    public List<Order1> echarsShow(){
+        List<Order1> o=  userService.EcharsShow();
+        System.out.println(o);
+        System.out.println(123);
+        return o;
     }
 
 

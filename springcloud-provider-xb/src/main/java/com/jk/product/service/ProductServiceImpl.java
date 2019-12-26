@@ -1,5 +1,6 @@
 package com.jk.product.service;
 
+import com.jk.lcw.model.Order;
 import com.jk.product.mapper.ProductMapper;
 import com.jk.product.model.Color;
 import com.jk.product.model.Product;
@@ -53,5 +54,14 @@ public class ProductServiceImpl implements ProductService {
             product1.setShowColor(color);
         }
         return product;
+    }
+    @Override
+    public List<Order> queryshoucang(Integer id) {
+        return productMapper.queryshoucang(id);
+    }
+
+    @Override
+    public void del(Integer id) {
+        productMapper.del(id);
     }
 }

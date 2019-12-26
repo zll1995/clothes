@@ -1,6 +1,7 @@
 package com.jk.lcw.controller;
 
 import com.jk.lcw.model.Advertising;
+import com.jk.lcw.model.Order;
 import com.jk.lcw.model.Product;
 import com.jk.lcw.service.ProductService;
 import com.jk.lcw.service.ProductServiceEntity;
@@ -43,5 +44,12 @@ public class ProductController {
     public List queryProEs(){
         return productService.queryProEs();
     }
+
+    @PostMapping("addDingdan")
+    @ResponseBody
+    public void addDingdan(@RequestBody Order order){
+        productService.addDingdan(order);
+    }
+
 
 }

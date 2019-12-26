@@ -1,6 +1,7 @@
 package com.jk.lcw.mapper;
 
 import com.jk.lcw.model.Advertising;
+import com.jk.lcw.model.Order;
 import com.jk.user.model.User;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface ProductMapper {
     void xiu(User user);
 
     List queryProEs();
+
+    void addDingdan(Order order);
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,8 @@ public class UserController {
     public String query(){
         return "lcw/index";
     }
+
+
     @RequestMapping("index")
     public String index(){
         return "index";
@@ -54,6 +57,24 @@ public class UserController {
             return "fail";
         }
         return "success";
+    }
+
+    //验证用户名是否存在
+    @RequestMapping("zhu")
+    public String  zhu(HttpServletRequest request){
+        request.getSession().removeAttribute(request.getSession().getId());
+        return "lcw/index";
+    }
+
+    //前台验证消息
+    @RequestMapping("loginin")
+    @ResponseBody
+    public int  loginin(HttpServletRequest request, HttpServletResponse response){
+        User user = (User) request.getSession().getAttribute(request.getSession().getId());
+        if(user!=null){
+            return 1;
+        }
+        return 2;
     }
 
     /**

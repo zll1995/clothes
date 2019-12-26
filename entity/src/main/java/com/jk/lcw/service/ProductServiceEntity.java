@@ -1,6 +1,8 @@
 package com.jk.lcw.service;
 
 import com.jk.lcw.model.Advertising;
+
+import com.jk.lcw.model.Order;
 import com.jk.lcw.model.ProductEs;
 import com.jk.user.model.User;
 import org.springframework.web.bind.annotation.*;
@@ -17,5 +19,8 @@ public interface ProductServiceEntity {
 
     @PostMapping("queryProductAll")
     List<ProductEs> queryProductAll();
+
+    @PostMapping("addDingdan")
+    void addDingdan(@RequestBody Order order);
 }
 

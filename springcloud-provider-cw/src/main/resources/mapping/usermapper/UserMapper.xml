@@ -46,4 +46,9 @@
         LEFT JOIN t_size tsi ON tcs.sizeId=tsi.sizeId
         GROUP BY  tp.productId
     </select>
+
+    <insert id="addDingdan" parameterType="com.jk.lcw.model.Order">
+        insert  into t_order1(shangpinId,shangpinName,shangpinImg,zfbId,orderDate,xiaDanren,xdrPhone,address,shangpinprice)values
+        (#{shangpinId},#{shangpinName},#{shangpinImg},#{zfbId},#{orderDate},#{xiaDanRen},#{xdrPhone},#{address},#{shangpinprice})
+    </insert>
 </mapper>

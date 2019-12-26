@@ -56,7 +56,8 @@
 
     <!--线型图-->
     <select id="queryUserBiao" resultType="java.util.LinkedHashMap">
-    select COUNT(*) count,DATE_FORMAT(birthday,'%Y-%m-%d') time  from user GROUP BY DATE_FORMAT(birthday,'%Y-%m-%d')
+     select COUNT(*) count,DATE_FORMAT(orderDate,'%Y-%m-%d') time
+           from t_order1 GROUP BY DATE_FORMAT(orderDate,'%Y-%m-%d')
     </select>
 
 
@@ -71,5 +72,10 @@
      select count(*) y , typeName 服装类型 from t_type group by typeName
     </select>
 
-
+    <select id="EcharsShow" resultType="com.jk.user.model.Order1">
+          select a.orderDate AS orderDates,count(*) AS counts
+from t_order1 a
+group by a.orderDate
+order by a.shangpinName
+    </select>
 </mapper>

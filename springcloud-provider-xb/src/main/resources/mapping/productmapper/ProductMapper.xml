@@ -60,4 +60,10 @@
 
         LIMIT 0,3
     </select>
+    <select id="queryshoucang" resultType="com.jk.lcw.model.Order">
+        select * from t_order1 where xiaDanRen = #{id}
+    </select>
+    <delete id="del">
+        delete from t_order1 where orderId = #{id}
+    </delete>
 </mapper>

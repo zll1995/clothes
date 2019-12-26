@@ -21,6 +21,8 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,15 +31,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 @Controller
 public class ProductController {
     @Autowired
     private ProductService productService;
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
@@ -115,12 +122,12 @@ public class ProductController {
     }
 
 
-
+    @Scheduled(fixedRate = 900000000)
     @RequestMapping("queryadvertising")
     @ResponseBody
     public List<Advertising> queryadvertising(){
-
-        return productService.queryadvertising();
+        List l=productService.queryadvertising();
+        return l;
     }
 
     @RequestMapping("addShouCang")

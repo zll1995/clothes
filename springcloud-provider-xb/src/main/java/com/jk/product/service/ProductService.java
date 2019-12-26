@@ -1,5 +1,6 @@
 package com.jk.product.service;
 
+import com.jk.lcw.model.Order;
 import com.jk.product.model.Color;
 import com.jk.product.model.Product;
 
@@ -18,4 +19,8 @@ public interface ProductService {
     Color queryColor(Integer id);
 
     List<Product> queryXiangGuan(Integer id);
+
+    List<Order> queryshoucang(Integer id);
+
+    void del(Integer id);
 }

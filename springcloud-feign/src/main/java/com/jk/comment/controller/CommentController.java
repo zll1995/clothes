@@ -37,7 +37,6 @@ public class CommentController {
     public void addComment(Comment comment, HttpServletRequest request){
         comment.setProductId(comment.getProductId());
         User u = (User) request.getSession().getAttribute(request.getSession().getId());
-        System.err.println(u.getUserid());
         comment.setUserId(u.getUserid());
         comment.setPraise(1);
         commentServiceEntity.addComment(comment);
@@ -47,7 +46,6 @@ public class CommentController {
     public List<Comment> queryComment(Integer productId){
         List<Comment> comments = commentServiceEntity.queryComment(productId);
         for (Comment comment1 : comments) {
-            System.err.println(comment1.getUserId());
             User user = commentServiceEntity.queryUserByUserId(comment1.getUserId());
             Comment cc = commentServiceEntity.queryCommentByPraise(comment1.getId());
             comment1.setUserName(user.getUsername());

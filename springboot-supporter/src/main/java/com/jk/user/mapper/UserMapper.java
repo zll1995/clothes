@@ -1,5 +1,6 @@
 package com.jk.user.mapper;
 
+import com.jk.user.model.Order1;
 import com.jk.user.model.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,4 +32,6 @@ public interface UserMapper {
     List<Map<String, Object>> queryColumn();
 
     User queryUserByUsername(@Param("name") String name);
+
+    List<Order1> EcharsShow();
 }

@@ -1,5 +1,6 @@
 package com.jk.product.mapper;
 
+import com.jk.lcw.model.Order;
 import com.jk.product.model.Color;
 import com.jk.product.model.Product;
 import com.jk.product.model.Size;
@@ -26,4 +27,8 @@ public interface ProductMapper {
     Integer queryXiangGuan(@Param("id") Integer id);
 
     List<Product> queryProduct(@Param("brandId")Integer brandId);
+
+    List<Order> queryshoucang(@Param("id")Integer id);
+
+    void del(@Param("id")Integer id);
 }

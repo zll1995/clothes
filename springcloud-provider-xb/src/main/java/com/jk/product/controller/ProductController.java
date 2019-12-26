@@ -1,5 +1,6 @@
 package com.jk.product.controller;
 
+import com.jk.lcw.model.Order;
 import com.jk.product.model.Color;
 import com.jk.product.model.Product;
 import com.jk.product.service.ProductService;
@@ -40,4 +41,16 @@ public class ProductController {
     public List<Product> queryXiangGuan(@RequestParam("id") Integer id){
         return productService.queryXiangGuan(id);
     }
+    @GetMapping("queryshoucang")
+    @ResponseBody
+    public List<Order> queryshoucang(@RequestParam("id") Integer id){
+        return productService.queryshoucang(id);
+    }
+
+    @GetMapping("del")
+    @ResponseBody
+    public void del(@RequestParam("id") Integer id){
+        productService.del(id);
+    }
+
 }

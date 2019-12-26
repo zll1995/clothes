@@ -1,5 +1,6 @@
 package com.jk.user.service;
 
+import com.jk.user.model.Order1;
 import com.jk.user.model.User;
 import com.jk.user.model.WebUser;
 
@@ -35,4 +36,6 @@ public interface UserService {
     List<Map<String, Object>> queryCakeMoney();
 
     List<Map<String, Object>> queryColumn();
+
+    List<Order1> EcharsShow();
 }

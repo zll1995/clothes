@@ -138,4 +138,6 @@
         insert into t_order (userId,orderNum,productName,sizePrice,sizeImg,sizeName) values
                 (#{userId},#{orderNum},#{productName},#{sizePrice},#{sizeImg},#{sizeName})
     </insert>
+
+
 </mapper>

@@ -1,5 +1,6 @@
 package com.jk.product.servivce;
 
+import com.jk.lcw.model.Order;
 import com.jk.product.model.Color;
 import com.jk.product.model.Product;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,4 +22,8 @@ public interface ProductServiceEntity {
     Color queryColor(@RequestParam("id") Integer id);
     @GetMapping("queryXiangGuan")
     List<Product> queryXiangGuan(@RequestParam("id") Integer id);
+    @GetMapping("queryshoucang")
+    List<Order> queryshoucang(@RequestParam("id")Integer id);
+    @GetMapping("del")
+    void del(@RequestParam("id")Integer id);
 }

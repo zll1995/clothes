@@ -67,6 +67,12 @@
                             <li>
                                 <a href="../toCarts">购物车</a>
                             </li>
+                            <li>
+                                <a href="../product/toCollect">我的订单</a>
+                            </li>
+                            <li id="LoginButton">
+
+                            </li>
 
                         </ul>
                     </nav>
@@ -352,6 +358,7 @@
 
 <script type="text/javascript">
     $(function(){
+        initUserLoginJudge();
         queryMovie();
         queryadv();
     })
@@ -397,6 +404,28 @@ function queryMovie() {
             }
         })
     }
+
+
+
+
+    function initUserLoginJudge(){
+        $.ajax({
+            url:"../loginin",
+            success:function(data){
+                var a = "";
+                if(data == 2){
+                    a = '<a href="../index"><span class="glyphicon glyphicon-user"></span>登录</a>';
+                }else{
+                    a = '<a href="../zhu"><span class="glyphicon glyphicon-user"></span>注销</a>';
+                }
+                $("#LoginButton").html(a);
+            },
+            error:function(){
+                alert("判断用户是否登录出错")
+            }
+        })
+    }
+
 
 </script>
 
